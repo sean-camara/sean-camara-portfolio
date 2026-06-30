@@ -2,6 +2,10 @@
 
 Clean, responsive portfolio website for Sean John Camara, focused on full-stack web development, software development, and Android as an additional specialization.
 
+## Live Site
+
+https://portfolio-site-kappa-rust.vercel.app
+
 ## Featured Work
 
 - RMV Stainless Steel Fabrication System
