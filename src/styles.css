@@ -106,6 +106,7 @@ p {
 }
 
 .nav-shell {
+  position: relative;
   width: min(var(--container), calc(100% - 96px));
   height: 80px;
   margin: 0 auto;
@@ -175,6 +176,8 @@ p {
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  cursor: pointer;
 }
 
 main {
@@ -1068,6 +1071,32 @@ main {
 
   .nav-links {
     display: none;
+  }
+
+  .nav-links.is-open {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    left: 0;
+    display: grid;
+    gap: 6px;
+    border: 1px solid rgba(164, 230, 255, 0.16);
+    border-radius: 18px;
+    background: rgba(11, 19, 38, 0.98);
+    padding: 12px;
+  }
+
+  .nav-links.is-open a {
+    border-bottom: 0;
+    border-radius: 12px;
+    padding: 13px 14px;
+    color: rgba(218, 226, 253, 0.84);
+  }
+
+  .nav-links.is-open a:hover,
+  .nav-links.is-open a:focus-visible {
+    background: rgba(164, 230, 255, 0.1);
+    color: var(--primary);
   }
 
   .nav-menu {

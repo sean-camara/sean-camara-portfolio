@@ -1,4 +1,5 @@
-import { ArrowUpRight, Code2, Mail, Menu, Network } from "lucide-react";
+import { useState } from "react";
+import { ArrowUpRight, Code2, Mail, Menu, Network, X } from "lucide-react";
 import { About } from "./components/About";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
@@ -37,16 +38,24 @@ const contactLinks = [
 ];
 
 export function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const closeMenu = () => setIsMenuOpen(false);
+
   return (
     <>
       <header className="site-header">
         <nav className="nav-shell" aria-label="Primary navigation">
-          <a className="logo" href="#home" aria-label="Sean.dev home">
+          <a className="logo" href="#home" aria-label="Sean.dev home" onClick={closeMenu}>
             Sean.dev
           </a>
-          <div className="nav-links" aria-label="Page sections">
+          <div
+            className={`nav-links${isMenuOpen ? " is-open" : ""}`}
+            id="mobile-navigation"
+            aria-label="Page sections"
+          >
             {navLinks.map((link) => (
-              <a href={link.href} key={link.label}>
+              <a href={link.href} key={link.label} onClick={closeMenu}>
                 {link.label}
               </a>
             ))}
@@ -55,9 +64,16 @@ export function App() {
             View Projects
             <ArrowUpRight size={15} />
           </a>
-          <a className="nav-menu" href="#contact" aria-label="Open contact section">
-            <Menu size={20} />
-          </a>
+          <button
+            className="nav-menu"
+            type="button"
+            aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-navigation"
+            onClick={() => setIsMenuOpen((open) => !open)}
+          >
+            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
         </nav>
       </header>
 
