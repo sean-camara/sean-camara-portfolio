@@ -4,16 +4,18 @@ export function About() {
   return (
     <section className="section-shell about-section" id="about">
       <div className="about-grid">
-        <div className="profile-card glass-card" aria-label="Abstract profile system card">
+        <div className="profile-card glass-card" aria-label="Sean John Camara profile photo">
           <div className="profile-screen">
-            <div className="profile-sidebar" />
-            <div className="profile-code">
-              <span />
-              <span />
-              <span />
-              <span />
+            <img
+              src="/assets/sean-profile.png"
+              alt="Sean John Camara"
+              loading="lazy"
+              decoding="async"
+            />
+            <div className="profile-caption">
+              <strong>Sean John Camara</strong>
+              <span>Full-Stack Web Developer</span>
             </div>
-            <div className="profile-panel" />
           </div>
           <div className="location-card glass-card">
             <MapPin size={15} />

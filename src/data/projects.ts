@@ -8,6 +8,7 @@ export type Project = {
   highlights: string[];
   repoUrl: string;
   liveUrl?: string;
+  imageUrl: string;
   visual: ProjectKind;
   actionLabel: string;
 };
@@ -33,6 +34,7 @@ export const projects: Project[] = [
     ],
     repoUrl: "https://github.com/sean-camara/rmv-web",
     liveUrl: "https://www.rmvfabrication.app",
+    imageUrl: "/assets/rmv-screenshot.png",
     visual: "rmv",
     actionLabel: "View Repo",
   },
@@ -50,6 +52,7 @@ export const projects: Project[] = [
     ],
     repoUrl: "https://github.com/sean-camara/AcademiaZen",
     liveUrl: "https://www.academiazen.app",
+    imageUrl: "/assets/academiazen-screenshot.png",
     visual: "academia",
     actionLabel: "Launch App",
   },
@@ -67,6 +70,7 @@ export const projects: Project[] = [
     ],
     repoUrl: "https://github.com/sean-camara/MoneyFlow_Backend",
     liveUrl: "https://money-flow-six.vercel.app",
+    imageUrl: "/assets/flowmoney-screenshot.png",
     visual: "flowmoney",
     actionLabel: "View Repo",
   },
@@ -83,6 +87,7 @@ export const projects: Project[] = [
       "Kitchen assistant chat",
     ],
     repoUrl: "https://github.com/sean-camara/ShelfLife",
+    imageUrl: "/assets/shelflife-screenshot.jpg",
     visual: "shelflife",
     actionLabel: "GitHub Repo",
   },
