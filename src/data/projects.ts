@@ -11,6 +11,7 @@ export type Project = {
   imageUrl: string;
   visual: ProjectKind;
   actionLabel: string;
+  liveActionLabel?: string;
 };
 
 export type SkillGroup = {
@@ -37,7 +38,8 @@ export const projects: Project[] = [
     liveUrl: "https://www.rmvfabrication.app",
     imageUrl: "/assets/rmv-screenshot.png",
     visual: "rmv",
-    actionLabel: "View Repo",
+    actionLabel: "View Repository",
+    liveActionLabel: "Live Demo",
   },
   {
     title: "AcademiaZen",
@@ -55,42 +57,45 @@ export const projects: Project[] = [
     liveUrl: "https://www.academiazen.app",
     imageUrl: "/assets/academiazen-screenshot.png",
     visual: "academia",
-    actionLabel: "Launch App",
+    actionLabel: "View Repository",
+    liveActionLabel: "Live Demo",
   },
   {
     title: "FlowMoney",
     type: "Money Tracker Web App",
     description:
-      "A responsive money tracking system with chat-style interactions and goal management features for personal finance organization.",
-    tech: ["React", "Responsive Web", "Dashboard UI", "Goal System"],
+      "A money tracker with chat-based AI assistant and goal system to help users manage finances smarter.",
+    tech: ["React", "Charts", "AI Assistant", "Local Storage"],
     highlights: [
-      "Expense tracking",
-      "Goal system",
-      "Chat-style interaction",
-      "Responsive design",
+      "Income and expense tracking",
+      "Financial goals management",
+      "AI chat assistant",
+      "Beautiful analytics dashboard",
     ],
     repoUrl: "https://github.com/sean-camara/MoneyFlow_Backend",
     liveUrl: "https://money-flow-six.vercel.app",
     imageUrl: "/assets/flowmoney-screenshot.png",
     visual: "flowmoney",
-    actionLabel: "View Repo",
+    actionLabel: "View Repository",
+    liveActionLabel: "Live Demo",
   },
   {
     title: "ShelfLife",
     type: "Native Android Pantry App",
     description:
-      "A native Android app for pantry tracking, shopping lists, barcode scanning, receipt scanning, AI recipe generation, and kitchen assistant features.",
-    tech: ["Kotlin", "Jetpack Compose", "Firebase", "Room", "ML Kit", "Cloudflare Worker"],
+      "A native Android pantry and ingredient tracker with barcode scanner, AI recipes, and AI kitchen assistant.",
+    tech: ["Kotlin", "Jetpack Compose", "Room", "ML Kit"],
     highlights: [
-      "Pantry inventory",
-      "Barcode and receipt scanning",
+      "Pantry and ingredient management",
+      "Barcode and receipt scanner OCR",
       "AI recipe generation",
-      "Kitchen assistant chat",
+      "AI kitchen assistant chat",
     ],
     repoUrl: "https://github.com/sean-camara/ShelfLife",
     imageUrl: "/assets/shelflife-screenshot.jpg",
     visual: "shelflife",
-    actionLabel: "GitHub Repo",
+    actionLabel: "View Repository",
+    liveActionLabel: "Get on Google Play",
   },
 ];
 
