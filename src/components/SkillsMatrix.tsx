@@ -1,10 +1,22 @@
-import { Code2, Database, PenTool, Smartphone, Wrench } from "lucide-react";
+import {
+  Bot,
+  Braces,
+  Code2,
+  Database,
+  Layers3,
+  PenTool,
+  Smartphone,
+  Sparkles,
+  Wrench,
+} from "lucide-react";
 import type { SkillGroup } from "../data/projects";
 
 const icons = {
   frontend: PenTool,
   backend: Database,
   android: Smartphone,
+  ai: Bot,
+  engineering: Layers3,
   tools: Wrench,
 };
 
@@ -24,9 +36,20 @@ export function SkillsMatrix({ groups }: SkillsMatrixProps) {
         {groups.map((group) => {
           const Icon = icons[group.icon];
           return (
-            <article className="skill-card glass-card" key={group.label}>
-              <div className="skill-icon">
-                <Icon size={22} />
+            <article
+              className={`skill-card glass-card${group.accent ? " skill-card-accent" : ""}`}
+              key={group.label}
+            >
+              <div className="skill-card-head">
+                <div className="skill-icon">
+                  <Icon size={22} />
+                </div>
+                {group.accent && (
+                  <span className="skill-eyebrow">
+                    <Sparkles size={13} />
+                    Applied AI
+                  </span>
+                )}
               </div>
               <h3>{group.label}</h3>
               <div className="skill-tags">
@@ -40,17 +63,23 @@ export function SkillsMatrix({ groups }: SkillsMatrixProps) {
 
         <article className="capability-card glass-card">
           <div>
-            <h3>Full-Stack Capability</h3>
+            <h3>Full-Stack Software Engineer</h3>
             <p>
-              I specialize in bridging clean frontend interfaces with reliable backend
-              workflows, useful database design, authentication, and practical deployment.
+              I design and build complete software solutions, from responsive web applications
+              and native Android apps to scalable backend services and AI-powered experiences.
+              My focus is creating products that are fast, intuitive, maintainable, and
+              production-ready.
             </p>
             <div className="capability-points">
-              <span>Fast Deployment</span>
-              <span>Secure Systems</span>
+              <span>Full-Stack Development</span>
+              <span>Android Engineering</span>
+              <span>AI Integration</span>
             </div>
           </div>
-          <Code2 className="capability-icon" size={96} strokeWidth={1.4} />
+          <div className="capability-mark" aria-hidden="true">
+            <Code2 size={38} strokeWidth={1.6} />
+            <Braces size={72} strokeWidth={1.25} />
+          </div>
         </article>
       </div>
     </section>

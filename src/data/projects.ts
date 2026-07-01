@@ -15,8 +15,9 @@ export type Project = {
 
 export type SkillGroup = {
   label: string;
-  icon: "frontend" | "backend" | "android" | "tools";
+  icon: "frontend" | "backend" | "android" | "ai" | "engineering" | "tools";
   skills: string[];
+  accent?: boolean;
 };
 
 export const projects: Project[] = [
@@ -97,10 +98,21 @@ export const skillGroups: SkillGroup[] = [
   {
     label: "Frontend",
     icon: "frontend",
-    skills: ["React", "TypeScript", "JavaScript", "Tailwind CSS", "Responsive UI", "PWA"],
+    skills: [
+      "React",
+      "TypeScript",
+      "JavaScript",
+      "Tailwind CSS",
+      "Responsive Design",
+      "Progressive Web Apps",
+      "Vite",
+      "Framer Motion",
+      "UI/UX",
+      "Accessibility",
+    ],
   },
   {
-    label: "Backend & Database",
+    label: "Backend & Cloud",
     icon: "backend",
     skills: [
       "Firebase",
@@ -108,24 +120,72 @@ export const skillGroups: SkillGroup[] = [
       "MongoDB Atlas",
       "REST APIs",
       "Authentication",
-      "PayMongo Integration",
+      "PayMongo",
+      "API Integration",
+      "Deployment",
+      "JSON Architecture",
     ],
   },
   {
-    label: "Android",
+    label: "Android Development",
     icon: "android",
     skills: [
       "Kotlin",
       "Jetpack Compose",
       "Room Database",
       "DataStore",
+      "Navigation Compose",
+      "CameraX",
       "ML Kit",
+      "Material 3",
+      "Firebase Auth",
       "Firebase App Distribution",
+      "WorkManager",
     ],
   },
   {
-    label: "Tools",
+    label: "Artificial Intelligence",
+    icon: "ai",
+    accent: true,
+    skills: [
+      "AI Applications",
+      "Prompt Engineering",
+      "LLM Integration",
+      "DeepSeek API",
+      "OCR Processing",
+      "AI Chat Systems",
+      "AI Workflow Design",
+      "AI Automation",
+      "Recipe Generation",
+    ],
+  },
+  {
+    label: "Software Engineering",
+    icon: "engineering",
+    skills: [
+      "Full-Stack Development",
+      "Mobile Development",
+      "Database Design",
+      "System Architecture",
+      "State Management",
+      "Performance Optimization",
+      "Problem Solving",
+      "Clean Architecture",
+    ],
+  },
+  {
+    label: "Developer Tools",
     icon: "tools",
-    skills: ["GitHub", "Codex", "Android Studio", "VS Code", "UI Planning"],
+    skills: [
+      "Git",
+      "GitHub",
+      "Codex",
+      "Android Studio",
+      "VS Code",
+      "Postman",
+      "Firebase Console",
+      "Cloudflare Dashboard",
+      "UI Planning",
+    ],
   },
 ];
