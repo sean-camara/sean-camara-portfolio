@@ -516,7 +516,7 @@ main {
   overflow: hidden;
   border: 1px solid rgba(164, 230, 255, 0.16);
   border-radius: 18px;
-  background: rgba(6, 14, 32, 0.72);
+  background: rgba(6, 14, 32, 0.92);
   transform: translate3d(0, 8px, 0) scale(0.985);
   animation: media-rise 520ms ease both;
 }
@@ -525,13 +525,8 @@ main {
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
   object-position: top center;
-  transition: transform 500ms ease;
-}
-
-.project-card:hover .project-screenshot-frame img {
-  transform: scale(1.035);
 }
 
 .project-visual.rmv .project-screenshot-frame,
@@ -548,7 +543,7 @@ main {
 }
 
 .project-visual.shelflife .project-screenshot-frame img {
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .project-body {
