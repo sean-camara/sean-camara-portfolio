@@ -25,7 +25,7 @@ export function ProjectShowcase({ projects }: ProjectShowcaseProps) {
         </p>
       </div>
 
-      <div className="project-list">
+      <div className="project-list" role="region" aria-label="Featured projects" tabIndex={0}>
         {projects.map((project, index) => {
           return (
             <article className={`editorial-project editorial-project-${project.visual}`} key={project.title}>
