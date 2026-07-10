@@ -3,7 +3,7 @@ export function Footer() {
     <footer className="footer">
       <div className="section-shell footer-inner">
         <span>Sean John Camara</span>
-        <span>© 2026 Sean John Camara. Built with passion for clean and practical software.</span>
+        <span>© 2026. Built with React and TypeScript.</span>
         <div>
           <a href="https://github.com/sean-camara" target="_blank" rel="noreferrer">
             GitHub

@@ -47,6 +47,7 @@ export function App() {
       <header className="site-header">
         <nav className="nav-shell" aria-label="Primary navigation">
           <a className="logo" href="#home" aria-label="Sean.dev home" onClick={closeMenu}>
+            <span className="logo-mark" aria-hidden="true">SC</span>
             Sean.dev
           </a>
           <div
@@ -60,8 +61,8 @@ export function App() {
               </a>
             ))}
           </div>
-          <a className="nav-cta" href="#projects">
-            View Projects
+          <a className="nav-cta" href="#contact">
+            Let's talk
             <ArrowUpRight size={15} />
           </a>
           <button

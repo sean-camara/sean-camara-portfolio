@@ -3,55 +3,36 @@ import {
   CheckCircle2,
   Code2,
   ExternalLink,
-  Globe2,
-  GraduationCap,
   Play,
-  Smartphone,
-  Sparkles,
-  Star,
-  Wallet,
 } from "lucide-react";
-import type { Project, ProjectKind } from "../data/projects";
+import type { Project } from "../data/projects";
 
 type ProjectShowcaseProps = {
   projects: Project[];
-};
-
-const categoryIcons: Record<ProjectKind, typeof Globe2> = {
-  rmv: Globe2,
-  academia: GraduationCap,
-  flowmoney: Wallet,
-  shelflife: Smartphone,
 };
 
 export function ProjectShowcase({ projects }: ProjectShowcaseProps) {
   return (
     <section className="section-shell projects-section" id="projects">
       <div className="projects-heading">
-        <span className="projects-eyebrow">
-          <span />
-          MY WORK
-        </span>
-        <h2>
-          Featured <span>Projects</span>
-        </h2>
+        <div>
+          <p className="section-kicker">Selected work</p>
+          <h2>Products built for real use.</h2>
+        </div>
         <p>
-          A focused collection of practical systems built across full-stack web,
-          productivity tools, finance workflows, and native Android.
+          A focused collection of deployed web systems, productivity tools, finance
+          workflows, and native Android applications.
         </p>
       </div>
 
-      <div className="project-grid">
-        {projects.map((project) => {
-          const CategoryIcon = categoryIcons[project.visual];
+      <div className="project-list">
+        {projects.map((project, index) => {
           return (
-            <article className={`project-card project-card-${project.visual}`} key={project.title}>
+            <article className={`editorial-project editorial-project-${project.visual}`} key={project.title}>
               <ProjectImage project={project} />
               <div className="project-body">
-                <p className="project-type">
-                  <CategoryIcon size={20} strokeWidth={1.8} />
-                  {project.type}
-                </p>
+                <p className="project-index">{String(index + 1).padStart(2, "0")} / Project</p>
+                <p className="project-type">{project.type}</p>
                 <h3>{project.title}</h3>
                 <p className="project-description">{project.description}</p>
                 <div className="tech-list" aria-label={`${project.title} technologies`}>
@@ -93,49 +74,19 @@ export function ProjectShowcase({ projects }: ProjectShowcaseProps) {
           );
         })}
       </div>
-
-      <div className="projects-more">
-        <div className="projects-more-copy">
-          <div className="projects-more-icon">
-            <Star size={24} fill="currentColor" />
-          </div>
-          <div>
-            <h3>More projects coming soon.</h3>
-            <p>I'm constantly building and improving. Stay tuned for more exciting things!</p>
-          </div>
-        </div>
-        <div className="projects-more-stats">
-          <span>
-            <strong>4+</strong>
-            Projects
-          </span>
-          <span>
-            <strong>Full-Stack</strong>
-            Development
-          </span>
-          <span>
-            <strong>Always</strong>
-            Building
-          </span>
-        </div>
-      </div>
     </section>
   );
 }
 
 function ProjectImage({ project }: { project: Project }) {
   return (
-    <div className={`project-visual ${project.visual}`}>
-      <div className="visual-badge">{project.type}</div>
-      <Sparkles className="project-visual-spark" size={18} />
-      <div className="project-screenshot-frame">
-        <img
-          src={project.imageUrl}
-          alt={`${project.title} screenshot`}
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
-    </div>
+    <figure className={`project-visual ${project.visual}`}>
+      <img
+        src={project.imageUrl}
+        alt={`${project.title} screenshot`}
+        loading="lazy"
+        decoding="async"
+      />
+    </figure>
   );
 }

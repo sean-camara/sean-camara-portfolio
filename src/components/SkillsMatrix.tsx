@@ -6,7 +6,6 @@ import {
   Layers3,
   PenTool,
   Smartphone,
-  Sparkles,
   Wrench,
 } from "lucide-react";
 import type { SkillGroup } from "../data/projects";
@@ -27,29 +26,29 @@ type SkillsMatrixProps = {
 export function SkillsMatrix({ groups }: SkillsMatrixProps) {
   return (
     <section className="section-shell skills-section" id="skills">
-      <div className="center-heading">
-        <h2>Skills &amp; Tools</h2>
-        <span />
+      <div className="skills-heading">
+        <div>
+          <p className="section-kicker">Capabilities</p>
+          <h2>Technology with purpose.</h2>
+        </div>
+        <p>
+          A focused toolkit for designing, building, and shipping complete software products.
+        </p>
       </div>
 
       <div className="skills-bento">
-        {groups.map((group) => {
+        {groups.map((group, index) => {
           const Icon = icons[group.icon];
           return (
             <article
-              className={`skill-card glass-card${group.accent ? " skill-card-accent" : ""}`}
+              className={`skill-card${group.accent ? " skill-card-accent" : ""}`}
               key={group.label}
             >
               <div className="skill-card-head">
                 <div className="skill-icon">
                   <Icon size={22} />
                 </div>
-                {group.accent && (
-                  <span className="skill-eyebrow">
-                    <Sparkles size={13} />
-                    Applied AI
-                  </span>
-                )}
+                <span className="skill-number">{String(index + 1).padStart(2, "0")}</span>
               </div>
               <h3>{group.label}</h3>
               <div className="skill-tags">
@@ -61,8 +60,9 @@ export function SkillsMatrix({ groups }: SkillsMatrixProps) {
           );
         })}
 
-        <article className="capability-card glass-card">
+        <article className="capability-card">
           <div>
+            <p className="section-kicker">How I work</p>
             <h3>Full-Stack Software Engineer</h3>
             <p>
               I design and build complete software solutions, from responsive web applications
