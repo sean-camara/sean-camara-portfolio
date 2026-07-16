@@ -12,6 +12,11 @@ export type Project = {
   visual: ProjectKind;
   actionLabel: string;
   liveActionLabel?: string;
+  caseStudy: {
+    challenge: string;
+    ownership: string;
+    engineering: string[];
+  };
 };
 
 export type SkillGroup = {
@@ -40,6 +45,11 @@ export const projects: Project[] = [
     visual: "rmv",
     actionLabel: "View Repository",
     liveActionLabel: "Live Demo",
+    caseStudy: {
+      challenge: "Unify appointments, fabrication projects, staff operations, and payment workflows in one business system.",
+      ownership: "Full-stack product design, implementation, integration, and deployment.",
+      engineering: ["Role-based dashboards", "Appointment-to-project workflow", "PayMongo integration"],
+    },
   },
   {
     title: "AcademiaZen",
@@ -59,6 +69,11 @@ export const projects: Project[] = [
     visual: "academia",
     actionLabel: "View Repository",
     liveActionLabel: "Live Demo",
+    caseStudy: {
+      challenge: "Bring student planning, study materials, and AI-assisted practice into one focused workspace.",
+      ownership: "Product design, React development, PWA behavior, and AI feature integration.",
+      engineering: ["Offline-friendly PWA", "AI quiz generation", "Tasks, calendar, and PDF organization"],
+    },
   },
   {
     title: "FlowMoney",
@@ -78,6 +93,11 @@ export const projects: Project[] = [
     visual: "flowmoney",
     actionLabel: "View Repository",
     liveActionLabel: "Live Demo",
+    caseStudy: {
+      challenge: "Make personal finance tracking easier to understand through goals, visual feedback, and conversation.",
+      ownership: "Interface design, React implementation, data visualization, and AI assistant integration.",
+      engineering: ["Income and expense tracking", "Goal-based workflow", "Local-first persistence"],
+    },
   },
   {
     title: "ShelfLife",
@@ -96,6 +116,11 @@ export const projects: Project[] = [
     visual: "shelflife",
     actionLabel: "View Repository",
     liveActionLabel: "Get on Google Play",
+    caseStudy: {
+      challenge: "Help people track pantry items quickly and turn available ingredients into useful meal ideas.",
+      ownership: "Native Android product design, Kotlin development, local data, scanning, and AI features.",
+      engineering: ["Jetpack Compose UI", "Room local database", "ML Kit barcode and receipt scanning"],
+    },
   },
 ];
 
