@@ -97,11 +97,11 @@ button { font: inherit; }
   display: grid;
   place-items: center;
   background: var(--ink);
-  animation: intro-leave 550ms .78s cubic-bezier(.8,0,.2,1) forwards;
+  animation: intro-leave 800ms 1.05s cubic-bezier(.8,0,.2,1) forwards;
   pointer-events: none;
 }
 
-.intro-screen > div { text-align: center; animation: intro-rise 1.15s ease both; }
+.intro-screen > div { text-align: center; animation: intro-rise 1.55s ease both; }
 .intro-screen span {
   display: block;
   font-family: var(--font-display);
