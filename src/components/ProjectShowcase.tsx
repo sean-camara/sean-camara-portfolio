@@ -97,7 +97,7 @@ export function ProjectShowcase({ projects }: ProjectShowcaseProps) {
               <X size={20} />
             </button>
             <div className="project-modal-hero">
-              <ProjectImage project={selectedProject} />
+              <ProjectImage project={selectedProject} isModal />
               <div className="project-modal-hero-copy">
                 <span className="project-modal-index">{String(selectedIndex! + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}</span>
                 <p>{selectedProject.type}</p>
@@ -156,9 +156,12 @@ export function ProjectShowcase({ projects }: ProjectShowcaseProps) {
   );
 }
 
-function ProjectImage({ project }: { project: Project }) {
+function ProjectImage({ project, isModal = false }: { project: Project; isModal?: boolean }) {
   return (
-    <figure className="project-image" data-parallax data-parallax-speed=".55">
+    <figure
+      className={`project-image${isModal ? " project-image-modal" : ""}`}
+      {...(!isModal ? { "data-parallax": true, "data-parallax-speed": ".55" } : {})}
+    >
       <img
         src={project.imageUrl}
         alt={`${project.title} screenshot`}
