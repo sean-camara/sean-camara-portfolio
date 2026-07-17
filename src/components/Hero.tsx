@@ -4,7 +4,7 @@ export function Hero() {
   return (
     <section className="hero" id="home">
       <div className="hero-grid page-shell">
-        <div className="hero-copy" data-reveal>
+        <div className="hero-copy" data-reveal="hero">
           <div className="hero-eyebrow">
             <span>Philippines</span>
             <span>Full-Stack Software Developer</span>
@@ -15,9 +15,9 @@ export function Hero() {
             from interface and architecture to deployment.
           </p>
           <div className="hero-actions">
-            <a className="button-primary" href="#projects">View work</a>
-            <a className="button-secondary" href="#contact">Get in touch</a>
-            <a className="text-link" href="/Sean_John_Camara_Resume.pdf" target="_blank" rel="noreferrer">
+            <a className="button-primary" href="#projects" data-magnetic>View work</a>
+            <a className="button-secondary" href="#contact" data-magnetic>Get in touch</a>
+            <a className="text-link" href="/Sean_John_Camara_Resume.pdf" target="_blank" rel="noreferrer" data-magnetic>
               Résumé <ArrowUpRight size={15} />
             </a>
           </div>
@@ -25,7 +25,7 @@ export function Hero() {
             <ArrowDown size={15} /> Explore selected work
           </a>
         </div>
-        <figure className="hero-portrait" data-reveal data-parallax>
+        <figure className="hero-portrait" data-reveal="portrait" data-parallax data-parallax-speed="1.25">
           <img
             src="/assets/sean-profile.png"
             alt="Sean John Camara"

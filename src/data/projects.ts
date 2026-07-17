@@ -1,4 +1,4 @@
-export type ProjectKind = "rmv" | "academia" | "flowmoney" | "shelflife";
+export type ProjectKind = "applyph" | "rmv" | "academia" | "flowmoney" | "shelflife";
 
 export type Project = {
   title: string;
@@ -28,8 +28,30 @@ export type SkillGroup = {
 
 export const projects: Project[] = [
   {
+    title: "ApplyPH",
+    type: "Ongoing · AI-Powered Job Application Assistant",
+    description:
+      "A mobile-first job application assistant for Filipino job seekers with resume building, evidence-linked match reports, AI-assisted application packages, application tracking, and offline-friendly PWA support.",
+    tech: ["Next.js", "TypeScript", "Supabase", "Cloudflare Workers", "PWA", "AI Workflows"],
+    highlights: [
+      "Evidence-linked job matching",
+      "AI-assisted application packages",
+      "Private resume workflows",
+      "Offline application tracking",
+    ],
+    repoUrl: "https://github.com/potatsukki/ApplyPH",
+    imageUrl: "/assets/applyph-showcase.png",
+    visual: "applyph",
+    actionLabel: "View Repository",
+    caseStudy: {
+      challenge: "Help Filipino job seekers create stronger applications from confirmed experience without overstating their qualifications.",
+      ownership: "Full-stack product design, Next.js architecture, AI workflows, private document flows, PWA behavior, and cloud integration.",
+      engineering: ["Evidence-linked match reports", "Owner-scoped AI workflow", "Offline application tracker"],
+    },
+  },
+  {
     title: "RMV Stainless Steel Fabrication",
-    type: "Full-Stack Business Management System",
+    type: "Thesis · Full-Stack Business Management System",
     description:
       "A web-based system for a stainless steel fabrication business with appointment booking, role-based dashboards, project tracking, and payment-related workflows.",
     tech: ["React", "Cloudflare", "MongoDB Atlas", "PayMongo"],
