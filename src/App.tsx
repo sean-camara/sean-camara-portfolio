@@ -62,7 +62,8 @@ export function App() {
       <header className="site-header">
         <nav className="site-nav" aria-label="Primary navigation">
           <a className="brand-mark" href="#home" aria-label="Sean John Camara home" onClick={closeMenu}>
-            Sean John Camara<span>.</span>
+            <img src="/favicon.png" alt="" width="34" height="34" />
+            <span className="brand-name">Sean John Camara<span>.</span></span>
           </a>
           <div
             className={`main-nav ${isMenuOpen ? "is-open" : ""}`}

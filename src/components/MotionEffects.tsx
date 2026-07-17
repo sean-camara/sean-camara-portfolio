@@ -8,6 +8,10 @@ const magneticSelector = "[data-magnetic]";
 export function MotionEffects() {
   useEffect(() => {
     const root = document.documentElement;
+    const scrollProgress = document.querySelector<HTMLElement>(".scroll-progress");
+    const pointerOrb = document.querySelector<HTMLElement>(".pointer-orb");
+    const heroCopy = document.querySelector<HTMLElement>(".hero-copy");
+    const heroImage = document.querySelector<HTMLElement>(".hero-portrait img");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     const revealElements = Array.from(
@@ -16,6 +20,7 @@ export function MotionEffects() {
     const parallaxElements = Array.from(
       document.querySelectorAll<HTMLElement>(parallaxSelector),
     );
+    const activeParallaxElements = new Set<HTMLElement>();
     const sections = Array.from(document.querySelectorAll<HTMLElement>("main section[id]"));
 
     let observer: IntersectionObserver | undefined;
@@ -96,8 +101,10 @@ export function MotionEffects() {
       const handlePointerMove = (event: PointerEvent) => {
         if (pointerFrame) cancelAnimationFrame(pointerFrame);
         pointerFrame = requestAnimationFrame(() => {
-          root.style.setProperty("--cursor-x", `${event.clientX}px`);
-          root.style.setProperty("--cursor-y", `${event.clientY}px`);
+          pointerOrb?.style.setProperty(
+            "transform",
+            `translate3d(${event.clientX - 130}px, ${event.clientY - 130}px, 0)`,
+          );
           root.classList.add("pointer-active");
           pointerFrame = 0;
         });
@@ -126,25 +133,39 @@ export function MotionEffects() {
     );
     sections.forEach((section) => sectionObserver.observe(section));
 
+    const parallaxObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const element = entry.target as HTMLElement;
+          if (entry.isIntersecting) activeParallaxElements.add(element);
+          else activeParallaxElements.delete(element);
+        });
+      },
+      { rootMargin: "20% 0px" },
+    );
+    parallaxElements.forEach((element) => parallaxObserver.observe(element));
+
     let scrollFrame = 0;
 
     const updateScrollEffects = () => {
       const scrollRange = document.documentElement.scrollHeight - window.innerHeight;
       const progress = scrollRange > 0 ? window.scrollY / scrollRange : 0;
-      root.style.setProperty("--scroll-progress", progress.toFixed(4));
+      scrollProgress?.style.setProperty("transform", `scaleX(${progress.toFixed(4)})`);
       const heroProgress = Math.min(1, window.scrollY / Math.max(1, window.innerHeight));
-      root.style.setProperty("--hero-progress", heroProgress.toFixed(4));
-      root.style.setProperty("--hero-copy-shift", `${(-34 * heroProgress).toFixed(2)}px`);
-      root.style.setProperty("--hero-image-shift", `${(18 * heroProgress).toFixed(2)}px`);
-      root.style.setProperty("--hero-image-scale", (1.04 + heroProgress * 0.035).toFixed(4));
+      heroCopy?.style.setProperty("--hero-copy-shift", `${(-34 * heroProgress).toFixed(2)}px`);
+      heroImage?.style.setProperty("--hero-image-shift", `${(18 * heroProgress).toFixed(2)}px`);
+      heroImage?.style.setProperty("--hero-image-scale", (1.04 + heroProgress * 0.035).toFixed(4));
 
       if (!reduceMotion) {
-        parallaxElements.forEach((element) => {
+        const offsets = Array.from(activeParallaxElements, (element) => {
           const rect = element.getBoundingClientRect();
           const elementCenter = rect.top + rect.height / 2;
           const distance = window.innerHeight / 2 - elementCenter;
           const speed = Number(element.dataset.parallaxSpeed ?? 1);
           const offset = Math.max(-30, Math.min(30, distance * 0.035 * speed));
+          return [element, offset] as const;
+        });
+        offsets.forEach(([element, offset]) => {
           element.style.setProperty("--parallax-offset", `${offset.toFixed(2)}px`);
         });
       }
@@ -163,6 +184,7 @@ export function MotionEffects() {
     return () => {
       observer?.disconnect();
       sectionObserver.disconnect();
+      parallaxObserver.disconnect();
       tiltCleanups.forEach((cleanup) => cleanup());
       magneticCleanups.forEach((cleanup) => cleanup());
       if (scrollFrame) cancelAnimationFrame(scrollFrame);
@@ -170,13 +192,11 @@ export function MotionEffects() {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleScroll);
       root.classList.remove("motion-ready");
-      root.style.removeProperty("--scroll-progress");
-      root.style.removeProperty("--hero-progress");
-      root.style.removeProperty("--hero-copy-shift");
-      root.style.removeProperty("--hero-image-shift");
-      root.style.removeProperty("--hero-image-scale");
-      root.style.removeProperty("--cursor-x");
-      root.style.removeProperty("--cursor-y");
+      scrollProgress?.style.removeProperty("transform");
+      pointerOrb?.style.removeProperty("transform");
+      heroCopy?.style.removeProperty("--hero-copy-shift");
+      heroImage?.style.removeProperty("--hero-image-shift");
+      heroImage?.style.removeProperty("--hero-image-scale");
       root.classList.remove("pointer-active");
     };
   }, []);
