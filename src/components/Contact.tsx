@@ -12,9 +12,12 @@ type ContactProps = {
 };
 
 export function Contact({ contactLinks }: ContactProps) {
+  const githubLinks = contactLinks.filter((link) => link.label === "GitHub");
+  const linkedIn = contactLinks.find((link) => link.label === "LinkedIn");
+
   return (
     <section className="contact-section page-shell" id="contact">
-      <div className="contact-grid" data-reveal>
+      <div className="contact-grid" data-reveal="split">
         <div>
           <p className="section-kicker">[ Get in touch ]</p>
           <h2>Let&apos;s build something<br /><em>useful.</em></h2>
@@ -22,7 +25,7 @@ export function Contact({ contactLinks }: ContactProps) {
             Open to opportunities, collaborations, and practical projects that need careful
             product thinking and reliable implementation.
           </p>
-          <a className="contact-email" href="mailto:camara.sean13@gmail.com">
+          <a className="contact-email" href="mailto:camara.sean13@gmail.com" data-magnetic>
             <Mail size={18} />
             camara.sean13@gmail.com
             <ArrowUpRight size={17} />
@@ -36,20 +39,27 @@ export function Contact({ contactLinks }: ContactProps) {
               09910248649
             </span>
           </a>
-          {contactLinks
-            .filter((link) => link.label === "GitHub" || link.label === "LinkedIn")
-            .map((link) => {
-              const Icon = link.label === "GitHub" ? Code2 : Network;
-              return (
-                <a href={link.href} target="_blank" rel="noreferrer" key={link.label}>
-                  <Icon size={18} />
-                  <span>
-                    <small>{link.label}</small>
-                    {link.value}
-                  </span>
-                </a>
-              );
-            })}
+          {githubLinks.length > 0 && (
+            <div className="contact-link-group">
+              <Code2 size={18} />
+              <span>
+                <small>GitHub</small>
+                <span className="contact-link-values">
+                  {githubLinks.map((link) => (
+                    <a href={link.href} target="_blank" rel="noreferrer" key={link.href}>
+                      {link.value}<ArrowUpRight size={13} />
+                    </a>
+                  ))}
+                </span>
+              </span>
+            </div>
+          )}
+          {linkedIn && (
+            <a href={linkedIn.href} target="_blank" rel="noreferrer">
+              <Network size={18} />
+              <span><small>LinkedIn</small>{linkedIn.value}</span>
+            </a>
+          )}
         </div>
       </div>
     </section>

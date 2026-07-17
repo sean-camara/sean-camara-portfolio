@@ -17,7 +17,7 @@ type SkillsMatrixProps = {
 export function SkillsMatrix({ groups }: SkillsMatrixProps) {
   return (
     <section className="editorial-section page-shell skills-section" id="skills">
-      <div className="section-heading" data-reveal>
+      <div className="section-heading" data-reveal="split">
         <div>
           <p className="section-kicker">[ Capabilities ]</p>
           <h2>Technology<br />with purpose.</h2>
@@ -34,7 +34,7 @@ export function SkillsMatrix({ groups }: SkillsMatrixProps) {
             <article
               className="skill-row"
               key={group.label}
-              data-reveal
+              data-reveal="row"
             >
               <div className="skill-index">{String(index + 1).padStart(2, "0")}</div>
               <div className="skill-title">

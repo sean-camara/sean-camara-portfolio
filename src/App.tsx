@@ -26,6 +26,12 @@ const contactLinks = [
   },
   {
     label: "GitHub",
+    value: "github.com/potatsukki",
+    href: "https://github.com/potatsukki",
+    icon: Code2,
+  },
+  {
+    label: "GitHub",
     value: "github.com/sean-camara",
     href: "https://github.com/sean-camara",
     icon: Code2,

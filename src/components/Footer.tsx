@@ -6,7 +6,10 @@ export function Footer() {
         <span>© 2026. Built with React and TypeScript.</span>
         <div className="footer-links">
           <a href="https://github.com/sean-camara" target="_blank" rel="noreferrer">
-            GitHub
+            GitHub (Sean)
+          </a>
+          <a href="https://github.com/potatsukki" target="_blank" rel="noreferrer">
+            GitHub (Potatsukki)
           </a>
           <a href="https://www.linkedin.com/in/sean-john-camara-ab78a3321/" target="_blank" rel="noreferrer">
             LinkedIn
