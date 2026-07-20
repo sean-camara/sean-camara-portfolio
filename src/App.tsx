@@ -25,15 +25,15 @@ const contactLinks = [
     icon: Mail,
   },
   {
-    label: "GitHub",
-    value: "github.com/potatsukki",
-    href: "https://github.com/potatsukki",
+    label: "Primary GitHub",
+    value: "github.com/sean-camara",
+    href: "https://github.com/sean-camara",
     icon: Code2,
   },
   {
-    label: "GitHub",
-    value: "github.com/sean-camara",
-    href: "https://github.com/sean-camara",
+    label: "Additional repositories",
+    value: "github.com/potatsukki",
+    href: "https://github.com/potatsukki",
     icon: Code2,
   },
   {
@@ -51,11 +51,12 @@ export function App() {
 
   return (
     <>
+      <a className="skip-link" href="#main-content">Skip to content</a>
       <MotionEffects />
       <div className="intro-screen" aria-hidden="true">
         <div>
           <span>Sean John Camara</span>
-          <small>Full-Stack Development · Android · Applied AI</small>
+          <small>Junior Frontend Developer · React · Next.js · TypeScript</small>
         </div>
       </div>
 
@@ -75,6 +76,9 @@ export function App() {
                 {link.label}
               </a>
             ))}
+            <a href="https://github.com/sean-camara" target="_blank" rel="noopener noreferrer" aria-label="Primary GitHub profile (opens in a new tab)">
+              GitHub
+            </a>
           </div>
           <button
             className="menu-toggle"
@@ -96,7 +100,7 @@ export function App() {
         <a href="#contact">Contact</a>
       </aside>
 
-      <main>
+      <main id="main-content">
         <Hero />
         <ProjectShowcase projects={projects} />
         <SkillsMatrix groups={skillGroups} />

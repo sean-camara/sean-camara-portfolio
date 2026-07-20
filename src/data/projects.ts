@@ -1,21 +1,29 @@
 export type ProjectKind = "applyph" | "rmv" | "academia" | "flowmoney" | "shelflife";
 
+export type ProjectLink = {
+  label: string;
+  url: string;
+  kind: "repository" | "demo";
+};
+
 export type Project = {
   title: string;
   type: string;
+  status: string;
+  context: string;
+  role: string;
   description: string;
   tech: string[];
   highlights: string[];
-  repoUrl: string;
-  liveUrl?: string;
+  links: ProjectLink[];
+  unavailableDemo?: string;
   imageUrl: string;
   visual: ProjectKind;
-  actionLabel: string;
-  liveActionLabel?: string;
   caseStudy: {
     challenge: string;
     ownership: string;
     engineering: string[];
+    limitation?: string;
   };
 };
 
@@ -29,119 +37,142 @@ export type SkillGroup = {
 export const projects: Project[] = [
   {
     title: "ApplyPH",
-    type: "Ongoing · AI-Powered Job Application Assistant",
+    type: "Job application assistant",
+    status: "In active development",
+    context: "Personal project",
+    role: "Independent developer",
     description:
-      "A mobile-first job application assistant for Filipino job seekers with resume building, evidence-linked match reports, AI-assisted application packages, application tracking, and offline-friendly PWA support.",
-    tech: ["Next.js", "TypeScript", "Supabase", "Cloudflare Workers", "PWA", "AI Workflows"],
+      "A mobile-first job application assistant for Filipino job seekers, combining guided resume workflows, evidence-linked job matching, application packages, and tracking in a privacy-aware PWA.",
+    tech: ["Next.js", "React", "TypeScript", "Supabase", "PWA", "Vitest", "Playwright"],
     highlights: [
-      "Evidence-linked job matching",
-      "AI-assisted application packages",
-      "Private resume workflows",
-      "Offline application tracking",
+      "Responsive, mobile-first interface",
+      "Private document and resume workflows",
+      "Application tracking with offline support",
+      "Automated and browser test foundations",
     ],
-    repoUrl: "https://github.com/potatsukki/ApplyPH",
+    links: [
+      { label: "Repository", url: "https://github.com/potatsukki/ApplyPH", kind: "repository" },
+    ],
+    unavailableDemo: "Public demo not yet available",
     imageUrl: "/assets/applyph-showcase.png",
     visual: "applyph",
-    actionLabel: "View Repository",
     caseStudy: {
-      challenge: "Help Filipino job seekers create stronger applications from confirmed experience without overstating their qualifications.",
-      ownership: "Full-stack product design, Next.js architecture, AI workflows, private document flows, PWA behavior, and cloud integration.",
-      engineering: ["Evidence-linked match reports", "Owner-scoped AI workflow", "Offline application tracker"],
+      challenge: "Help Filipino job seekers prepare stronger applications from confirmed experience without overstating their qualifications.",
+      ownership: "Frontend architecture, responsive product design, Supabase integration, document workflows, PWA behavior, testing, and cloud deployment setup.",
+      engineering: ["Evidence-linked match reports", "Owner-scoped data flows", "Offline application tracker"],
+      limitation: "The product is still in active development, so no public demo is linked yet.",
     },
   },
   {
     title: "RMV Stainless Steel Fabrication",
-    type: "Thesis · Full-Stack Business Management System",
+    type: "Fabrication management system",
+    status: "Live demo available",
+    context: "Academic capstone",
+    role: "Full-stack developer",
     description:
-      "A web-based system for a stainless steel fabrication business with appointment booking, role-based dashboards, project tracking, and payment-related workflows.",
-    tech: ["React", "Cloudflare", "MongoDB Atlas", "PayMongo"],
+      "Academic capstone developed around the real operational workflow of a local stainless-steel fabrication business, from appointments and project tracking to payments and fabrication progress.",
+    tech: ["React", "TypeScript", "REST APIs", "MongoDB", "Firebase", "Vitest"],
     highlights: [
-      "Appointment to project workflow",
-      "Multiple user roles",
-      "Admin and staff dashboards",
-      "Business-focused web system",
+      "Responsive role-based dashboards",
+      "Appointment and project workflows",
+      "Payments, reports, and document handling",
+      "Fabrication progress and notifications",
     ],
-    repoUrl: "https://github.com/sean-camara/rmv-web",
-    liveUrl: "https://www.rmvfabrication.app",
+    links: [
+      { label: "Frontend Repository", url: "https://github.com/sean-camara/rmv-web", kind: "repository" },
+      { label: "Backend Repository", url: "https://github.com/sean-camara/rmv-server", kind: "repository" },
+      { label: "Live Demo", url: "https://www.rmvfabrication.app", kind: "demo" },
+    ],
     imageUrl: "/assets/rmv-showcase.png",
     visual: "rmv",
-    actionLabel: "View Repository",
-    liveActionLabel: "Live Demo",
     caseStudy: {
-      challenge: "Unify appointments, fabrication projects, staff operations, and payment workflows in one business system.",
-      ownership: "Full-stack product design, implementation, integration, and deployment.",
-      engineering: ["Role-based dashboards", "Appointment-to-project workflow", "PayMongo integration"],
+      challenge: "Translate a complex fabrication workflow into clear interfaces for customers, staff, and administrators.",
+      ownership: "Responsive React interfaces, state and API integration, role-based workflows, backend implementation, and deployment.",
+      engineering: ["Authenticated role-based dashboards", "Appointment-to-project workflow", "Real-time updates and payment flows"],
+      limitation: "This is an academic capstone based on a real business workflow; no claim is made that the business currently uses it.",
     },
   },
   {
     title: "AcademiaZen",
-    type: "Student Productivity Web App",
+    type: "Student productivity PWA",
+    status: "Live demo available",
+    context: "Personal project",
+    role: "Full-stack developer",
     description:
-      "A student organizer with subjects, tasks, AI quizzes, PDF folders, calendar tools, smart notifications, and offline-friendly PWA features.",
-    tech: ["React", "PWA", "AI Features", "Calendar", "Offline Support"],
+      "A responsive student workspace for subjects, tasks, study sessions, calendars, files, notifications, and AI-assisted learning tools, designed to work well across mobile and desktop.",
+    tech: ["React", "TypeScript", "Vite", "Tailwind CSS", "PWA", "Vitest", "Playwright"],
     highlights: [
-      "Task and subject management",
-      "AI quiz generation",
-      "PDF organization",
-      "Smart notifications",
+      "Responsive student dashboard",
+      "Subject, task, and calendar workflows",
+      "File and PDF organization",
+      "Notifications and AI-assisted study tools",
     ],
-    repoUrl: "https://github.com/sean-camara/AcademiaZen",
-    liveUrl: "https://www.academiazen.app",
+    links: [
+      { label: "Frontend Repository", url: "https://github.com/sean-camara/AcademiaZen", kind: "repository" },
+      { label: "Backend Repository", url: "https://github.com/sean-camara/AcademiaZen_Backend", kind: "repository" },
+      { label: "Live Demo", url: "https://www.academiazen.app", kind: "demo" },
+    ],
     imageUrl: "/assets/academiazen-showcase.png",
     visual: "academia",
-    actionLabel: "View Repository",
-    liveActionLabel: "Live Demo",
     caseStudy: {
-      challenge: "Bring student planning, study materials, and AI-assisted practice into one focused workspace.",
-      ownership: "Product design, React development, PWA behavior, and AI feature integration.",
-      engineering: ["Offline-friendly PWA", "AI quiz generation", "Tasks, calendar, and PDF organization"],
-    },
-  },
-  {
-    title: "FlowMoney",
-    type: "Money Tracker Web App",
-    description:
-      "A money tracker with chat-based AI assistant and goal system to help users manage finances smarter.",
-    tech: ["React", "Charts", "AI Assistant", "Local Storage"],
-    highlights: [
-      "Income and expense tracking",
-      "Financial goals management",
-      "AI chat assistant",
-      "Beautiful analytics dashboard",
-    ],
-    repoUrl: "https://github.com/sean-camara/MoneyFlow_Backend",
-    liveUrl: "https://money-flow-six.vercel.app",
-    imageUrl: "/assets/flowmoney-showcase.png",
-    visual: "flowmoney",
-    actionLabel: "View Repository",
-    liveActionLabel: "Live Demo",
-    caseStudy: {
-      challenge: "Make personal finance tracking easier to understand through goals, visual feedback, and conversation.",
-      ownership: "Interface design, React implementation, data visualization, and AI assistant integration.",
-      engineering: ["Income and expense tracking", "Goal-based workflow", "Local-first persistence"],
+      challenge: "Bring planning, study materials, and focused learning tools into one calm, mobile-friendly workspace.",
+      ownership: "React interface development, responsive layouts, PWA behavior, API integration, and automated testing.",
+      engineering: ["Offline-friendly PWA", "Calendar and notification flows", "Separated frontend and backend applications"],
     },
   },
   {
     title: "ShelfLife",
-    type: "Native Android Pantry App",
+    type: "Native Android pantry app",
+    status: "Android project",
+    context: "Personal project",
+    role: "Android developer",
     description:
-      "A native Android pantry and ingredient tracker with barcode scanner, AI recipes, and AI kitchen assistant.",
-    tech: ["Kotlin", "Jetpack Compose", "Room", "ML Kit"],
+      "A native Android pantry and ingredient tracker with local inventory, expiration tracking, barcode and receipt scanning, and AI-assisted recipe ideas.",
+    tech: ["Kotlin", "Jetpack Compose", "Room", "ML Kit", "Firebase"],
     highlights: [
-      "Pantry and ingredient management",
-      "Barcode and receipt scanner OCR",
-      "AI recipe generation",
-      "AI kitchen assistant chat",
+      "Native Compose interface",
+      "Local pantry and expiry tracking",
+      "Barcode and receipt scanning",
+      "AI-assisted recipe ideas",
     ],
-    repoUrl: "https://github.com/sean-camara/ShelfLife",
+    links: [
+      { label: "Repository", url: "https://github.com/sean-camara/ShelfLife", kind: "repository" },
+    ],
     imageUrl: "/assets/shelflife-showcase.png",
     visual: "shelflife",
-    actionLabel: "View Repository",
-    liveActionLabel: "Get on Google Play",
     caseStudy: {
-      challenge: "Help people track pantry items quickly and turn available ingredients into useful meal ideas.",
-      ownership: "Native Android product design, Kotlin development, local data, scanning, and AI features.",
+      challenge: "Make pantry tracking quick enough for everyday use while keeping core inventory data available locally.",
+      ownership: "Native Android UI, local data, scanning flows, Firebase integration, and AI feature integration.",
       engineering: ["Jetpack Compose UI", "Room local database", "ML Kit barcode and receipt scanning"],
+      limitation: "No public Google Play listing or downloadable build is linked.",
+    },
+  },
+  {
+    title: "FlowMoney",
+    type: "Personal finance web app",
+    status: "Live demo available",
+    context: "Personal project",
+    role: "Full-stack developer",
+    description:
+      "A responsive personal-finance dashboard for income and expense tracking, financial goals, data visualization, and API-backed account workflows.",
+    tech: ["React", "TypeScript", "REST APIs", "MongoDB", "Express"],
+    highlights: [
+      "Responsive finance dashboard",
+      "Income and expense tracking",
+      "Financial goals and data visualization",
+      "Frontend-to-API integration",
+    ],
+    links: [
+      { label: "Backend Repository", url: "https://github.com/sean-camara/MoneyFlow_Backend", kind: "repository" },
+      { label: "Live Demo", url: "https://money-flow-six.vercel.app", kind: "demo" },
+    ],
+    imageUrl: "/assets/flowmoney-showcase.png",
+    visual: "flowmoney",
+    caseStudy: {
+      challenge: "Present everyday financial activity and goals in a dashboard that remains clear on smaller screens.",
+      ownership: "Responsive interface work, dashboard flows, data visualization, and backend API integration.",
+      engineering: ["Income and expense workflows", "Goal tracking", "Separated frontend and backend applications"],
+      limitation: "The public frontend repository could not be verified; the available repository link is explicitly backend-only.",
     },
   },
 ];
@@ -150,94 +181,22 @@ export const skillGroups: SkillGroup[] = [
   {
     label: "Frontend",
     icon: "frontend",
-    skills: [
-      "React",
-      "TypeScript",
-      "JavaScript",
-      "Tailwind CSS",
-      "Responsive Design",
-      "Progressive Web Apps",
-      "Vite",
-      "Framer Motion",
-      "UI/UX",
-      "Accessibility",
-    ],
-  },
-  {
-    label: "Backend & Cloud",
-    icon: "backend",
-    skills: [
-      "Firebase",
-      "Cloudflare Workers",
-      "MongoDB Atlas",
-      "REST APIs",
-      "Authentication",
-      "PayMongo",
-      "API Integration",
-      "Deployment",
-      "JSON Architecture",
-    ],
-  },
-  {
-    label: "Android Development",
-    icon: "android",
-    skills: [
-      "Kotlin",
-      "Jetpack Compose",
-      "Room Database",
-      "DataStore",
-      "Navigation Compose",
-      "CameraX",
-      "ML Kit",
-      "Material 3",
-      "Firebase Auth",
-      "Firebase App Distribution",
-      "WorkManager",
-    ],
-  },
-  {
-    label: "Artificial Intelligence",
-    icon: "ai",
     accent: true,
-    skills: [
-      "AI Applications",
-      "Prompt Engineering",
-      "LLM Integration",
-      "DeepSeek API",
-      "OCR Processing",
-      "AI Chat Systems",
-      "AI Workflow Design",
-      "AI Automation",
-      "Recipe Generation",
-    ],
+    skills: ["TypeScript", "JavaScript", "HTML5", "CSS3", "React", "Next.js", "Responsive Design", "Accessibility", "Tailwind CSS", "Progressive Web Apps"],
   },
   {
-    label: "Software Engineering",
-    icon: "engineering",
-    skills: [
-      "Full-Stack Development",
-      "Mobile Development",
-      "Database Design",
-      "System Architecture",
-      "State Management",
-      "Performance Optimization",
-      "Problem Solving",
-      "Clean Architecture",
-    ],
+    label: "Backend & APIs",
+    icon: "backend",
+    skills: ["Node.js", "Express", "REST APIs", "Authentication", "Supabase", "PostgreSQL", "MongoDB", "Firebase", "Cloudflare Workers"],
   },
   {
-    label: "Developer Tools",
+    label: "Testing & Tools",
     icon: "tools",
-    skills: [
-      "Git",
-      "GitHub",
-      "Codex",
-      "Android Studio",
-      "VS Code",
-      "Postman",
-      "Firebase Console",
-      "Cloudflare Dashboard",
-      "UI Planning",
-    ],
+    skills: ["Git", "GitHub", "Vitest", "Playwright", "Vite", "Postman", "Vercel", "Cloudflare"],
+  },
+  {
+    label: "Additional: Android",
+    icon: "android",
+    skills: ["Kotlin", "Jetpack Compose", "Room Database", "ML Kit", "Android Studio"],
   },
 ];
