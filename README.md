@@ -4,7 +4,7 @@ Clean, responsive portfolio website for Sean John Camara, focused on full-stack 
 
 ## Live Site
 
-https://portfolio-site-kappa-rust.vercel.app
+https://seanjohncamara.vercel.app
 
 ## Featured Work
 
