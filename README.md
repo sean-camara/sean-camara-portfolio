@@ -1,6 +1,6 @@
 # Sean John Camara - Developer Portfolio
 
-Clean, responsive portfolio website for Sean John Camara, focused on full-stack web development, software development, and Android as an additional specialization.
+Responsive portfolio for Sean John Camara, positioned for junior frontend, React, Next.js, and TypeScript roles. Full-stack and Android work appear as supporting experience.
 
 ## Live Site
 
@@ -8,10 +8,11 @@ https://seanjohncamara.vercel.app
 
 ## Featured Work
 
+- ApplyPH
 - RMV Stainless Steel Fabrication System
 - AcademiaZen
-- FlowMoney
 - ShelfLife
+- FlowMoney
 
 ## Stack
 

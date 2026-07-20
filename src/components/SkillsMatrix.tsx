@@ -23,7 +23,7 @@ export function SkillsMatrix({ groups }: SkillsMatrixProps) {
           <h2>Technology<br />with purpose.</h2>
         </div>
         <p className="section-intro">
-          Technologies used across the products above—not a keyword inventory, but a working toolkit for shipping complete software.
+          Frontend tools first, supported by practical API, testing, cloud, and native Android experience.
         </p>
       </div>
 

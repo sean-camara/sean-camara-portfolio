@@ -5,13 +5,13 @@ export function Footer() {
         <span className="footer-name">Sean John Camara<span>.</span></span>
         <span>© 2026. Built with React and TypeScript.</span>
         <div className="footer-links">
-          <a href="https://github.com/sean-camara" target="_blank" rel="noreferrer">
-            GitHub (Sean)
+          <a href="https://github.com/sean-camara" target="_blank" rel="noopener noreferrer">
+            Primary GitHub
           </a>
-          <a href="https://github.com/potatsukki" target="_blank" rel="noreferrer">
-            GitHub (Potatsukki)
+          <a href="https://github.com/potatsukki" target="_blank" rel="noopener noreferrer">
+            Additional repos
           </a>
-          <a href="https://www.linkedin.com/in/sean-john-camara-ab78a3321/" target="_blank" rel="noreferrer">
+          <a href="https://www.linkedin.com/in/sean-john-camara-ab78a3321/" target="_blank" rel="noopener noreferrer">
             LinkedIn
           </a>
         </div>

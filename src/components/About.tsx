@@ -12,6 +12,8 @@ export function About() {
           <img
             src="/assets/sean-workspace.png"
             alt="Sean John Camara working at his laptop"
+            width="1537"
+            height="1023"
             loading="lazy"
             decoding="async"
           />
@@ -20,13 +22,12 @@ export function About() {
         <div className="about-copy" data-reveal="right">
           <span className="about-index">01 / 04</span>
           <p className="about-lead">
-            I am Sean John Camara, a Computer Science student and developer focused on
-            practical web applications and full-stack systems.
+            I am Sean John Camara, a junior frontend developer focused on responsive,
+            accessible React and Next.js interfaces.
           </p>
           <p>
-            My work centers on real-world projects, clear interfaces, useful workflows,
-            and deployed applications. I primarily build for the web, with native Android
-            development as an additional specialization.
+            I connect interfaces to REST APIs, authentication, data services, tests, and
+            deployment workflows. Full-stack and native Android work support my frontend focus.
           </p>
 
           <blockquote>
@@ -36,11 +37,11 @@ export function About() {
           <dl className="profile-facts">
             <div>
               <dt>Education</dt>
-              <dd>BS Computer Science, STI College Fairview — Expected 2027</dd>
+              <dd>STI College Fairview · BS Computer Science coursework · Completed through third-year standing</dd>
             </div>
             <div>
               <dt>Focus</dt>
-              <dd>Web systems, APIs, applied AI, and native Android apps</dd>
+              <dd>Frontend development with React, Next.js, and TypeScript</dd>
             </div>
             <div>
               <dt>Based in</dt>

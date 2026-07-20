@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowLeft, ArrowRight, ArrowUpRight, Code2, ExternalLink, Play, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Code2, ExternalLink, Info, X } from "lucide-react";
 import type { Project } from "../data/projects";
 
 type ProjectShowcaseProps = {
@@ -37,18 +37,17 @@ export function ProjectShowcase({ projects }: ProjectShowcaseProps) {
     <section className="editorial-section page-shell" id="projects">
       <div className="section-heading" data-reveal="split">
         <div>
-          <p className="section-kicker">[ Selected case studies ]</p>
           <h2>Software built for<br />real use.</h2>
         </div>
         <p className="section-intro">
-          Deployed web systems, productivity tools, finance workflows,
-          and a native Android application—designed and engineered end to end.
+          Frontend-focused React and Next.js work, supported by full-stack
+          systems and one native Android project.
         </p>
       </div>
 
       <dl className="portfolio-stats" data-reveal aria-label="Portfolio overview">
         <div><dt>{projects.length}</dt><dd>Featured products</dd></div>
-        <div><dt>{projects.filter((project) => project.liveUrl).length}</dt><dd>Live web applications</dd></div>
+        <div><dt>{projects.filter((project) => project.links.some((link) => link.kind === "demo")).length}</dt><dd>Live web applications</dd></div>
         <div><dt>{projects.filter((project) => project.visual === "shelflife").length}</dt><dd>Native Android application</dd></div>
       </dl>
 
@@ -73,6 +72,7 @@ export function ProjectShowcase({ projects }: ProjectShowcaseProps) {
                 <div className="project-number">{String(index + 1).padStart(2, "0")}</div>
                 <p className="project-type">{project.type}</p>
                 <h3>{project.title}</h3>
+                <p className="project-card-status">{project.status}</p>
               </div>
             </article>
           );
@@ -109,6 +109,11 @@ export function ProjectShowcase({ projects }: ProjectShowcaseProps) {
               <div className="project-modal-intro">
                 <span>Project overview</span>
                 <p>{selectedProject.description}</p>
+                <dl className="project-meta">
+                  <div><dt>Status</dt><dd>{selectedProject.status}</dd></div>
+                  <div><dt>Context</dt><dd>{selectedProject.context}</dd></div>
+                  <div><dt>Role</dt><dd>{selectedProject.role}</dd></div>
+                </dl>
               </div>
               <div className="project-modal-evidence">
                 <div className="project-modal-detail">
@@ -121,24 +126,37 @@ export function ProjectShowcase({ projects }: ProjectShowcaseProps) {
                 </div>
                 <div className="project-modal-detail project-modal-engineering">
                   <span>03 — Engineering evidence</span>
-                  <ul>{selectedProject.caseStudy.engineering.map((item) => <li key={item}>{item}</li>)}</ul>
+                  <ul>{[...selectedProject.highlights, ...selectedProject.caseStudy.engineering].map((item) => <li key={item}>{item}</li>)}</ul>
                 </div>
+                {selectedProject.caseStudy.limitation && (
+                  <div className="project-modal-detail">
+                    <span>04 — Current limitation</span>
+                    <p>{selectedProject.caseStudy.limitation}</p>
+                  </div>
+                )}
               </div>
               <div className="project-modal-stack" aria-label={`${selectedProject.title} technologies`}>
                 <span className="project-modal-label">Built with</span>
                 <div>{selectedProject.tech.map((tech) => <span key={tech}>{tech}</span>)}</div>
               </div>
               <div className="project-modal-actions">
-                <a href={selectedProject.repoUrl} target="_blank" rel="noreferrer">
-                  <Code2 size={16} />{selectedProject.actionLabel}<ArrowUpRight size={14} />
-                </a>
-                {selectedProject.liveUrl ? (
-                  <a href={selectedProject.liveUrl} target="_blank" rel="noreferrer">
-                    <ExternalLink size={16} />{selectedProject.liveActionLabel ?? "Live Demo"}<ArrowUpRight size={14} />
+                {selectedProject.links.map((link) => (
+                  <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${selectedProject.title} ${link.label} (opens in a new tab)`}
+                    key={link.url}
+                  >
+                    {link.kind === "repository" ? <Code2 size={16} /> : <ExternalLink size={16} />}
+                    {link.label}<ArrowUpRight size={14} />
                   </a>
-                ) : selectedProject.liveActionLabel ? (
-                  <span className="project-unavailable"><Play size={16} />{selectedProject.liveActionLabel}</span>
-                ) : null}
+                ))}
+                {selectedProject.unavailableDemo && (
+                  <span className="project-unavailable" aria-label={selectedProject.unavailableDemo}>
+                    <Info size={16} />{selectedProject.unavailableDemo}
+                  </span>
+                )}
               </div>
               <nav className="project-modal-nav" aria-label="Browse projects">
                 <button type="button" onClick={() => setSelectedIndex((selectedIndex! - 1 + projects.length) % projects.length)}>
@@ -165,6 +183,8 @@ function ProjectImage({ project, isModal = false }: { project: Project; isModal?
       <img
         src={project.imageUrl}
         alt={`${project.title} screenshot`}
+        width="1672"
+        height="941"
         loading="lazy"
         decoding="async"
       />

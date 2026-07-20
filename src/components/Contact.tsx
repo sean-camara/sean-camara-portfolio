@@ -12,7 +12,7 @@ type ContactProps = {
 };
 
 export function Contact({ contactLinks }: ContactProps) {
-  const githubLinks = contactLinks.filter((link) => link.label === "GitHub");
+  const githubLinks = contactLinks.filter((link) => link.label !== "Email" && link.label !== "LinkedIn");
   const linkedIn = contactLinks.find((link) => link.label === "LinkedIn");
 
   return (
@@ -22,8 +22,7 @@ export function Contact({ contactLinks }: ContactProps) {
           <p className="section-kicker">[ Get in touch ]</p>
           <h2>Let&apos;s build something<br /><em>useful.</em></h2>
           <p className="contact-copy">
-            Open to opportunities, collaborations, and practical projects that need careful
-            product thinking and reliable implementation.
+            Open to junior frontend, React, Next.js, and TypeScript opportunities.
           </p>
           <a className="contact-email" href="mailto:camara.sean13@gmail.com" data-magnetic>
             <Mail size={18} />
@@ -43,11 +42,11 @@ export function Contact({ contactLinks }: ContactProps) {
             <div className="contact-link-group">
               <Code2 size={18} />
               <span>
-                <small>GitHub</small>
+                <small>GitHub profiles</small>
                 <span className="contact-link-values">
                   {githubLinks.map((link) => (
-                    <a href={link.href} target="_blank" rel="noreferrer" key={link.href}>
-                      {link.value}<ArrowUpRight size={13} />
+                    <a href={link.href} target="_blank" rel="noopener noreferrer" key={link.href} aria-label={`${link.label}: ${link.value} (opens in a new tab)`}>
+                      <span><strong>{link.label}:</strong> {link.value}</span><ArrowUpRight size={13} />
                     </a>
                   ))}
                 </span>
@@ -55,7 +54,7 @@ export function Contact({ contactLinks }: ContactProps) {
             </div>
           )}
           {linkedIn && (
-            <a href={linkedIn.href} target="_blank" rel="noreferrer">
+            <a href={linkedIn.href} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile (opens in a new tab)">
               <Network size={18} />
               <span><small>LinkedIn</small>{linkedIn.value}</span>
             </a>
