@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://seanjohncamara.vercel.app/sitemap.xml

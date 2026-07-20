@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { ArrowDown, Download } from "lucide-react";
 
 export function Hero() {
   return (
@@ -17,11 +17,11 @@ export function Hero() {
             modern testing tools, and production deployment experience.
           </p>
           <div className="hero-actions">
-            <a className="button-primary" href="#projects" data-magnetic>View work</a>
-            <a className="button-secondary" href="#contact" data-magnetic>Get in touch</a>
-            <a className="text-link" href="/Sean_John_Camara_Resume.pdf" target="_blank" rel="noopener noreferrer" aria-label="View résumé PDF (opens in a new tab)" data-magnetic>
-              Résumé <ArrowUpRight size={15} />
+            <a className="button-primary" href="#projects" data-magnetic>View projects</a>
+            <a className="button-secondary" href="/Sean_John_Camara_Resume.pdf" download data-magnetic>
+              Download résumé <Download size={15} />
             </a>
+            <a className="text-link" href="#contact" data-magnetic>Contact me</a>
           </div>
           <ul className="hero-specialties" aria-label="Frontend strengths">
             <li>Responsive UI</li>
@@ -34,7 +34,7 @@ export function Hero() {
         </div>
         <figure className="hero-portrait" data-reveal="portrait" data-parallax data-parallax-speed="1.25">
           <img
-            src="/assets/sean-profile.png"
+            src="/assets/sean-profile.webp"
             alt="Sean John Camara"
             width="1122"
             height="1402"

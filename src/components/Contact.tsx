@@ -31,11 +31,11 @@ export function Contact({ contactLinks }: ContactProps) {
           </a>
         </div>
         <div className="contact-links">
-          <a href="tel:09910248649">
+          <a href="tel:+639910248649">
             <Phone size={18} />
             <span>
               <small>Phone</small>
-              09910248649
+              +63 991 024 8649
             </span>
           </a>
           {githubLinks.length > 0 && (
