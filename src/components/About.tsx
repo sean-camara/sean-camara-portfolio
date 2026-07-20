@@ -10,7 +10,7 @@ export function About() {
 
         <figure className="about-workspace" data-parallax data-parallax-speed="1.1" data-tilt>
           <img
-            src="/assets/sean-workspace.png"
+            src="/assets/sean-workspace.webp"
             alt="Sean John Camara working at his laptop"
             width="1537"
             height="1023"

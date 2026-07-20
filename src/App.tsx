@@ -4,6 +4,7 @@ import { About } from "./components/About";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 import { Hero } from "./components/Hero";
+import { IntroScreen } from "./components/IntroScreen";
 import { MotionEffects } from "./components/MotionEffects";
 import { ProjectShowcase } from "./components/ProjectShowcase";
 import { SkillsMatrix } from "./components/SkillsMatrix";
@@ -53,12 +54,7 @@ export function App() {
     <>
       <a className="skip-link" href="#main-content">Skip to content</a>
       <MotionEffects />
-      <div className="intro-screen" aria-hidden="true">
-        <div>
-          <span>Sean John Camara</span>
-          <small>Junior Frontend Developer · React · Next.js · TypeScript</small>
-        </div>
-      </div>
+      <IntroScreen />
 
       <header className="site-header">
         <nav className="site-nav" aria-label="Primary navigation">
