@@ -5,9 +5,6 @@ export function Hero() {
     <section className="hero" id="home">
       <div className="hero-grid page-shell">
         <div className="hero-copy" data-reveal="hero">
-          <div className="hero-eyebrow">
-            <span>Junior Frontend Developer</span>
-          </div>
           <h1>
             <span>Frontend</span>
             <span className="hero-title-accent">Developer</span>
