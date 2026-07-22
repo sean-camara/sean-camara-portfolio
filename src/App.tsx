@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Code2, Mail, Menu, Network, X } from "lucide-react";
 import { About } from "./components/About";
+import { Certifications } from "./components/Certifications";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
+import { ExperienceEducation } from "./components/ExperienceEducation";
 import { Hero } from "./components/Hero";
 import { IntroScreen } from "./components/IntroScreen";
 import { MotionEffects } from "./components/MotionEffects";
@@ -13,7 +15,9 @@ import { projects, skillGroups } from "./data/projects";
 const navLinks = [
   { label: "Home", href: "#home" },
   { label: "Projects", href: "#projects" },
+  { label: "Experience", href: "#experience" },
   { label: "Skills", href: "#skills" },
+  { label: "Certifications", href: "#certifications" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ];
@@ -91,7 +95,9 @@ export function App() {
 
       <aside className="section-rail" aria-label="Jump to section">
         <a href="#projects">Work</a>
+        <a href="#experience">Experience</a>
         <a href="#skills">Skills</a>
+        <a href="#certifications">Certs</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </aside>
@@ -99,7 +105,9 @@ export function App() {
       <main id="main-content">
         <Hero />
         <ProjectShowcase projects={projects} />
+        <ExperienceEducation />
         <SkillsMatrix groups={skillGroups} />
+        <Certifications />
         <About />
         <Contact contactLinks={contactLinks} />
       </main>

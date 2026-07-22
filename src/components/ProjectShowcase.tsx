@@ -54,7 +54,10 @@ export function ProjectShowcase({ projects }: ProjectShowcaseProps) {
   return (
     <section className="editorial-section page-shell" id="projects">
       <div className="section-heading" data-reveal="split">
-        <div><h2>Software built for<br />real use.</h2></div>
+        <div>
+          <p className="section-kicker">[ Projects ]</p>
+          <h2>Software built for<br />real use.</h2>
+        </div>
         <p className="section-intro">Frontend-focused React and Next.js work, supported by full-stack systems and one native Android project.</p>
       </div>
 

@@ -37,7 +37,7 @@ export function About() {
           <dl className="profile-facts">
             <div>
               <dt>Education</dt>
-              <dd>STI College Fairview · BS Computer Science coursework · Completed through third-year standing</dd>
+              <dd>STI College Fairview · BS Computer Science · Expected graduation 2027</dd>
             </div>
             <div>
               <dt>Focus</dt>
