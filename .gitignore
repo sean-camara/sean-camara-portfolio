@@ -2,6 +2,7 @@ node_modules/
 dist/
 qa/
 output/
+tmp/
 .vercel/
 .env*
 *.log
