@@ -66,9 +66,9 @@ export const projects: Project[] = [
     imageUrl: "/assets/applyph-showcase.webp",
     visual: "applyph",
     gallery: [
-      { src: "/assets/applyph-home.webp", alt: "ApplyPH public home page on desktop", caption: "Responsive public home page" },
-      { src: "/assets/applyph-match.webp", alt: "ApplyPH demo job match result on desktop", caption: "Evidence-linked match result using demo-safe data" },
-      { src: "/assets/applyph-match-mobile.webp", alt: "ApplyPH demo match workflow on a phone", caption: "Mobile-first match workflow using demo-safe data" },
+      { src: "/assets/applyph-landing-laptop.png", alt: "ApplyPH landing page shown on a laptop", caption: "Landing page" },
+      { src: "/assets/applyph-resume-checker-laptop.png", alt: "ApplyPH resume checker shown on a laptop", caption: "Resume checker" },
+      { src: "/assets/applyph-resume-result-laptop.png", alt: "ApplyPH resume checker result shown on a laptop", caption: "Resume checker result" },
     ],
     caseStudy: {
       challenge: "Help Filipino job seekers prepare stronger applications from confirmed experience without overstating their qualifications.",

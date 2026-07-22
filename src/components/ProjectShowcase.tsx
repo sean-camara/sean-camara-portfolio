@@ -131,12 +131,26 @@ export function ProjectShowcase({ projects }: ProjectShowcaseProps) {
                   event.preventDefault();
                   setGalleryIndex((current) => (current + (event.key === "ArrowLeft" ? -1 : 1) + selectedProject.gallery!.length) % selectedProject.gallery!.length);
                 }}>
-                  <img src={selectedProject.gallery[galleryIndex].src} alt={selectedProject.gallery[galleryIndex].alt} loading="lazy" decoding="async" />
-                  <figcaption><span>{selectedProject.gallery[galleryIndex].caption}</span><span>{galleryIndex + 1} / {selectedProject.gallery.length}</span></figcaption>
-                  <div className="project-gallery-controls">
-                    <button type="button" onClick={() => setGalleryIndex((galleryIndex - 1 + selectedProject.gallery!.length) % selectedProject.gallery!.length)} aria-label="Previous ApplyPH screenshot"><ArrowLeft size={16} /></button>
-                    <button type="button" onClick={() => setGalleryIndex((galleryIndex + 1) % selectedProject.gallery!.length)} aria-label="Next ApplyPH screenshot"><ArrowRight size={16} /></button>
+                  <div className="project-gallery-stage">
+                    <img src={selectedProject.gallery[galleryIndex].src} alt={selectedProject.gallery[galleryIndex].alt} loading="lazy" decoding="async" />
+                    <span className="project-gallery-stage-label">{selectedProject.gallery[galleryIndex].caption}</span>
                   </div>
+                  <div className="project-gallery-thumbnails" aria-label="ApplyPH product screenshots">
+                    {selectedProject.gallery.map((shot, index) => (
+                      <button
+                        className={index === galleryIndex ? "is-active" : ""}
+                        type="button"
+                        onClick={() => setGalleryIndex(index)}
+                        aria-label={`Show ${shot.caption}`}
+                        aria-pressed={index === galleryIndex}
+                        key={shot.src}
+                      >
+                        <img src={shot.src} alt="" loading="lazy" decoding="async" />
+                        <span>{String(index + 1).padStart(2, "0")}</span>
+                      </button>
+                    ))}
+                  </div>
+                  <figcaption><span>Product screens</span><span>{galleryIndex + 1} / {selectedProject.gallery.length}</span></figcaption>
                 </figure>
               )}
 
