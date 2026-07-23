@@ -30,13 +30,13 @@ const contactLinks = [
     icon: Mail,
   },
   {
-    label: "Primary GitHub",
+    label: "Main GitHub",
     value: "github.com/sean-camara",
     href: "https://github.com/sean-camara",
     icon: Code2,
   },
   {
-    label: "Additional repositories",
+    label: "ApplyPH GitHub",
     value: "github.com/potatsukki",
     href: "https://github.com/potatsukki",
     icon: Code2,

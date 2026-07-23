@@ -128,7 +128,7 @@ export function ProjectShowcase({ projects }: ProjectShowcaseProps) {
                 </dl>
               </div>
 
-              {selectedProject.gallery && (
+              {selectedProject.gallery && selectedProject.gallery.length > 0 && (
                 <figure className="project-gallery" tabIndex={0} data-gallery onKeyDown={(event) => {
                   if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
                   event.preventDefault();
@@ -138,7 +138,7 @@ export function ProjectShowcase({ projects }: ProjectShowcaseProps) {
                     <img src={selectedProject.gallery[galleryIndex].src} alt={selectedProject.gallery[galleryIndex].alt} loading="lazy" decoding="async" />
                     <span className="project-gallery-stage-label">{selectedProject.gallery[galleryIndex].caption}</span>
                   </div>
-                  <div className="project-gallery-thumbnails" aria-label="ApplyPH product screenshots">
+                  <div className="project-gallery-thumbnails" aria-label={`${selectedProject.title} product screenshots`}>
                     {selectedProject.gallery.map((shot, index) => (
                       <button
                         className={index === galleryIndex ? "is-active" : ""}

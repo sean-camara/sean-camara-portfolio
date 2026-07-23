@@ -8,17 +8,17 @@ https://seanjohncamara.vercel.app
 
 ## Featured Work
 
-- ApplyPH
 - RMV Stainless Steel Fabrication System
 - AcademiaZen
+- ApplyPH
 - ShelfLife
 - FlowMoney
 
 ## Stack
 
 - React + Vite
-- TypeScript 7 RC
-- CSS Modules-style component structure with global design tokens
+- TypeScript
+- Custom global CSS architecture with reusable design tokens and component-specific class naming
 - Lucide React icons
 - Vercel-ready static build
 
@@ -27,6 +27,9 @@ https://seanjohncamara.vercel.app
 ```bash
 npm install
 npm run dev
+npm run typecheck
+npm run test
+npm run test:e2e
 ```
 
 ## Production Build
