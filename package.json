@@ -6,23 +6,28 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "typecheck": "tsc --noEmit",
-    "test": "node --test src/lib/*.test.ts && node scripts/validate-portfolio.mjs",
+    "test": "npm run test:unit",
+    "test:unit": "node --test src/lib/*.test.ts && node scripts/validate-portfolio.mjs",
+    "test:e2e": "playwright test",
+    "test:a11y": "playwright test --grep @a11y",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview --host 127.0.0.1"
   },
   "dependencies": {
-    "@vitejs/plugin-react": "latest",
-    "lucide-react": "latest",
-    "react": "latest",
-    "react-dom": "latest",
-    "vite": "latest"
+    "@vitejs/plugin-react": "^6.0.3",
+    "lucide-react": "^1.22.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "vite": "^8.1.1"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.2",
     "@types/node": "^26.0.1",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
+    "@axe-core/playwright": "^4.11.0",
+    "@playwright/test": "^1.58.2",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
     "tailwindcss": "^4.3.2",
-    "typescript": "rc"
+    "typescript": "^5.9.3"
   }
 }

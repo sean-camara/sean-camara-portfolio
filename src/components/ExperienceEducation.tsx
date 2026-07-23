@@ -9,27 +9,27 @@ export function ExperienceEducation() {
           <h2>Building while<br />learning.</h2>
         </div>
         <p className="section-intro">
-          Client-validated product work backed by an active computer science education.
+          Hands-on product development through an active computer science education and a real-business capstone collaboration.
         </p>
       </div>
 
       <div className="experience-list">
         <article className="experience-entry" data-reveal="row">
           <div className="experience-entry-side">
-            <span>01 / Client work</span>
+            <span>01 / Capstone collaboration</span>
             <time dateTime="2025">2025 — Present</time>
           </div>
           <div className="experience-entry-main">
-            <p className="experience-context">Academic capstone · Four-person team</p>
-            <h3>Lead Full-Stack Developer</h3>
+            <p className="experience-context">Real-business academic capstone · Four-person team</p>
+            <h3>Primary Full-Stack Developer</h3>
             <h4>RMV Stainless Steel Fabrication &amp; Construction Services</h4>
             <ul className="experience-notes">
-              <li>Built the application end to end: role-based interfaces, REST API, MongoDB data model, authentication, dashboards, and deployment.</li>
-              <li>Worked with three teammates responsible for thesis documentation and system testing.</li>
+              <li>Personally built most of the application: role-based interfaces, REST API, MongoDB data model, authentication, dashboards, and deployment.</li>
+              <li>Worked with three teammates who focused primarily on thesis documentation and system testing.</li>
               <li>RMV reviewed, tested, and approved the current build. The capstone remains under development and is not yet in daily use.</li>
             </ul>
             <a href="https://www.rmvfabrication.app" target="_blank" rel="noopener noreferrer">
-              View client project <ArrowUpRight size={15} />
+              View live capstone <ArrowUpRight size={15} />
             </a>
           </div>
         </article>

@@ -11,8 +11,8 @@ const html = readFileSync(resolve(root, "index.html"), "utf8");
 const files = [app, projects, hero, contact, showcase, html];
 
 const checks = [
-  [app.includes('label: "Primary GitHub"') && app.includes("https://github.com/sean-camara"), "Primary GitHub link"],
-  [app.includes('label: "Additional repositories"') && app.includes("https://github.com/potatsukki"), "Additional repositories link"],
+  [app.includes('label: "Main GitHub"') && app.includes("https://github.com/sean-camara"), "Main GitHub link"],
+  [app.includes('label: "ApplyPH GitHub"') && app.includes("https://github.com/potatsukki"), "ApplyPH GitHub link"],
   [projects.includes("https://github.com/potatsukki/ApplyPH"), "ApplyPH repository owner"],
   [projects.includes('label: "Backend Repository"') && projects.includes("MoneyFlow_Backend"), "FlowMoney backend label"],
   [projects.includes("Public demo not yet available"), "Missing ApplyPH demo handling"],
@@ -23,6 +23,7 @@ const checks = [
   [html.includes('content="https://seanjohncamara.vercel.app/og.png"') && html.includes('property="og:image:width" content="1200"') && html.includes('property="og:image:height" content="630"'), "Social image metadata"],
   [html.includes('"@type": "Person"') && html.includes('"telephone": "+639910248649"'), "Person structured data"],
   [existsSync(resolve(root, "public/og.png")), "Open Graph image"],
+  [["rmv-screenshot.png", "academiazen-screenshot.png", "shelflife-screenshot.jpg", "flowmoney-screenshot.png"].every((asset) => existsSync(resolve(root, "public/assets", asset))), "Project gallery assets"],
   [files.every((source) => !source.includes('href="#"')), "No fake destinations"],
 ];
 
