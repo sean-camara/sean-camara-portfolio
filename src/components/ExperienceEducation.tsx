@@ -1,6 +1,34 @@
-import { ArrowUpRight } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight, X } from "lucide-react";
+
+const educationMemories = [
+  { title: "Student Council", image: "/assets/student-council.jpg", alt: "STI College Fairview Student Council event", context: "Student leadership · STI College Fairview", description: "A glimpse of my time supporting student-led activities and working with fellow student leaders during campus events." },
+  { title: "PRIME representatives", image: "/assets/prime-organization.png", alt: "PRIME student representatives from STI College Fairview", context: "School representation · PRIME organization", description: "As part of PRIME, I represented STI College Fairview while visiting different schools and helping introduce prospective students to the institution." },
+  { title: "XLNC · Entrepreneurship Week", image: "/assets/xlnc-entrepreneurship.jpg", alt: "XLNC shirt-selling website project during Entrepreneurship Week", context: "Student venture · Entrepreneurship Week", description: "Worked with teammates to create XLNC, an online shirt-selling website, and present the idea through a physical booth during Entrepreneurship Week." },
+] as const;
 
 export function ExperienceEducation() {
+  const [selectedMemory, setSelectedMemory] = useState<number | null>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const openerRef = useRef<HTMLButtonElement | null>(null);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (selectedMemory === null || !dialog) return;
+    if (!dialog.open) dialog.showModal();
+    document.body.style.overflow = "hidden";
+    closeRef.current?.focus();
+    return () => { document.body.style.overflow = ""; };
+  }, [selectedMemory]);
+
+  const closeMemory = () => {
+    dialogRef.current?.close();
+    setSelectedMemory(null);
+    document.body.style.overflow = "";
+    window.requestAnimationFrame(() => openerRef.current?.focus());
+  };
+
   return (
     <section className="editorial-section page-shell experience-section" id="experience">
       <div className="section-heading" data-reveal="split">
@@ -44,18 +72,19 @@ export function ExperienceEducation() {
             <h3>Bachelor of Science in Computer Science</h3>
             <h4>STI College Fairview</h4>
             <div className="education-gallery" aria-label="School experiences">
-              <figure>
-                <img src="/assets/student-council.jpg" alt="STI College Fairview Student Council event" />
-                <figcaption>Student Council</figcaption>
-              </figure>
-              <figure>
-                <img src="/assets/prime-organization.png" alt="PRIME student representatives from STI College Fairview" />
-                <figcaption>PRIME representatives</figcaption>
-              </figure>
-              <figure>
-                <img src="/assets/xlnc-entrepreneurship.jpg" alt="XLNC shirt-selling website project during Entrepreneurship Week" />
-                <figcaption>XLNC · Entrepreneurship Week</figcaption>
-              </figure>
+              {educationMemories.map((memory, index) => (
+                <button
+                  className="education-card"
+                  type="button"
+                  key={memory.title}
+                  onClick={(event) => { openerRef.current = event.currentTarget; setSelectedMemory(index); }}
+                  aria-label={`View ${memory.title} school experience`}
+                >
+                  <img src={memory.image} alt={memory.alt} />
+                  <span>{memory.title}</span>
+                  <ArrowUpRight size={15} aria-hidden="true" />
+                </button>
+              ))}
             </div>
           </div>
         </article>
@@ -65,6 +94,29 @@ export function ExperienceEducation() {
           <p>Open to internships and junior frontend or full-stack developer opportunities.</p>
         </div>
       </div>
+
+      <dialog
+        className="education-modal"
+        ref={dialogRef}
+        onCancel={(event) => { event.preventDefault(); closeMemory(); }}
+        onKeyDown={(event) => { if (event.key === "Escape") { event.preventDefault(); closeMemory(); } }}
+        onClick={(event) => { if (event.target === event.currentTarget) closeMemory(); }}
+        aria-labelledby="education-modal-title"
+      >
+        {selectedMemory !== null && (
+          <div className="education-modal-panel">
+            <button ref={closeRef} className="project-modal-close" type="button" onClick={closeMemory} aria-label="Close school experience"><X size={20} /></button>
+            <div className="education-modal-image"><img src={educationMemories[selectedMemory].image} alt={educationMemories[selectedMemory].alt} /></div>
+            <div className="education-modal-content">
+              <span className="project-modal-index">{String(selectedMemory + 1).padStart(2, "0")} / {String(educationMemories.length).padStart(2, "0")}</span>
+              <p className="education-modal-kicker">School experience</p>
+              <h3 id="education-modal-title">{educationMemories[selectedMemory].title}</h3>
+              <div className="education-modal-detail"><span>Context</span><p>{educationMemories[selectedMemory].context}</p></div>
+              <div className="education-modal-detail"><span>What I did</span><p>{educationMemories[selectedMemory].description}</p></div>
+            </div>
+          </div>
+        )}
+      </dialog>
     </section>
   );
 }
