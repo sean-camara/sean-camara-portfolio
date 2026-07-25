@@ -695,7 +695,7 @@ section[id], main[id] { scroll-margin-top: 5rem; }
 .education-card::after { position: absolute; inset: 45% 0 0; content: ""; background: linear-gradient(transparent, rgba(0,0,0,.8)); pointer-events: none; }
 .education-card span { position: absolute; z-index: 1; right: 2rem; bottom: .6rem; left: .65rem; color: #fff; font-family: var(--font-mono); font-size: .55rem; font-weight: 650; letter-spacing: .07em; line-height: 1.35; text-shadow: 0 1px 8px #000; text-transform: uppercase; }
 .education-card svg { position: absolute; z-index: 1; right: .65rem; bottom: .58rem; color: var(--gold); }
-.education-modal { width: min(1040px, calc(100% - 48px)); height: min(670px, calc(100dvh - 48px)); padding: 0; overflow: hidden; border: 1px solid rgba(255,255,255,.12); background: #0d0d0c; color: #ded8ce; animation: project-modal-in 260ms ease-out; }
+.education-modal { position: fixed; top: 50%; left: 50%; width: min(1040px, calc(100% - 48px)); height: min(670px, calc(100dvh - 48px)); margin: 0; padding: 0; overflow: hidden; border: 1px solid rgba(255,255,255,.12); background: #0d0d0c; color: #ded8ce; transform: translate(-50%, -50%); animation: project-modal-in 260ms ease-out; }
 .education-modal::backdrop { background: rgba(0,0,0,.84); animation: project-backdrop-in 220ms ease-out; }
 .education-modal-panel { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(320px, .8fr); height: 100%; }
 .education-modal-image { min-height: 0; overflow: hidden; background: #080808; }
