@@ -861,6 +861,11 @@ section[id], main[id] { scroll-margin-top: 5rem; }
   .project-modal-panel { display: block; height: 100%; overflow-y: auto; }
   .project-modal-hero { height: min(72dvh, 650px); }
   .project-modal-content { overflow: visible; }
+  .education-modal { width: min(620px, calc(100% - 32px)); height: min(760px, calc(100dvh - 32px)); }
+  .education-modal-panel { display: block; overflow-y: auto; }
+  .education-modal-image { height: min(43dvh, 390px); }
+  .education-modal-image img { object-fit: contain; }
+  .education-modal-content { overflow: visible; padding: 2.75rem 1.5rem 1.75rem; }
 }
 
 @media (min-width: 901px) and (max-width: 1280px) {

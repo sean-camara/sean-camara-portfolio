@@ -12,21 +12,35 @@ export function ExperienceEducation() {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const openerRef = useRef<HTMLButtonElement | null>(null);
+  const scrollPositionRef = useRef(0);
 
   useEffect(() => {
     const dialog = dialogRef.current;
     if (selectedMemory === null || !dialog) return;
+    scrollPositionRef.current = window.scrollY;
     if (!dialog.open) dialog.showModal();
-    document.body.style.overflow = "hidden";
-    closeRef.current?.focus();
-    return () => { document.body.style.overflow = ""; };
+    Object.assign(document.body.style, {
+      position: "fixed",
+      top: `-${scrollPositionRef.current}px`,
+      left: "0",
+      right: "0",
+      width: "100%",
+      overflow: "hidden",
+    });
+    closeRef.current?.focus({ preventScroll: true });
+    return () => {
+      Object.assign(document.body.style, { position: "", top: "", left: "", right: "", width: "", overflow: "" });
+      window.scrollTo(0, scrollPositionRef.current);
+    };
   }, [selectedMemory]);
 
   const closeMemory = () => {
     dialogRef.current?.close();
     setSelectedMemory(null);
-    document.body.style.overflow = "";
-    window.requestAnimationFrame(() => openerRef.current?.focus());
+    window.requestAnimationFrame(() => {
+      openerRef.current?.focus({ preventScroll: true });
+      window.scrollTo(0, scrollPositionRef.current);
+    });
   };
 
   return (
