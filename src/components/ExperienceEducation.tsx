@@ -43,6 +43,20 @@ export function ExperienceEducation() {
             <p className="experience-context">Currently enrolled · Expected graduation 2027</p>
             <h3>Bachelor of Science in Computer Science</h3>
             <h4>STI College Fairview</h4>
+            <div className="education-gallery" aria-label="School experiences">
+              <figure>
+                <img src="/assets/student-council.jpg" alt="STI College Fairview Student Council event" />
+                <figcaption>Student Council</figcaption>
+              </figure>
+              <figure>
+                <img src="/assets/prime-organization.png" alt="PRIME student representatives from STI College Fairview" />
+                <figcaption>PRIME representatives</figcaption>
+              </figure>
+              <figure>
+                <img src="/assets/xlnc-entrepreneurship.jpg" alt="XLNC shirt-selling website project during Entrepreneurship Week" />
+                <figcaption>XLNC · Entrepreneurship Week</figcaption>
+              </figure>
+            </div>
           </div>
         </article>
 
