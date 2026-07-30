@@ -22,15 +22,14 @@ export type Project = {
   visual: ProjectKind;
   gallery?: { src: string; alt: string; caption: string }[];
   caseStudy: {
-    challenge: string;
-    targetUsers: string;
-    ownership: string;
-    frontend: string;
-    backend?: string;
-    decision: string;
+    problem: string;
+    solution: string;
+    architecture: string;
+    challenges: string[];
+    decisions: string[];
     testing: string;
     deployment: string;
-    engineering: string[];
+    lessons: string[];
     limitation?: string;
   };
 };
@@ -48,10 +47,10 @@ export const projects: Project[] = [
     type: "Fabrication management system",
     status: "Live demo available",
     context: "Academic capstone",
-    role: "Full-stack developer",
+    role: "Independent full-stack developer",
     summary: "Role-based workflows for appointments, projects, payments, and fabrication progress.",
     description:
-      "Academic capstone developed around the real operational workflow of a local stainless-steel fabrication business, from appointments and project tracking to payments and fabrication progress.",
+      "An academic capstone designed for fabrication customers, staff, and administrators, covering appointments, project tracking, payments, documents, and fabrication progress in one role-based system.",
     tech: ["React", "TypeScript", "REST APIs", "MongoDB", "Firebase", "Vitest"],
     highlights: [
       "Responsive role-based dashboards",
@@ -60,8 +59,8 @@ export const projects: Project[] = [
       "Fabrication progress and notifications",
     ],
     links: [
-      { label: "Frontend Repository", url: "https://github.com/sean-camara/rmv-web", kind: "repository" },
-      { label: "Backend Repository", url: "https://github.com/sean-camara/rmv-server", kind: "repository" },
+      { label: "Frontend Repository", url: "https://github.com/potatsukki/rmv-web", kind: "repository" },
+      { label: "Backend Repository", url: "https://github.com/potatsukki/rmv-server", kind: "repository" },
       { label: "Live Demo", url: "https://www.rmvfabrication.app", kind: "demo" },
     ],
     imageUrl: "/assets/rmv-showcase.webp",
@@ -70,15 +69,14 @@ export const projects: Project[] = [
       { src: "/assets/rmv-screenshot.png", alt: "RMV Stainless Steel Fabrication dashboard interface", caption: "Dashboard" },
     ],
     caseStudy: {
-      challenge: "Translate a complex fabrication workflow into clear interfaces for customers, staff, and administrators.",
-      targetUsers: "Fabrication customers, staff, and administrators with distinct workflow needs.",
-      ownership: "Responsive React interfaces, state and API integration, role-based workflows, backend implementation, and deployment.",
-      frontend: "Responsive React and TypeScript dashboards tailored to authenticated roles.",
-      backend: "Express and MongoDB REST APIs with authentication, file, payment, and real-time integrations.",
-      decision: "The navigation and dashboards mirror each role's part of the appointment-to-fabrication lifecycle.",
-      testing: "Vitest coverage supports the frontend's core behavior.",
-      deployment: "Frontend and backend are deployed; a live public demo is available.",
-      engineering: ["Authenticated role-based dashboards", "Appointment-to-project workflow", "Real-time updates and payment flows"],
+      problem: "Appointments, quotations, project updates, payments, and fabrication records can become fragmented when customers, staff, and administrators rely on separate manual processes.",
+      solution: "The capstone connects those steps in one role-based system, giving each account type the screens and actions needed for its part of the appointment-to-fabrication workflow.",
+      architecture: "A React and TypeScript frontend consumes an Express REST API backed by MongoDB. Firebase supports authentication-related services, while Socket.IO, document handling, and PayMongo integrations support live updates, files, and payments. Docker, Nginx, and blue-green deployment scripts support the hosted environment.",
+      challenges: ["Modeling status transitions across appointments, projects, fabrication, and delivery", "Keeping customer, staff, and administrator access rules consistent", "Coordinating payment, file, notification, and real-time workflows"],
+      decisions: ["Used role-specific dashboards instead of exposing one shared administrative interface", "Centralized workflow rules and validation in backend services", "Added state-machine, authorization, validation, and service tests around high-risk transitions"],
+      testing: "Frontend Vitest tests cover authentication routing, project access, report and engineer workflows, configuration safety, and contrast regressions. Backend Vitest suites cover authentication policies, validation, state transitions, payments, refunds, fabrication, and other services; smoke-test scripts exercise API and pipeline flows. Run `npm run test` in each repository and the documented smoke commands when test data is available. Full browser coverage and live-provider sandbox checks remain areas for further testing.",
+      deployment: "The React frontend and Express API are deployed with Docker/Nginx operations documented in the repositories; a public demo is available.",
+      lessons: ["Business workflows need explicit state and permission rules before UI implementation", "Service-level validation is essential when several roles can affect one project", "Deployment and rollback procedures should be treated as part of the application"],
       limitation: "This is an academic capstone based on a real business workflow; no claim is made that the business currently uses it.",
     },
   },
@@ -87,7 +85,7 @@ export const projects: Project[] = [
     type: "Student productivity PWA",
     status: "Live demo available",
     context: "Personal project",
-    role: "Full-stack developer",
+    role: "Independent full-stack developer",
     summary: "A calm, responsive workspace unifying study planning and learning tools.",
     description:
       "A responsive student workspace for subjects, tasks, study sessions, calendars, files, notifications, and AI-assisted learning tools, designed to work well across mobile and desktop.",
@@ -109,15 +107,14 @@ export const projects: Project[] = [
       { src: "/assets/academiazen-screenshot.png", alt: "AcademiaZen student dashboard interface", caption: "Student dashboard" },
     ],
     caseStudy: {
-      challenge: "Bring planning, study materials, and focused learning tools into one calm, mobile-friendly workspace.",
-      targetUsers: "Students managing coursework, schedules, materials, and focused study sessions.",
-      ownership: "React interface development, responsive layouts, PWA behavior, API integration, and automated testing.",
-      frontend: "Responsive React and TypeScript PWA with dashboard, calendar, file, and study workflows.",
-      backend: "Separate REST API and Firebase-backed authentication services.",
-      decision: "Related academic tools share one workspace while retaining focused, task-specific views.",
-      testing: "Vitest and Playwright cover application behavior and browser workflows.",
-      deployment: "Frontend and backend are deployed; a live public demo is available.",
-      engineering: ["Offline-friendly PWA", "Calendar and notification flows", "Separated frontend and backend applications"],
+      problem: "Students often manage tasks, schedules, study materials, focus sessions, and reminders across disconnected tools, increasing context switching and making progress harder to track.",
+      solution: "AcademiaZen combines coursework planning, study sessions, files, notifications, and AI-assisted study tools in a responsive workspace designed for desktop and mobile use.",
+      architecture: "A React, TypeScript, Vite, and Tailwind CSS PWA communicates with a separate Node.js REST API. Firebase handles identity, MongoDB stores application state, Cloudflare R2 stores PDFs, and external adapters isolate push notifications, AI, and PayMongo billing. Docker and Nginx support production deployment.",
+      challenges: ["Synchronizing student state across authenticated sessions and reconnects", "Keeping PDF, notification, and study workflows usable on small screens", "Separating external services from core application behavior"],
+      decisions: ["Kept frontend and backend deployable as separate applications", "Used typed API boundaries and dedicated adapters for storage, identity, AI, billing, and push services", "Designed related study tools as focused views inside one persistent workspace"],
+      testing: "Frontend Vitest tests cover API helpers, navigation, calendar, library, empty states, and error boundaries; Playwright covers the public browser experience. Backend Vitest suites cover authentication, environment validation, billing, quotas, state revisions, and account deletion. Run `npm run test:run` in each repository and `npm run test:e2e` in the frontend. Coverage commands exist, but no coverage percentage is claimed; authenticated cross-service browser flows remain an area for expansion.",
+      deployment: "The frontend and backend are deployed with Docker and production operations documented; a public demo is available.",
+      lessons: ["Offline and reconnect behavior must be designed alongside normal online flows", "External services are easier to test when isolated behind adapters", "A productivity interface benefits from clear task boundaries instead of one overloaded dashboard"],
     },
   },
   {
@@ -148,15 +145,14 @@ export const projects: Project[] = [
       { src: "/assets/applyph-resume-result-laptop.png", alt: "ApplyPH resume checker result shown on a laptop", caption: "Resume checker result" },
     ],
     caseStudy: {
-      challenge: "Help Filipino job seekers prepare stronger applications from confirmed experience without overstating their qualifications.",
-      targetUsers: "Filipino job seekers preparing, evaluating, and tracking applications.",
-      ownership: "Frontend architecture, responsive product design, Supabase integration, document workflows, PWA behavior, testing, and cloud deployment setup.",
-      frontend: "Responsive Next.js and React PWA flows for resumes, job matching, application packages, and tracking.",
-      backend: "Owner-scoped Supabase interfaces and private document APIs.",
-      decision: "Evidence-linked output and explicit fact confirmation reduce unsupported claims in generated application material.",
-      testing: "Vitest, Testing Library, and Playwright foundations cover components and critical browser flows.",
+      problem: "Job seekers need to compare their real experience with a vacancy and prepare tailored documents without introducing unsupported claims or exposing private resume data.",
+      solution: "ApplyPH guides applicants through resume intake, evidence-linked matching, follow-up questions, application-package generation, review, download, and tracking while requiring confirmation for factual changes.",
+      architecture: "A Next.js and TypeScript PWA uses server-rendered routes and protected server APIs. Supabase provides authentication, PostgreSQL persistence, row-level ownership controls, and private file storage. Provider adapters support mock and planned live AI/payment modes; Docker and Node deployment files target a DigitalOcean VPS.",
+      challenges: ["Keeping generated claims traceable to applicant-confirmed evidence", "Protecting private documents and owner-scoped records", "Preserving progress across multi-step AI, payment, and document workflows"],
+      decisions: ["Made evidence atoms and explicit confirmation the source of truth for generated facts", "Revalidated sessions and roles on the server instead of relying on hidden frontend controls", "Used deterministic mock providers so core workflows remain testable without paid credentials"],
+      testing: "Vitest covers validation, authentication policy, environment safety, downloads, PDF generation, application services, and other domain behavior. Playwright covers public pages, authentication, profile, matching, packages, downloads, payments, tracking, admin operations, security headers, and responsive layouts. Run `npm test` and `npm run test:browser`. Runtime Supabase RLS and Storage tests still need a working local Supabase environment; no coverage percentage is claimed.",
       deployment: "Next.js Node and Docker deployment path configured; public launch pending.",
-      engineering: ["Evidence-linked match reports", "Owner-scoped data flows", "Offline application tracker"],
+      lessons: ["AI output should be treated as untrusted input and validated against confirmed facts", "Authorization must be enforced at every server and database boundary", "Idempotent workflow steps make retries safer for document and payment operations"],
       limitation: "The product is still in active development, so no public demo is linked yet.",
     },
   },
@@ -165,10 +161,10 @@ export const projects: Project[] = [
     type: "Native Android pantry app",
     status: "Android project",
     context: "Personal project",
-    role: "Android developer",
+    role: "Independent Android developer",
     summary: "Local-first pantry tracking with expiry, barcode, and receipt workflows.",
     description:
-      "A native Android pantry and ingredient tracker with local inventory, expiration tracking, barcode and receipt scanning, and AI-assisted recipe ideas.",
+      "A native Android app for households that combines local pantry inventory, expiration tracking, barcode and receipt scanning, shopping lists, and AI-assisted recipe ideas.",
     tech: ["Kotlin", "Jetpack Compose", "Room", "ML Kit", "Firebase"],
     highlights: [
       "Native Compose interface",
@@ -177,7 +173,7 @@ export const projects: Project[] = [
       "AI-assisted recipe ideas",
     ],
     links: [
-      { label: "Repository", url: "https://github.com/sean-camara/ShelfLife", kind: "repository" },
+      { label: "Repository", url: "https://github.com/potatsukki/ShelfLife", kind: "repository" },
     ],
     imageUrl: "/assets/shelflife-showcase.webp",
     visual: "shelflife",
@@ -185,15 +181,14 @@ export const projects: Project[] = [
       { src: "/assets/shelflife-screenshot.jpg", alt: "ShelfLife Android pantry tracking interface", caption: "Pantry tracking" },
     ],
     caseStudy: {
-      challenge: "Make pantry tracking quick enough for everyday use while keeping core inventory data available locally.",
-      targetUsers: "People tracking household pantry inventory and expiration dates.",
-      ownership: "Native Android UI, local data, scanning flows, Firebase integration, and AI feature integration.",
-      frontend: "Native Android interface built with Kotlin and Jetpack Compose.",
-      backend: "Room provides local persistence with supporting Firebase integrations.",
-      decision: "Local-first inventory keeps essential pantry data usable without depending on a network request.",
-      testing: "Testing approach is not publicly documented.",
+      problem: "Household ingredients are easy to forget after purchase, which makes expiration dates, duplicate buying, and meal planning difficult to manage.",
+      solution: "ShelfLife keeps a local pantry inventory, surfaces expiry information, and reduces manual entry through barcode and receipt scanning with optional recipe assistance.",
+      architecture: "A Kotlin and Jetpack Compose Android client uses Room for local inventory persistence. ML Kit supports barcode and receipt scanning, Firebase provides cloud services and security rules, and a Cloudflare Worker proxies AI requests so provider credentials are not embedded in the app.",
+      challenges: ["Keeping core pantry data useful without a network connection", "Turning imperfect barcode and receipt input into editable inventory records", "Calling AI features without shipping private service credentials in the APK"],
+      decisions: ["Used Room as the local source for essential pantry data", "Kept scan results reviewable before saving", "Routed AI requests through a Worker instead of calling the provider directly from Android"],
+      testing: "Kotlin unit tests cover pantry-item saving and DAO isolation, Firebase emulator tests validate Firestore rules, and Node tests cover Worker validation. An Android instrumentation test scaffold is present. Run `gradlew test`, `npm test` in `firebase-tests`, and `npm test` in `worker`; broader Compose UI, scanner-device, and end-to-end tests remain to be added.",
       deployment: "No public store release or downloadable build is linked.",
-      engineering: ["Jetpack Compose UI", "Room local database", "ML Kit barcode and receipt scanning"],
+      lessons: ["Local-first storage keeps everyday utilities resilient", "Scanner results need correction paths because recognition is imperfect", "Mobile secrets belong behind a server-side proxy"],
       limitation: "No public Google Play listing or downloadable build is linked.",
     },
   },
@@ -202,10 +197,10 @@ export const projects: Project[] = [
     type: "Personal finance web app",
     status: "Live demo available",
     context: "Personal project",
-    role: "Full-stack developer",
+    role: "Independent full-stack developer",
     summary: "A responsive dashboard for everyday money tracking and financial goals.",
     description:
-      "A responsive personal-finance dashboard for income and expense tracking, financial goals, data visualization, and API-backed account workflows.",
+      "A responsive personal-finance dashboard for individuals and shared-account members managing income, expenses, subscriptions, financial goals, and API-backed account workflows.",
     tech: ["React", "TypeScript", "REST APIs", "MongoDB", "Express"],
     highlights: [
       "Responsive finance dashboard",
@@ -223,16 +218,15 @@ export const projects: Project[] = [
       { src: "/assets/flowmoney-screenshot.png", alt: "FlowMoney personal finance dashboard interface", caption: "Finance dashboard" },
     ],
     caseStudy: {
-      challenge: "Present everyday financial activity and goals in a dashboard that remains clear on smaller screens.",
-      targetUsers: "Individuals tracking income, expenses, and personal financial goals.",
-      ownership: "Responsive interface work, dashboard flows, data visualization, and backend API integration.",
-      frontend: "Responsive React and TypeScript dashboard with clear financial summaries and charts.",
-      backend: "Express and MongoDB API for account and transaction workflows.",
-      decision: "Summary-first dashboards surface balances and trends before transaction-level detail.",
-      testing: "Testing approach is not publicly documented.",
-      deployment: "The frontend is live on Vercel; the verified repository link is backend-only.",
-      engineering: ["Income and expense workflows", "Goal tracking", "Separated frontend and backend applications"],
-      limitation: "The public frontend repository could not be verified; the available repository link is explicitly backend-only.",
+      problem: "Income, expenses, subscriptions, and savings goals are difficult to understand when records are scattered or shown without useful summaries.",
+      solution: "FlowMoney organizes transactions and goals in a responsive dashboard, presenting account summaries and charts before detailed records.",
+      architecture: "A React and Vite frontend uses Firebase client services, Recharts, and Socket.IO integration. A separate Express and TypeScript API uses Better Auth, MongoDB, Socket.IO, Web Push, email, and an AI-service adapter. The frontend is deployed on Vercel.",
+      challenges: ["Presenting several financial data types clearly on mobile screens", "Enforcing access to shared-account records", "Keeping dashboard data synchronized with API-backed changes"],
+      decisions: ["Used summary-first dashboard views before transaction-level detail", "Kept frontend and backend concerns in separate repositories", "Applied backend middleware to authentication and joint-account access rules"],
+      testing: "The deployed frontend and backend repositories do not currently expose automated test scripts. Available validation is linting and production build for the frontend plus TypeScript build for the backend. Unit tests for financial calculations and access rules, API integration tests, and end-to-end transaction flows remain priorities.",
+      deployment: "The frontend is live on Vercel; backend setup and production build commands are documented separately.",
+      lessons: ["Financial dashboards need clear information hierarchy before added visual detail", "Shared accounts require explicit authorization checks on every record", "Testability should be planned early around calculations and ownership rules"],
+      limitation: "The frontend repository is private; automated tests and detailed production operations are not yet documented in the public backend repository.",
     },
   },
 ];
@@ -258,5 +252,10 @@ export const skillGroups: SkillGroup[] = [
     label: "Additional: Android",
     icon: "android",
     skills: ["Kotlin", "Jetpack Compose", "Room Database", "ML Kit", "Android Studio"],
+  },
+  {
+    label: "Currently Developing",
+    icon: "engineering",
+    skills: ["Data Structures & Algorithms", "LeetCode Easy & Medium", "HackerRank Exercises", "Junior-Level System Design", "REST API Design", "Database Design", "Automated Testing", "Deployment & CI/CD"],
   },
 ];

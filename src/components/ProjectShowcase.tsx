@@ -158,18 +158,15 @@ export function ProjectShowcase({ projects }: ProjectShowcaseProps) {
               )}
 
               <div className="project-modal-evidence">
-                <Detail label="01 — Problem" text={selectedProject.caseStudy.challenge} />
-                <Detail label="02 — Target users" text={selectedProject.caseStudy.targetUsers} />
-                <Detail label="03 — Ownership" text={selectedProject.caseStudy.ownership} />
-                <Detail label="04 — Frontend" text={selectedProject.caseStudy.frontend} />
-                {selectedProject.caseStudy.backend && <Detail label="05 — Backend" text={selectedProject.caseStudy.backend} />}
-                <Detail label="06 — Key decision" text={selectedProject.caseStudy.decision} />
+                <Detail label="01 — Problem" text={selectedProject.caseStudy.problem} />
+                <Detail label="02 — Solution" text={selectedProject.caseStudy.solution} />
+                <Detail label="03 — Architecture" text={selectedProject.caseStudy.architecture} />
+                <DetailList label="04 — Key features" items={selectedProject.highlights} />
+                <DetailList label="05 — Challenges" items={selectedProject.caseStudy.challenges} />
+                <DetailList label="06 — Solutions & decisions" items={selectedProject.caseStudy.decisions} />
                 <Detail label="07 — Testing" text={selectedProject.caseStudy.testing} />
                 <Detail label="08 — Deployment" text={selectedProject.caseStudy.deployment} />
-                <div className="project-modal-detail project-modal-engineering">
-                  <span>Engineering evidence</span>
-                  <ul>{[...selectedProject.highlights, ...selectedProject.caseStudy.engineering].map((item) => <li key={item}>{item}</li>)}</ul>
-                </div>
+                <DetailList label="09 — Lessons learned" items={selectedProject.caseStudy.lessons} />
                 {selectedProject.caseStudy.limitation && <Detail label="Current limitation" text={selectedProject.caseStudy.limitation} />}
               </div>
               <div className="project-modal-stack" aria-label={`${selectedProject.title} technologies`}>
@@ -198,6 +195,10 @@ export function ProjectShowcase({ projects }: ProjectShowcaseProps) {
 
 function Detail({ label, text }: { label: string; text: string }) {
   return <div className="project-modal-detail"><span>{label}</span><p>{text}</p></div>;
+}
+
+function DetailList({ label, items }: { label: string; items: string[] }) {
+  return <div className="project-modal-detail"><span>{label}</span><ul>{items.map((item) => <li key={item}>{item}</li>)}</ul></div>;
 }
 
 function ProjectImage({ project, isModal = false }: { project: Project; isModal?: boolean }) {

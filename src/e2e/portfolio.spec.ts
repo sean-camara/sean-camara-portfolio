@@ -61,6 +61,7 @@ test("mobile and tablet widths have no horizontal overflow", async ({ page }) =>
     await page.setViewportSize(viewport);
     await page.reload();
     await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+    await expect(page.getByRole("heading", { name: "Customer Service Representative" })).toBeVisible();
   }
 });
 

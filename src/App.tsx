@@ -9,6 +9,7 @@ import { Hero } from "./components/Hero";
 import { IntroScreen } from "./components/IntroScreen";
 import { MotionEffects } from "./components/MotionEffects";
 import { ProjectShowcase } from "./components/ProjectShowcase";
+import { ProfessionalExperience } from "./components/ProfessionalExperience";
 import { SkillsMatrix } from "./components/SkillsMatrix";
 import { projects, skillGroups } from "./data/projects";
 
@@ -16,6 +17,7 @@ const navLinks = [
   { label: "Home", href: "#home" },
   { label: "Projects", href: "#projects" },
   { label: "Experience", href: "#experience" },
+  { label: "Education", href: "#education" },
   { label: "Skills", href: "#skills" },
   { label: "Certifications", href: "#certifications" },
   { label: "About", href: "#about" },
@@ -96,6 +98,7 @@ export function App() {
       <aside className="section-rail" aria-label="Jump to section">
         <a href="#projects">Work</a>
         <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
         <a href="#skills">Skills</a>
         <a href="#certifications">Certs</a>
         <a href="#about">About</a>
@@ -105,6 +108,7 @@ export function App() {
       <main id="main-content">
         <Hero />
         <ProjectShowcase projects={projects} />
+        <ProfessionalExperience />
         <ExperienceEducation />
         <SkillsMatrix groups={skillGroups} />
         <Certifications />

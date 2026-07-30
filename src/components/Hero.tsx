@@ -10,8 +10,8 @@ export function Hero() {
             <span className="hero-title-accent">Developer</span>
           </h1>
           <p className="hero-statement">
-            I build polished, accessible web interfaces with TypeScript, REST APIs,
-            modern testing tools, and production deployment experience.
+            I build polished, accessible web interfaces through independent projects
+            using TypeScript, REST APIs, automated testing, and deployment workflows.
           </p>
           <div className="hero-actions">
             <a className="button-primary" href="#projects" data-magnetic>View projects</a>
@@ -20,11 +20,6 @@ export function Hero() {
             </a>
             <a className="text-link" href="#contact" data-magnetic>Contact me</a>
           </div>
-          <ul className="hero-specialties" aria-label="Frontend strengths">
-            <li>Responsive UI</li>
-            <li>Accessible interfaces</li>
-            <li>Tested integrations</li>
-          </ul>
           <a className="scroll-cue" href="#projects">
             <ArrowDown size={15} /> Explore selected work
           </a>
