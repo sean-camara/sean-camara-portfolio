@@ -1,4 +1,4 @@
-export type ProjectKind = "applyph" | "rmv" | "academia" | "flowmoney" | "shelflife";
+export type ProjectKind = "yhans" | "applyph" | "rmv" | "academia" | "flowmoney" | "shelflife";
 
 export type ProjectLink = {
   label: string;
@@ -42,6 +42,44 @@ export type SkillGroup = {
 };
 
 export const projects: Project[] = [
+  {
+    title: "Yhan’s Catering Services",
+    type: "Responsive business and marketing website",
+    status: "Deployed on Vercel",
+    context: "Professional experience — paid freelance project",
+    role: "Frontend Developer and Web Designer",
+    summary: "A polished online presence for a real catering business serving Quezon City and nearby Metro Manila areas.",
+    description:
+      "A responsive marketing website that brings catering packages, menus, past events, booking details, and customer inquiries into one clear experience.",
+    tech: ["React 19", "TypeScript", "Tailwind CSS 4", "React Router DOM 7", "Vite 8", "Vitest", "React Testing Library", "Playwright", "Axe", "jsdom"],
+    highlights: [
+      "Responsive desktop, tablet, and mobile layouts",
+      "Packages, customizable menus, grazing tables, food trays, and packed meals",
+      "Filterable previous-event gallery and business story",
+      "Service areas, booking process, contact details, hours, and payment methods",
+      "Facebook inquiry and quotation calls to action",
+      "SEO, structured data, sitemap, accessibility, and automated testing",
+    ],
+    links: [
+      { label: "Live Website", url: "https://yhans-catering-services-eight.vercel.app", kind: "demo" },
+    ],
+    imageUrl: "/assets/yhans-catering-showcase.png",
+    visual: "yhans",
+    gallery: [
+      { src: "/assets/yhans-catering-showcase.png", alt: "Yhan’s Catering Services website displayed on a laptop", caption: "Responsive business website" },
+    ],
+    caseStudy: {
+      problem: "The catering business’s packages, menus, event work, booking details, and contact information were scattered across social-media posts and private messages, making it harder for potential customers to understand the full service offering before inquiring.",
+      solution: "Created one organized marketing website where customers can explore the business, services, packages, menus, past events, service areas, and booking process before requesting a quotation through Facebook.",
+      architecture: "A React 19 and TypeScript single-page application built with Vite 8, Tailwind CSS 4, and React Router DOM 7. Dedicated Home, Packages & Services, Events, and About & Contact routes organize the public content. Locally hosted Fontsource packages provide Inter, Cormorant Garamond, and Great Vibes typography.",
+      challenges: ["Organizing a broad service catalog without turning the site into an ordering platform", "Keeping package and event content easy to browse on small screens", "Presenting business information clearly while preserving direct quotation and booking workflows"],
+      decisions: ["Structured content across four focused routes", "Used clear Facebook inquiry calls to action instead of implying online ordering", "Added filterable events and service-specific sections to help customers find relevant information quickly"],
+      testing: "Vitest, React Testing Library, jsdom, Playwright, and Axe cover unit, component, end-to-end, and accessibility behavior.",
+      deployment: "Deployed to Vercel through a GitHub-based production workflow.",
+      lessons: ["A service-business website needs clear boundaries between discovery and booking", "Centralized content reduces repetitive questions before inquiries", "Accessibility, SEO, and responsive behavior are core parts of a professional marketing site"],
+      limitation: "The website is informational rather than an ordering platform; quotations, availability, final pricing, bookings, and payments are handled directly by the business.",
+    },
+  },
   {
     title: "RMV Stainless Steel Fabrication",
     type: "Fabrication management system",
