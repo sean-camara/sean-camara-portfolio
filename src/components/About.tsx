@@ -10,10 +10,10 @@ export function About() {
 
         <figure className="about-workspace" data-parallax data-parallax-speed="1.1" data-tilt>
           <img
-            src="/assets/sean-workspace.webp"
-            alt="Sean John Camara working at his laptop"
-            width="1537"
-            height="1023"
+            src="/assets/sean-beach-portrait.webp"
+            alt="Sean John Camara on a beach at sunset"
+            width="1138"
+            height="1403"
             loading="lazy"
             decoding="async"
           />
@@ -22,8 +22,7 @@ export function About() {
         <div className="about-copy" data-reveal="right">
           <span className="about-index">01 / 04</span>
           <p className="about-lead">
-            I am Sean John Camara, a junior frontend developer focused on responsive,
-            accessible React and Next.js interfaces.
+            Frontend developer building thoughtful interfaces.
           </p>
           <p>
             I connect interfaces to REST APIs, authentication, data services, tests, and

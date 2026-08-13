@@ -1,4 +1,4 @@
-export type ProjectKind = "yhans" | "applyph" | "rmv" | "academia" | "flowmoney" | "shelflife";
+export type ProjectKind = "aghimuan" | "yhans" | "applyph" | "rmv" | "academia" | "flowmoney" | "shelflife";
 
 export type ProjectLink = {
   label: string;
@@ -42,6 +42,46 @@ export type SkillGroup = {
 };
 
 export const projects: Project[] = [
+  {
+    title: "Aghimuan Creatives",
+    type: "Immersive creative portfolio",
+    status: "Live",
+    context: "Creative portfolio for artist",
+    role: "Website designer and developer",
+    summary: "An immersive creative portfolio transforming visual work into an experience.",
+    description: "An editorial-style creative portfolio where photography, video, motion, layout, and storytelling work together as a visual creative space.",
+    tech: ["React", "TypeScript", "Vite", "React Router", "Tailwind CSS", "Lucide React", "WebP", "MP4"],
+    highlights: [
+      "Immersive dark editorial art direction",
+      "Motion-led storytelling and scroll-driven visual sections",
+      "Portfolio archive across portraits, events, fashion, nightlife, automotive, brand, and property work",
+      "Video reel support with poster images",
+      "Category filters for intentional project discovery",
+      "Responsive layouts, swipeable work rails, and mobile snap scrolling",
+      "Grayscale-to-color hover interactions and touch-friendly alternatives",
+      "Optimized imagery, video assets, transparent branding, and reduced-motion support",
+      "Direct inquiry paths, social links, and downloadable CV",
+    ],
+    links: [
+      { label: "Live Website", url: "https://www.aghimuancreatives.site", kind: "demo" },
+    ],
+    imageUrl: "/assets/aghimuan-creatives-showcase.webp",
+    visual: "aghimuan",
+    gallery: [
+      { src: "/assets/aghimuan-creatives-showcase.webp", alt: "Aghimuan Creatives portfolio website displayed on a tablet", caption: "Creative portfolio homepage" },
+    ],
+    caseStudy: {
+      problem: "Aghimuan Creatives needed a central platform for a broad range of photography, videography, event, fashion, automotive, brand, and film work. A typical grid portfolio would not fully communicate the creative identity and emotion behind the work.",
+      solution: "Created an immersive, editorial-style creative portfolio that feels like exploring a visual archive. Motion, atmosphere, intentional layouts, and interaction give each body of work presence while keeping services, projects, and contact details easy to find.",
+      architecture: "A lightweight React single-page application with a creative studio homepage and a filterable /projects visual archive. Reusable React components, typed portfolio data, shared design tokens, and custom route-scroll behavior power the interface.",
+      challenges: ["Organizing a wide range of creative work without making the archive feel cluttered", "Making the website feel creatively alive while preserving clarity, performance, and mobile usability", "Creating touch-friendly alternatives for interactions that rely on hover on desktop"],
+      decisions: ["Used a dark, minimal visual system so the imagery remains central", "Used editorial layouts and layered motion to create atmosphere instead of a standard corporate structure", "Organized work as a filterable visual archive so variety feels curated", "Optimized photographs into WebP assets and used video posters to balance quality with loading speed", "Added reduced-motion support and lightweight requestAnimationFrame behavior"],
+      testing: "The project passes TypeScript type checking and the Vite production build process. It has been refined for responsive layouts, mobile navigation, touch interaction, visual scrolling behavior, and reduced-motion preferences.",
+      deployment: "Live at www.aghimuancreatives.site and delivered as a Vite static production build for fast, reliable web hosting.",
+      lessons: ["Creative portfolios should feel as intentional as the work they showcase", "The strongest result came from treating the website as part of the creative output itself", "Visual expression must be balanced with structure, speed, accessibility, and ease of exploration"],
+      limitation: "New portfolio work is currently added through local project data and requires redeployment. A future CMS would make curation and updates easier without touching the codebase.",
+    },
+  },
   {
     title: "Yhan’s Catering Services",
     type: "Responsive business and marketing website",

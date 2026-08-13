@@ -581,6 +581,8 @@ section[id], main[id] { scroll-margin-top: 5rem; }
 .project-meta div { padding: 1rem; background: #0d0d0c; }
 .project-meta dt { color: #918c82; font-family: var(--font-mono); font-size: .5rem; letter-spacing: .1em; text-transform: uppercase; }
 .project-meta dd { margin: .4rem 0 0; color: #c1bcb3; font-size: .68rem; line-height: 1.5; }
+.project-modal-live-link { display: inline-flex; align-items: center; gap: .45rem; margin-top: 1rem; padding: .7rem .9rem; border: 1px solid rgba(201,169,92,.4); color: var(--gold); font-family: var(--font-mono); font-size: .58rem; letter-spacing: .08em; text-transform: uppercase; transition: border-color 180ms ease, background 180ms ease; }
+.project-modal-live-link:hover { border-color: var(--gold); background: rgba(201,169,92,.08); }
 .project-modal-evidence { margin-top: 3rem; border-top: 1px solid var(--line); }
 .project-gallery { position: relative; margin: 3rem 0 0; border: 1px solid var(--line); background: #080808; outline: none; }
 .project-gallery:focus-visible { border-color: var(--gold); }

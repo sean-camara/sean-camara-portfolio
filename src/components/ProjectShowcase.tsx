@@ -126,6 +126,11 @@ export function ProjectShowcase({ projects }: ProjectShowcaseProps) {
                   <div><dt>Context</dt><dd>{selectedProject.context}</dd></div>
                   <div><dt>Role</dt><dd>{selectedProject.role}</dd></div>
                 </dl>
+                {selectedProject.links.filter((link) => link.kind === "demo").map((link) => (
+                  <a className="project-modal-live-link" href={link.url} target="_blank" rel="noopener noreferrer" key={link.url}>
+                    <ExternalLink size={15} />{link.label}<ArrowUpRight size={14} />
+                  </a>
+                ))}
               </div>
 
               {selectedProject.gallery && selectedProject.gallery.length > 0 && (
