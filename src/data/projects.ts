@@ -41,7 +41,7 @@ export type SkillGroup = {
   accent?: boolean;
 };
 
-export const projects: Project[] = [
+const projectInventory: Project[] = [
   {
     title: "Aghimuan Creatives",
     type: "Immersive creative portfolio",
@@ -68,7 +68,8 @@ export const projects: Project[] = [
     imageUrl: "/assets/aghimuan-creatives-showcase.webp",
     visual: "aghimuan",
     gallery: [
-      { src: "/assets/aghimuan-creatives-showcase.webp", alt: "Aghimuan Creatives portfolio website displayed on a tablet", caption: "Creative portfolio homepage" },
+      { src: "/assets/aghimuan-creatives-showcase.webp", alt: "Aghimuan Creatives portfolio website displayed on a tablet", caption: "Creative portfolio showcase" },
+      { src: "/assets/optimized/aghimuan-live.webp", alt: "Aghimuan Creatives live website homepage", caption: "Live creative portfolio homepage" },
     ],
     caseStudy: {
       problem: "Aghimuan Creatives needed a central platform for a broad range of photography, videography, event, fashion, automotive, brand, and film work. A typical grid portfolio would not fully communicate the creative identity and emotion behind the work.",
@@ -103,10 +104,11 @@ export const projects: Project[] = [
     links: [
       { label: "Live Website", url: "https://yhans-catering-services-eight.vercel.app", kind: "demo" },
     ],
-    imageUrl: "/assets/yhans-catering-showcase.png",
+    imageUrl: "/assets/optimized/yhans-catering-showcase.webp",
     visual: "yhans",
     gallery: [
-      { src: "/assets/yhans-catering-showcase.png", alt: "Yhan’s Catering Services website displayed on a laptop", caption: "Responsive business website" },
+      { src: "/assets/optimized/yhans-catering-showcase.webp", alt: "Yhan’s Catering Services website displayed on a laptop", caption: "Responsive business website showcase" },
+      { src: "/assets/optimized/yhans-live.webp", alt: "Yhan’s Catering Services live website homepage", caption: "Live business website homepage" },
     ],
     caseStudy: {
       problem: "The catering business’s packages, menus, event work, booking details, and contact information were scattered across social-media posts and private messages, making it harder for potential customers to understand the full service offering before inquiring.",
@@ -144,7 +146,7 @@ export const projects: Project[] = [
     imageUrl: "/assets/rmv-showcase.webp",
     visual: "rmv",
     gallery: [
-      { src: "/assets/rmv-screenshot.png", alt: "RMV Stainless Steel Fabrication dashboard interface", caption: "Dashboard" },
+      { src: "/assets/optimized/rmv-screenshot.webp", alt: "RMV public website showing stainless steel fabrication services", caption: "Public service website" },
     ],
     caseStudy: {
       problem: "Appointments, quotations, project updates, payments, and fabrication records can become fragmented when customers, staff, and administrators rely on separate manual processes.",
@@ -218,9 +220,9 @@ export const projects: Project[] = [
     imageUrl: "/assets/applyph-showcase.webp",
     visual: "applyph",
     gallery: [
-      { src: "/assets/applyph-landing-laptop.png", alt: "ApplyPH landing page shown on a laptop", caption: "Landing page" },
-      { src: "/assets/applyph-resume-checker-laptop.png", alt: "ApplyPH resume checker shown on a laptop", caption: "Resume checker" },
-      { src: "/assets/applyph-resume-result-laptop.png", alt: "ApplyPH resume checker result shown on a laptop", caption: "Resume checker result" },
+      { src: "/assets/optimized/applyph-landing-laptop.webp", alt: "ApplyPH landing page shown on a laptop", caption: "Landing page" },
+      { src: "/assets/optimized/applyph-resume-checker-laptop.webp", alt: "ApplyPH resume checker shown on a laptop", caption: "Resume checker" },
+      { src: "/assets/optimized/applyph-resume-result-laptop.webp", alt: "ApplyPH resume checker result shown on a laptop", caption: "Resume checker result" },
     ],
     caseStudy: {
       problem: "Job seekers need to compare their real experience with a vacancy and prepare tailored documents without introducing unsupported claims or exposing private resume data.",
@@ -308,6 +310,10 @@ export const projects: Project[] = [
     },
   },
 ];
+
+// Preserve the requested work order; retain the newer ApplyPH project in the index.
+const projectOrder: ProjectKind[] = ["aghimuan", "yhans", "rmv", "academia", "flowmoney", "shelflife", "applyph"];
+export const projects = [...projectInventory].sort((a, b) => projectOrder.indexOf(a.visual) - projectOrder.indexOf(b.visual));
 
 export const skillGroups: SkillGroup[] = [
   {

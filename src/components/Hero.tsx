@@ -1,39 +1,63 @@
-import { ArrowDown, Download } from "lucide-react";
-
 export function Hero() {
   return (
-    <section className="hero" id="home">
-      <div className="hero-grid page-shell">
-        <div className="hero-copy" data-reveal="hero">
-          <h1>
-            <span>Frontend</span>
-            <span className="hero-title-accent">Developer</span>
+    <section className="hero page-shell" id="home">
+      <div className="hero-eyebrow">
+        <p>Full-Stack Web & Android Developer</p>
+        <span>Based in the Philippines</span>
+      </div>
+      <div className="hero-grid">
+        <div className="hero-copy">
+          <h1 aria-label="Full-Stack Developer">
+            <span className="hero-title-line" aria-hidden="true">
+              <span className="hero-title-inner">Full-Stack</span>
+            </span>
+            <span
+              className="hero-title-line hero-title-accent"
+              aria-hidden="true"
+            >
+              <span className="hero-title-inner">Developer.</span>
+            </span>
           </h1>
           <p className="hero-statement">
-            I build polished, accessible web interfaces through independent projects
-            using TypeScript, REST APIs, automated testing, and deployment workflows.
+            I build thoughtful websites, full-stack applications, and native
+            Android tools — from interface design to deployment.
           </p>
           <div className="hero-actions">
-            <a className="button-primary" href="#projects" data-magnetic>View projects</a>
-            <a className="button-secondary" href="/Sean_John_Camara_Resume.pdf" download data-magnetic>
-              Download résumé <Download size={15} />
+            <a className="button-primary" href="#projects">
+              View selected work <span aria-hidden="true">↘</span>
             </a>
-            <a className="text-link" href="#contact" data-magnetic>Contact me</a>
+            <a className="text-link" href="#contact">
+              Get in touch <span aria-hidden="true">↗</span>
+            </a>
           </div>
-          <a className="scroll-cue" href="#projects">
-            <ArrowDown size={15} /> Explore selected work
+          <a
+            className="resume-link"
+            href="/Sean_John_Camara_Resume.pdf"
+            download
+          >
+            Download résumé <span aria-hidden="true">↓</span>
+            <span className="mono">PDF</span>
           </a>
         </div>
-        <figure className="hero-portrait" data-reveal="portrait" data-parallax data-parallax-speed="1.25">
-          <img
-            src="/assets/sean-profile.webp"
-            alt="Sean John Camara"
-            width="1122"
-            height="1402"
-            decoding="async"
-            fetchPriority="high"
-          />
-        </figure>
+        <div className="hero-portrait-frame">
+          <div className="hero-portrait-depth">
+            <img
+              src="/assets/sean-profile.webp"
+              alt="Sean John Camara"
+              width="1122"
+              height="1402"
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+            />
+          </div>
+        </div>
+      </div>
+      <div className="hero-baseline">
+        <span className="hero-rule" aria-hidden="true" />
+        <a href="#projects">
+          Explore selected work <span aria-hidden="true">↓</span>
+        </a>
       </div>
     </section>
   );

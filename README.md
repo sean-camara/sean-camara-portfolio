@@ -1,89 +1,47 @@
-# Sean John Camara - Developer Portfolio
+# Sean John Camara — Developer Portfolio
 
-Responsive portfolio for Sean John Camara, positioned for junior frontend, React, Next.js, and TypeScript roles. Full-stack and Android work appear as supporting experience.
+A dark, cinematic portfolio for a **Full-Stack Web & Android Developer**, built in the existing React, TypeScript, and Vite application.
 
-## Live Site
+## Run locally
 
-https://seanjohncamara.vercel.app
-
-## Featured Work
-
-- RMV Stainless Steel Fabrication System
-- AcademiaZen
-- ApplyPH
-- ShelfLife
-- FlowMoney
-
-## Stack
-
-- React + Vite
-- TypeScript
-- Custom global CSS architecture with reusable design tokens and component-specific class naming
-- Lucide React icons
-- Vercel-ready static build
-
-## Local Development
-
-```bash
+```sh
 npm install
 npm run dev
-npm run typecheck
-npm run test
+```
+
+Production preview and checks:
+
+```sh
+npm run build
+npm run preview -- --port 4180
+npm test
 npm run test:e2e
 ```
 
-## Production Build
+The build type-checks, bundles, and prerenders the homepage, seven case studies, and a 404 page. No environment variables or form backend are required. Browser tests use the production preview on port 4180; rebuild before testing if a preview is already running. No lint command is configured.
 
-```bash
-npm run build
-```
+## Pages and content
 
-Production output is generated in `dist/`, the default Vite output directory for Vercel.
+- Home: identity, selected work, project index, capabilities, about, employment, education, credentials, contact.
+- Case studies: `/work/aghimuan/`, `/work/yhans/`, `/work/rmv/`, `/work/academia/`, `/work/flowmoney/`, `/work/shelflife/`, `/work/applyph/`.
+- Project facts: `src/data/projects.ts`. All documented roles, scope, technical details, and limitations are retained.
+- Styles: `src/editorial.css`. The pre-existing, edited `src/styles.css` is preserved but no longer imported.
+- Media dimensions: `src/data/media.json`. Update this manifest when replacing an image.
+- Identity and metadata: `src/data/site.ts`, `index.html`, and `scripts/prerender.mjs`.
+- The existing résumé remains at `/Sean_John_Camara_Resume.pdf`; it was not regenerated.
 
-## Content Notes
+Native anchors and separately rendered pages support direct links, browser history, and useful content without JavaScript. Contact uses actual email/phone/profile links; clipboard feedback reflects genuine success or failure.
 
-Project content is based on Sean John Camara's GitHub repositories and resume materials. No work experience, companies, certifications, or fake metrics are invented.
+## Design and motion
 
-Development experience shown on the site comes from independent personal projects and an academic capstone, not formal software employment. Expected graduation is 2027.
+Near-black, warm white, and muted gold restore the original visual direction. Local Fraunces and Manrope fonts include SIL Open Font Licenses. The original portrait, monogram, all seven project covers, beach portrait, school photographs, and credential previews remain visible. Live Aghimuan and Yhan’s captures are additional case-study images. See `public/assets/optimized/PROVENANCE.md`.
 
-## Screenshot
-
-![Sean John Camara developer portfolio](public/og.png)
-
-## Architecture
-
-The site is a client-rendered React application. `src/data/projects.ts` is the content source for project cards and structured case studies; reusable components render the sections and accessible dialogs. Vite produces a static `dist/` build served by Vercel. The downloadable resume is generated from `resume/generate_resume.py` and copied into `public/`.
-
-## Environment Variables
-
-No environment variables are required. The portfolio contains no server-side services or private credentials.
-
-## Testing
-
-- `npm test`: Node unit tests plus portfolio content/link validation.
-- `npm run typecheck`: strict TypeScript validation.
-- `npm run test:e2e`: Playwright navigation, dialog, responsive, and resume-link flows.
-- `npm run test:a11y`: serious/critical accessibility checks with axe.
-- `npm run build`: production TypeScript and Vite build.
-
-No coverage percentage is published. Visual regression coverage and more assistive-technology testing remain future work.
+GSAP choreographs the desktop headline, image entrances, and closing arrow, with subtle portrait depth on desktop. Mobile uses a brief CSS headline entrance and loads GSAP when the work section approaches. CSS also handles hover feedback and sticky project summaries. Native scrolling and cursor are retained. Reduced motion is honored initially and when the preference changes; observers, listeners, and animations clean up. Static HTML remains usable if motion cannot load. No 3D scene or smooth-scroll engine is needed.
 
 ## Deployment
 
-Vercel serves the static Vite output. `vercel.json` contains the project deployment configuration; no deployment secrets belong in this repository.
+Vercel continues to serve `dist/`. `vercel.json` enables canonical trailing slashes for the static case-study directories. The build generates per-page metadata, a complete sitemap, and useful static HTML, and inlines the small stylesheet to eliminate its initial loading round trip. **No production deployment was performed.**
 
-## Known Limitations
+## Verification and limits
 
-- Project claims depend on repository-visible evidence and may lag behind private or uncommitted work.
-- Case studies use concise summaries rather than full engineering design documents.
-- The generated resume is intentionally limited to one page.
-
-## Future Improvements
-
-- Add dated case-study updates as projects reach verified release milestones.
-- Expand automated visual and cross-browser checks.
-- Keep future commits small, imperative, and scoped; group project documentation assets consistently without rewriting existing history.
-
-## License
-
-No license file is currently included. All rights are reserved unless a license is added later.
+See `REDESIGN_NOTES.md` for measured results, screenshots, the verified project inventory, and remaining limitations. The initial résumé changes, stylesheet edits, and asset deletions were preserved.

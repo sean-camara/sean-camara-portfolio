@@ -1,0 +1,170 @@
+{
+  "/favicon.png": {
+    "width": 512,
+    "height": 512
+  },
+  "/og.png": {
+    "width": 1200,
+    "height": 630
+  },
+  "/og.webp": {
+    "width": 1200,
+    "height": 630
+  },
+  "/assets/academiazen-screenshot.png": {
+    "width": 1024,
+    "height": 682
+  },
+  "/assets/academiazen-showcase.webp": {
+    "width": 1024,
+    "height": 682
+  },
+  "/assets/aghimuan-creatives-showcase.webp": {
+    "width": 1564,
+    "height": 1006
+  },
+  "/assets/applyph-landing-laptop.png": {
+    "width": 1604,
+    "height": 980
+  },
+  "/assets/applyph-resume-checker-laptop.png": {
+    "width": 1672,
+    "height": 941
+  },
+  "/assets/applyph-resume-result-laptop.png": {
+    "width": 1616,
+    "height": 973
+  },
+  "/assets/applyph-showcase.webp": {
+    "width": 1448,
+    "height": 1086
+  },
+  "/assets/flowmoney-screenshot.png": {
+    "width": 1024,
+    "height": 576
+  },
+  "/assets/flowmoney-showcase.webp": {
+    "width": 1024,
+    "height": 576
+  },
+  "/assets/prime-organization.png": {
+    "width": 1448,
+    "height": 1086
+  },
+  "/assets/rmv-screenshot.png": {
+    "width": 1521,
+    "height": 731
+  },
+  "/assets/rmv-showcase.webp": {
+    "width": 1672,
+    "height": 941
+  },
+  "/assets/sean-beach-portrait.webp": {
+    "width": 1122,
+    "height": 1402
+  },
+  "/assets/sean-profile.webp": {
+    "width": 1122,
+    "height": 1402
+  },
+  "/assets/shelflife-screenshot.jpg": {
+    "width": 1220,
+    "height": 2712
+  },
+  "/assets/shelflife-showcase.webp": {
+    "width": 1672,
+    "height": 941
+  },
+  "/assets/student-council.jpg": {
+    "width": 2048,
+    "height": 1365
+  },
+  "/assets/xlnc-entrepreneurship.jpg": {
+    "width": 960,
+    "height": 682
+  },
+  "/assets/yhans-catering-showcase.png": {
+    "width": 1586,
+    "height": 992
+  },
+  "/certificates/getting-started-mongodb-atlas.png": {
+    "width": 4149,
+    "height": 3207
+  },
+  "/certificates/mongodb-nodejs-developer-path.png": {
+    "width": 4149,
+    "height": 3207
+  },
+  "/certificates/mongodb-relational-document-model-showcase.png": {
+    "width": 1586,
+    "height": 992
+  },
+  "/assets/optimized/aghimuan-live-640.webp": {
+    "width": 640,
+    "height": 444
+  },
+  "/assets/optimized/aghimuan-live-960.webp": {
+    "width": 960,
+    "height": 667
+  },
+  "/assets/optimized/aghimuan-live.webp": {
+    "width": 1440,
+    "height": 1000
+  },
+  "/assets/optimized/applyph-landing-laptop.webp": {
+    "width": 1440,
+    "height": 880
+  },
+  "/assets/optimized/applyph-resume-checker-laptop.webp": {
+    "width": 1440,
+    "height": 810
+  },
+  "/assets/optimized/applyph-resume-result-laptop.webp": {
+    "width": 1440,
+    "height": 867
+  },
+  "/assets/optimized/getting-started-mongodb-atlas.webp": {
+    "width": 800,
+    "height": 618
+  },
+  "/assets/optimized/mongodb-nodejs-developer-path.webp": {
+    "width": 800,
+    "height": 618
+  },
+  "/assets/optimized/mongodb-relational-document-model-showcase.webp": {
+    "width": 1440,
+    "height": 901
+  },
+  "/assets/optimized/prime-organization.webp": {
+    "width": 800,
+    "height": 600
+  },
+  "/assets/optimized/rmv-screenshot.webp": {
+    "width": 1440,
+    "height": 692
+  },
+  "/assets/optimized/student-council.webp": {
+    "width": 800,
+    "height": 533
+  },
+  "/assets/optimized/xlnc-entrepreneurship.webp": {
+    "width": 800,
+    "height": 568
+  },
+  "/assets/optimized/yhans-catering-showcase.webp": {
+    "width": 1440,
+    "height": 901
+  },
+  "/assets/optimized/yhans-live-640.webp": {
+    "width": 640,
+    "height": 444
+  },
+  "/assets/optimized/yhans-live-960.webp": {
+    "width": 960,
+    "height": 667
+  },
+  "/assets/optimized/yhans-live.webp": {
+    "width": 1440,
+    "height": 1000
+  }
+}

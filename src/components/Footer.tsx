@@ -2,19 +2,21 @@ export function Footer() {
   return (
     <footer className="site-footer">
       <div className="page-shell footer-inner">
-        <span className="footer-name">Sean John Camara<span>.</span></span>
-        <span>© 2026. Built with React and TypeScript.</span>
+        <a className="footer-name" href="/#home">
+          Sean John Camara<span>↗</span>
+        </a>
+        <p>Full-Stack Web & Android Developer</p>
         <div className="footer-links">
-          <a href="https://github.com/sean-camara" target="_blank" rel="noopener noreferrer">
-            Main GitHub
-          </a>
-          <a href="https://github.com/potatsukki" target="_blank" rel="noopener noreferrer">
-            ApplyPH GitHub
-          </a>
-          <a href="https://www.linkedin.com/in/sean-john-camara-ab78a3321/" target="_blank" rel="noopener noreferrer">
-            LinkedIn
-          </a>
+          <a href="/#experience">Experience</a>
+          <a href="/#education">Education</a>
+          <a href="/#certifications">Credentials</a>
         </div>
+        <span className="footer-credit">
+          © 2026 · Built with React & TypeScript
+        </span>
+        <a className="back-top" href="#main-content">
+          Back to top ↑
+        </a>
       </div>
     </footer>
   );

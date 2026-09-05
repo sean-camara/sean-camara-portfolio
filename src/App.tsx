@@ -1,28 +1,17 @@
-import { useState } from "react";
-import { Code2, Mail, Menu, Network, X } from "lucide-react";
+import { Code2, Mail, Network } from "lucide-react";
 import { About } from "./components/About";
 import { Certifications } from "./components/Certifications";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 import { ExperienceEducation } from "./components/ExperienceEducation";
+import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
-import { IntroScreen } from "./components/IntroScreen";
 import { MotionEffects } from "./components/MotionEffects";
 import { ProjectShowcase } from "./components/ProjectShowcase";
+import { ProjectCaseStudy } from "./components/ProjectCaseStudy";
 import { ProfessionalExperience } from "./components/ProfessionalExperience";
 import { SkillsMatrix } from "./components/SkillsMatrix";
 import { projects, skillGroups } from "./data/projects";
-
-const navLinks = [
-  { label: "Home", href: "#home" },
-  { label: "Projects", href: "#projects" },
-  { label: "Experience", href: "#experience" },
-  { label: "Education", href: "#education" },
-  { label: "Skills", href: "#skills" },
-  { label: "Certifications", href: "#certifications" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
-];
 
 const contactLinks = [
   {
@@ -51,72 +40,48 @@ const contactLinks = [
   },
 ];
 
-export function App() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const closeMenu = () => setIsMenuOpen(false);
-
+export function App({ path = "/" }: { path?: string }) {
+  const project = projects.find(
+    (entry) => `/work/${entry.visual}` === path.replace(/\/$/, ""),
+  );
+  const isHome = path === "/";
   return (
     <>
-      <a className="skip-link" href="#main-content">Skip to content</a>
-      <MotionEffects />
-      <IntroScreen />
-
-      <header className="site-header">
-        <nav className="site-nav" aria-label="Primary navigation">
-          <a className="brand-mark" href="#home" aria-label="Sean John Camara home" onClick={closeMenu}>
-            <img src="/favicon.png" alt="" width="34" height="34" />
-            <span className="brand-name">Sean John Camara<span>.</span></span>
-          </a>
-          <div
-            className={`main-nav ${isMenuOpen ? "is-open" : ""}`}
-            id="mobile-navigation"
-            aria-label="Page sections"
-          >
-            {navLinks.map((link) => (
-              <a href={link.href} key={link.label} onClick={closeMenu}>
-                {link.label}
+      <a className="skip-link" href="#main-content">
+        Skip to content
+      </a>
+      <Header isHome={isHome} />
+      <div id="page-content">
+        <main id="main-content" tabIndex={-1}>
+          {isHome ? (
+            <>
+              <Hero />
+              <ProjectShowcase projects={projects} />
+              <SkillsMatrix groups={skillGroups} />
+              <About />
+              <div className="background-chapter">
+                <ProfessionalExperience />
+                <ExperienceEducation />
+                <Certifications />
+              </div>
+            </>
+          ) : project ? (
+            <ProjectCaseStudy project={project} projects={projects} />
+          ) : (
+            <section className="page-shell not-found">
+              <p className="section-kicker">404 / Page not found</p>
+              <h1>Back to the work.</h1>
+              <p>This page isn’t in the portfolio.</p>
+              <a className="button-primary" href="/#projects">
+                View selected work ↗
               </a>
-            ))}
-            <a href="https://github.com/sean-camara" target="_blank" rel="noopener noreferrer" aria-label="Primary GitHub profile (opens in a new tab)">
-              GitHub
-            </a>
-          </div>
-          <button
-            className="menu-toggle"
-            type="button"
-            aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-            aria-expanded={isMenuOpen}
-            aria-controls="mobile-navigation"
-            onClick={() => setIsMenuOpen((open) => !open)}
-          >
-            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
-        </nav>
-      </header>
-
-      <aside className="section-rail" aria-label="Jump to section">
-        <a href="#projects">Work</a>
-        <a href="#experience">Experience</a>
-        <a href="#education">Education</a>
-        <a href="#skills">Skills</a>
-        <a href="#certifications">Certs</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </aside>
-
-      <main id="main-content">
-        <Hero />
-        <ProjectShowcase projects={projects} />
-        <ProfessionalExperience />
-        <ExperienceEducation />
-        <SkillsMatrix groups={skillGroups} />
-        <Certifications />
-        <About />
-        <Contact contactLinks={contactLinks} />
-      </main>
-
-      <Footer />
+            </section>
+          )}
+          <Contact contactLinks={contactLinks} />
+        </main>
+        <Footer />
+      </div>
+      <MotionEffects />
     </>
   );
 }

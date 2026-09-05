@@ -2,9 +2,30 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, X } from "lucide-react";
 
 const educationMemories = [
-  { title: "Student Council", image: "/assets/student-council.jpg", alt: "STI College Fairview Student Council event", context: "Student leadership · STI College Fairview", description: "A glimpse of my time supporting student-led activities and working with fellow student leaders during campus events." },
-  { title: "PRIME representatives", image: "/assets/prime-organization.png", alt: "PRIME student representatives from STI College Fairview", context: "School representation · PRIME organization", description: "As part of PRIME, I represented STI College Fairview while visiting different schools and helping introduce prospective students to the institution." },
-  { title: "XLNC · Entrepreneurship Week", image: "/assets/xlnc-entrepreneurship.jpg", alt: "XLNC shirt-selling website project during Entrepreneurship Week", context: "Student venture · Entrepreneurship Week", description: "Worked with teammates to create XLNC, an online shirt-selling website, and present the idea through a physical booth during Entrepreneurship Week." },
+  {
+    title: "Student Council",
+    image: "/assets/optimized/student-council.webp",
+    alt: "STI College Fairview Student Council event",
+    context: "Student leadership · STI College Fairview",
+    description:
+      "A glimpse of my time supporting student-led activities and working with fellow student leaders during campus events.",
+  },
+  {
+    title: "PRIME representatives",
+    image: "/assets/optimized/prime-organization.webp",
+    alt: "PRIME student representatives from STI College Fairview",
+    context: "School representation · PRIME organization",
+    description:
+      "As part of PRIME, I represented STI College Fairview while visiting different schools and helping introduce prospective students to the institution.",
+  },
+  {
+    title: "XLNC · Entrepreneurship Week",
+    image: "/assets/optimized/xlnc-entrepreneurship.webp",
+    alt: "XLNC shirt-selling website project during Entrepreneurship Week",
+    context: "Student venture · Entrepreneurship Week",
+    description:
+      "Worked with teammates to create XLNC, an online shirt-selling website, and present the idea through a physical booth during Entrepreneurship Week.",
+  },
 ] as const;
 
 export function ExperienceEducation() {
@@ -13,49 +34,74 @@ export function ExperienceEducation() {
   const closeRef = useRef<HTMLButtonElement>(null);
   const openerRef = useRef<HTMLButtonElement | null>(null);
   const scrollPositionRef = useRef(0);
+  const frameRef = useRef(0);
 
   const restoreScrollPosition = () => {
     window.scrollTo(0, scrollPositionRef.current);
-    window.requestAnimationFrame(() => window.scrollTo(0, scrollPositionRef.current));
+    cancelAnimationFrame(frameRef.current);
+    frameRef.current = window.requestAnimationFrame(() =>
+      window.scrollTo(0, scrollPositionRef.current),
+    );
   };
 
   useEffect(() => {
     const dialog = dialogRef.current;
     if (selectedMemory === null || !dialog) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     if (!dialog.open) dialog.showModal();
     closeRef.current?.focus({ preventScroll: true });
     restoreScrollPosition();
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
   }, [selectedMemory]);
+
+  useEffect(() => () => cancelAnimationFrame(frameRef.current), []);
 
   const closeMemory = () => {
     dialogRef.current?.close();
     setSelectedMemory(null);
-    window.requestAnimationFrame(() => {
+    cancelAnimationFrame(frameRef.current);
+    frameRef.current = window.requestAnimationFrame(() => {
       openerRef.current?.focus({ preventScroll: true });
       restoreScrollPosition();
     });
   };
 
   return (
-    <section className="editorial-section page-shell education-section" id="education">
+    <section
+      className="editorial-section page-shell education-section"
+      id="education"
+    >
       <div className="section-heading" data-reveal="split">
         <div>
-          <p className="section-kicker">[ Education ]</p>
-          <h2>Building while<br />learning.</h2>
+          <p className="section-kicker">Education / Campus life</p>
+          <h2>
+            Building while
+            <br />
+            learning.
+          </h2>
         </div>
         <p className="section-intro">
-          Computer science education, continued learning, and preparation for entry-level development opportunities.
+          Computer science education, continued learning, and preparation for
+          entry-level development opportunities.
         </p>
       </div>
 
       <div className="experience-list">
-        <article className="experience-entry experience-entry-education" data-reveal="row">
+        <article
+          className="experience-entry experience-entry-education"
+          data-reveal="row"
+        >
           <div className="experience-entry-side">
             <span>01 / Education</span>
             <time dateTime="2023">2023 — 2027</time>
           </div>
           <div className="experience-entry-main">
-            <p className="experience-context">Currently enrolled · Expected Graduation: 2027</p>
+            <p className="experience-context">
+              Currently enrolled · Expected Graduation: 2027
+            </p>
             <h3>Bachelor of Science in Computer Science</h3>
             <h4>STI College Fairview</h4>
             <div className="education-gallery" aria-label="School experiences">
@@ -64,10 +110,21 @@ export function ExperienceEducation() {
                   className="education-card"
                   type="button"
                   key={memory.title}
-                  onClick={(event) => { scrollPositionRef.current = window.scrollY; openerRef.current = event.currentTarget; setSelectedMemory(index); }}
+                  onClick={(event) => {
+                    scrollPositionRef.current = window.scrollY;
+                    openerRef.current = event.currentTarget;
+                    setSelectedMemory(index);
+                  }}
                   aria-label={`View ${memory.title} school experience`}
                 >
-                  <img src={memory.image} alt={memory.alt} />
+                  <img
+                    src={memory.image}
+                    alt={memory.alt}
+                    loading="lazy"
+                    decoding="async"
+                    width="960"
+                    height="682"
+                  />
                   <span>{memory.title}</span>
                   <ArrowUpRight size={15} aria-hidden="true" />
                 </button>
@@ -77,29 +134,67 @@ export function ExperienceEducation() {
         </article>
 
         <div className="experience-availability" data-reveal="row">
-          <span>Available now</span>
-          <p>Seeking junior developer roles, internships, freelance projects, and contract-based development work to gain formal industry experience while applying skills developed through independent full-stack projects.</p>
+          <span>Next chapter</span>
+          <p>
+            Interested in junior developer roles, internships, freelance
+            projects, and contract work, applying what I’m learning through
+            independent web and Android projects.
+          </p>
         </div>
       </div>
 
       <dialog
         className="education-modal"
         ref={dialogRef}
-        onCancel={(event) => { event.preventDefault(); closeMemory(); }}
-        onKeyDown={(event) => { if (event.key === "Escape") { event.preventDefault(); closeMemory(); } }}
-        onClick={(event) => { if (event.target === event.currentTarget) closeMemory(); }}
+        onCancel={(event) => {
+          event.preventDefault();
+          closeMemory();
+        }}
+        onKeyDown={(event) => {
+          if (event.key === "Escape") {
+            event.preventDefault();
+            closeMemory();
+          }
+        }}
+        onClick={(event) => {
+          if (event.target === event.currentTarget) closeMemory();
+        }}
         aria-labelledby="education-modal-title"
       >
         {selectedMemory !== null && (
           <div className="education-modal-panel">
-            <button ref={closeRef} className="project-modal-close" type="button" onClick={closeMemory} aria-label="Close school experience"><X size={20} /></button>
-            <div className="education-modal-image"><img src={educationMemories[selectedMemory].image} alt={educationMemories[selectedMemory].alt} /></div>
+            <button
+              ref={closeRef}
+              className="project-modal-close"
+              type="button"
+              onClick={closeMemory}
+              aria-label="Close school experience"
+            >
+              <X size={20} />
+            </button>
+            <div className="education-modal-image">
+              <img
+                src={educationMemories[selectedMemory].image}
+                alt={educationMemories[selectedMemory].alt}
+              />
+            </div>
             <div className="education-modal-content">
-              <span className="project-modal-index">{String(selectedMemory + 1).padStart(2, "0")} / {String(educationMemories.length).padStart(2, "0")}</span>
+              <span className="project-modal-index">
+                {String(selectedMemory + 1).padStart(2, "0")} /{" "}
+                {String(educationMemories.length).padStart(2, "0")}
+              </span>
               <p className="education-modal-kicker">School experience</p>
-              <h3 id="education-modal-title">{educationMemories[selectedMemory].title}</h3>
-              <div className="education-modal-detail"><span>Context</span><p>{educationMemories[selectedMemory].context}</p></div>
-              <div className="education-modal-detail"><span>What I did</span><p>{educationMemories[selectedMemory].description}</p></div>
+              <h3 id="education-modal-title">
+                {educationMemories[selectedMemory].title}
+              </h3>
+              <div className="education-modal-detail">
+                <span>Context</span>
+                <p>{educationMemories[selectedMemory].context}</p>
+              </div>
+              <div className="education-modal-detail">
+                <span>What I did</span>
+                <p>{educationMemories[selectedMemory].description}</p>
+              </div>
             </div>
           </div>
         )}

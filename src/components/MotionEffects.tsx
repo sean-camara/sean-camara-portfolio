@@ -1,210 +1,265 @@
 import { useEffect } from "react";
 
-const revealSelector = "[data-reveal]";
-const tiltSelector = "[data-tilt]";
-const parallaxSelector = "[data-parallax]";
-const magneticSelector = "[data-magnetic]";
-
+// Everything renders in its final, readable state before motion is available.
 export function MotionEffects() {
   useEffect(() => {
-    const root = document.documentElement;
-    const scrollProgress = document.querySelector<HTMLElement>(".scroll-progress");
-    const pointerOrb = document.querySelector<HTMLElement>(".pointer-orb");
-    const heroCopy = document.querySelector<HTMLElement>(".hero-copy");
-    const heroImage = document.querySelector<HTMLElement>(".hero-portrait img");
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    const revealElements = Array.from(
-      document.querySelectorAll<HTMLElement>(revealSelector),
-    );
-    const parallaxElements = Array.from(
-      document.querySelectorAll<HTMLElement>(parallaxSelector),
-    );
-    const activeParallaxElements = new Set<HTMLElement>();
-    const sections = Array.from(document.querySelectorAll<HTMLElement>("main section[id]"));
+    const content = document.getElementById("page-content");
+    if (!content) return;
 
-    let observer: IntersectionObserver | undefined;
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const desktop = window.matchMedia(
+      "(min-width: 1100px) and (hover: hover) and (pointer: fine)",
+    );
+    let disposed = false;
+    let generation = 0;
+    let heroPlayed = false;
+    let workReached = false;
+    let pendingLoader: IntersectionObserver | undefined;
+    let cleanup: (() => void) | undefined;
 
-    if (reduceMotion) {
-      revealElements.forEach((element) => element.classList.add("is-visible"));
-    } else {
-      root.classList.add("motion-ready");
-      observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            entry.target.classList.add("is-visible");
-            observer?.unobserve(entry.target);
+    const stop = () => {
+      generation += 1;
+      pendingLoader?.disconnect();
+      pendingLoader = undefined;
+      cleanup?.();
+      cleanup = undefined;
+    };
+
+    const start = async () => {
+      stop();
+      if (disposed || preference.matches) return;
+      const request = generation;
+
+      // Mobile's opening uses CSS; load the scene engine only when work enters.
+      if (!desktop.matches && !workReached) {
+        const firstScene = content.querySelector(
+          "#projects, .case-narrative, #contact",
+        );
+        if (firstScene && "IntersectionObserver" in window) {
+          pendingLoader = new IntersectionObserver((entries) => {
+            if (
+              disposed ||
+              request !== generation ||
+              preference.matches ||
+              !entries.some((entry) => entry.isIntersecting)
+            )
+              return;
+            workReached = true;
+            heroPlayed = true;
+            void start();
           });
-        },
-        { rootMargin: "0px 0px -10% 0px", threshold: 0.08 },
-      );
-      revealElements.forEach((element) => observer?.observe(element));
-    }
-
-    const tiltCleanups: Array<() => void> = [];
-    const magneticCleanups: Array<() => void> = [];
-    let pointerFrame = 0;
-
-    if (!reduceMotion && finePointer) {
-      document.querySelectorAll<HTMLElement>(tiltSelector).forEach((element) => {
-        let tiltFrame = 0;
-
-        const handlePointerMove = (event: PointerEvent) => {
-          if (tiltFrame) cancelAnimationFrame(tiltFrame);
-          tiltFrame = requestAnimationFrame(() => {
-            const rect = element.getBoundingClientRect();
-            const x = (event.clientX - rect.left) / rect.width;
-            const y = (event.clientY - rect.top) / rect.height;
-            element.style.setProperty("--tilt-x", `${((0.5 - y) * 5).toFixed(2)}deg`);
-            element.style.setProperty("--tilt-y", `${((x - 0.5) * 6).toFixed(2)}deg`);
-            element.style.setProperty("--pointer-x", `${(x * 100).toFixed(1)}%`);
-            element.style.setProperty("--pointer-y", `${(y * 100).toFixed(1)}%`);
-            tiltFrame = 0;
-          });
-        };
-
-        const resetTilt = () => {
-          element.style.setProperty("--tilt-x", "0deg");
-          element.style.setProperty("--tilt-y", "0deg");
-        };
-
-        element.addEventListener("pointermove", handlePointerMove);
-        element.addEventListener("pointerleave", resetTilt);
-        tiltCleanups.push(() => {
-          if (tiltFrame) cancelAnimationFrame(tiltFrame);
-          element.removeEventListener("pointermove", handlePointerMove);
-          element.removeEventListener("pointerleave", resetTilt);
-        });
-      });
-
-      document.querySelectorAll<HTMLElement>(magneticSelector).forEach((element) => {
-        const handlePointerMove = (event: PointerEvent) => {
-          const rect = element.getBoundingClientRect();
-          const x = (event.clientX - (rect.left + rect.width / 2)) * 0.14;
-          const y = (event.clientY - (rect.top + rect.height / 2)) * 0.18;
-          element.style.setProperty("--magnetic-x", `${x.toFixed(2)}px`);
-          element.style.setProperty("--magnetic-y", `${y.toFixed(2)}px`);
-        };
-        const resetMagnetic = () => {
-          element.style.setProperty("--magnetic-x", "0px");
-          element.style.setProperty("--magnetic-y", "0px");
-        };
-        element.addEventListener("pointermove", handlePointerMove);
-        element.addEventListener("pointerleave", resetMagnetic);
-        magneticCleanups.push(() => {
-          element.removeEventListener("pointermove", handlePointerMove);
-          element.removeEventListener("pointerleave", resetMagnetic);
-        });
-      });
-
-      const handlePointerMove = (event: PointerEvent) => {
-        if (pointerFrame) cancelAnimationFrame(pointerFrame);
-        pointerFrame = requestAnimationFrame(() => {
-          pointerOrb?.style.setProperty(
-            "transform",
-            `translate3d(${event.clientX - 130}px, ${event.clientY - 130}px, 0)`,
-          );
-          root.classList.add("pointer-active");
-          pointerFrame = 0;
-        });
-      };
-      const handlePointerLeave = () => root.classList.remove("pointer-active");
-      document.addEventListener("pointermove", handlePointerMove);
-      document.documentElement.addEventListener("mouseleave", handlePointerLeave);
-      tiltCleanups.push(() => {
-        document.removeEventListener("pointermove", handlePointerMove);
-        document.documentElement.removeEventListener("mouseleave", handlePointerLeave);
-      });
-    }
-
-    const sectionObserver = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (!visible) return;
-        const id = (visible.target as HTMLElement).id;
-        document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((link) => {
-          link.classList.toggle("is-active", link.getAttribute("href") === `#${id}`);
-        });
-      },
-      { rootMargin: "-35% 0px -50% 0px", threshold: [0, 0.15, 0.4] },
-    );
-    sections.forEach((section) => sectionObserver.observe(section));
-
-    const parallaxObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const element = entry.target as HTMLElement;
-          if (entry.isIntersecting) activeParallaxElements.add(element);
-          else activeParallaxElements.delete(element);
-        });
-      },
-      { rootMargin: "20% 0px" },
-    );
-    parallaxElements.forEach((element) => parallaxObserver.observe(element));
-
-    let scrollFrame = 0;
-
-    const updateScrollEffects = () => {
-      const scrollRange = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = scrollRange > 0 ? window.scrollY / scrollRange : 0;
-      scrollProgress?.style.setProperty("transform", `scaleX(${progress.toFixed(4)})`);
-      const heroProgress = Math.min(1, window.scrollY / Math.max(1, window.innerHeight));
-      heroCopy?.style.setProperty("--hero-copy-shift", `${(-34 * heroProgress).toFixed(2)}px`);
-      heroImage?.style.setProperty("--hero-image-shift", `${(18 * heroProgress).toFixed(2)}px`);
-      heroImage?.style.setProperty("--hero-image-scale", (1.04 + heroProgress * 0.035).toFixed(4));
-
-      if (!reduceMotion) {
-        const offsets = Array.from(activeParallaxElements, (element) => {
-          const rect = element.getBoundingClientRect();
-          const elementCenter = rect.top + rect.height / 2;
-          const distance = window.innerHeight / 2 - elementCenter;
-          const speed = Number(element.dataset.parallaxSpeed ?? 1);
-          const offset = Math.max(-30, Math.min(30, distance * 0.035 * speed));
-          return [element, offset] as const;
-        });
-        offsets.forEach(([element, offset]) => {
-          element.style.setProperty("--parallax-offset", `${offset.toFixed(2)}px`);
-        });
+          pendingLoader.observe(firstScene);
+        }
+        return;
       }
 
-      scrollFrame = 0;
+      try {
+        const { gsap } = await import("gsap");
+        if (disposed || preference.matches || request !== generation) return;
+
+        const media = gsap.matchMedia(content);
+        cleanup = () => media.revert();
+
+        media.add("(prefers-reduced-motion: no-preference)", () => {
+          const select = (selector: string) =>
+            gsap.utils.toArray<HTMLElement>(selector, content);
+
+          if (
+            desktop.matches &&
+            !heroPlayed &&
+            window.scrollY < window.innerHeight * 0.65
+          ) {
+            heroPlayed = true;
+            const hero = gsap.timeline({
+              defaults: { ease: "power3.out", clearProps: "transform" },
+            });
+            const lines = select(".hero-title-inner");
+            const name = select(".hero-name");
+            const supporting = select(
+              ".hero-statement, .hero-actions, .resume-link",
+            );
+            const rule = select(".hero-rule");
+            const orbit = select(".hero-orbit");
+
+            // Leave the LCP portrait static; the typography carries the opening.
+            if (lines.length)
+              hero.from(
+                lines,
+                {
+                  yPercent: 104,
+                  duration: 1.12,
+                  stagger: 0.12,
+                  ease: "power4.out",
+                },
+                0.04,
+              );
+            if (name.length)
+              hero.from(name, { y: 12, duration: 0.75 }, 0.08);
+            if (supporting.length)
+              hero.from(
+                supporting,
+                { y: 15, duration: 0.8, stagger: 0.09 },
+                0.28,
+              );
+            if (rule.length)
+              hero.from(
+                rule,
+                { scaleX: 0, transformOrigin: "left", duration: 1.15 },
+                0.15,
+              );
+            if (orbit.length)
+              hero.from(
+                orbit,
+                { scale: 0.94, duration: 1.5 },
+                0.1,
+              );
+          }
+
+          if (!("IntersectionObserver" in window)) return;
+          const scenes = gsap.context(() => {}, content);
+          const cards = select(
+            ".index-row, .education-card, .certification-card",
+          );
+          const observer = new IntersectionObserver(
+            (entries) => {
+              if (disposed || request !== generation || preference.matches)
+                return;
+              entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                observer.unobserve(entry.target);
+                const element = entry.target as HTMLElement;
+                // Create tweens only when needed, without measuring every section.
+                scenes.add(() => {
+                  if (element.matches(".chapter-images, .about-workspace")) {
+                    const image = element.querySelector("img");
+                    const reveal = gsap.timeline({
+                      defaults: { ease: "power3.out", duration: 1.1 },
+                    });
+                    reveal.from(element, {
+                      y: 38,
+                      clipPath: "inset(0 0 7% 0)",
+                      clearProps: "transform,clipPath",
+                    });
+                    if (image)
+                      reveal.from(
+                        image,
+                        { scale: 1.045, duration: 1.25, clearProps: "transform" },
+                        0,
+                      );
+                  } else if (element.matches(".closing-arrow")) {
+                    gsap.from(element, {
+                      x: -24,
+                      y: 24,
+                      rotate: -8,
+                      duration: 1.15,
+                      ease: "power4.out",
+                      clearProps: "transform",
+                    });
+                  } else {
+                    const cardIndex = cards.indexOf(element);
+                    gsap.from(element, {
+                      y: cardIndex < 0 ? 28 : 34,
+                      duration: 0.9,
+                      delay: cardIndex < 0 ? 0 : (cardIndex % 2) * 0.08,
+                      ease: "power3.out",
+                      clearProps: "transform",
+                    });
+                  }
+                });
+              });
+            },
+            { threshold: 0.08, rootMargin: "0px 0px -8% 0px" },
+          );
+          select(
+            ".section-heading h2, .about-heading h2, .chapter-images, .about-workspace, .index-row, .education-card, .certification-card, .closing-arrow",
+          ).forEach((element) => observer.observe(element));
+          return () => {
+            observer.disconnect();
+            scenes.revert();
+          };
+        });
+
+        media.add(
+          "(min-width: 1100px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)",
+          () => {
+            const frame = content.querySelector<HTMLElement>(
+              ".hero-portrait-frame",
+            );
+            const depth = frame?.querySelector<HTMLElement>(
+              ".hero-portrait-depth",
+            );
+            const surface = frame?.closest<HTMLElement>(".hero");
+            if (!frame || !depth || !surface) return;
+
+            gsap.set(depth, {
+              transformPerspective: 900,
+              transformOrigin: "50% 50%",
+            });
+            const options = { duration: 0.8, ease: "power3.out" };
+            const xTo = gsap.quickTo(depth, "x", options);
+            const yTo = gsap.quickTo(depth, "y", options);
+            const rotateXTo = gsap.quickTo(depth, "rotationX", options);
+            const rotateYTo = gsap.quickTo(depth, "rotationY", options);
+            const move = (event: PointerEvent) => {
+              if (event.pointerType !== "mouse" || document.hidden) return;
+              const rect = frame.getBoundingClientRect();
+              const x = gsap.utils.clamp(
+                -1,
+                1,
+                ((event.clientX - rect.left) / rect.width - 0.5) * 2,
+              );
+              const y = gsap.utils.clamp(
+                -1,
+                1,
+                ((event.clientY - rect.top) / rect.height - 0.5) * 2,
+              );
+              xTo(x * 7);
+              yTo(y * 7);
+              rotateXTo(y * -1.1);
+              rotateYTo(x * 1.3);
+            };
+            const reset = () => {
+              xTo(0);
+              yTo(0);
+              rotateXTo(0);
+              rotateYTo(0);
+            };
+            const settle = () => {
+              reset();
+              [xTo, yTo, rotateXTo, rotateYTo].forEach(({ tween }) =>
+                tween.progress(1).pause(),
+              );
+            };
+            const visibility = () => {
+              if (document.hidden) settle();
+            };
+            surface.addEventListener("pointermove", move);
+            surface.addEventListener("pointerleave", reset);
+            window.addEventListener("blur", settle);
+            document.addEventListener("visibilitychange", visibility);
+            return () => {
+              surface.removeEventListener("pointermove", move);
+              surface.removeEventListener("pointerleave", reset);
+              window.removeEventListener("blur", settle);
+              document.removeEventListener("visibilitychange", visibility);
+            };
+          },
+        );
+      } catch {
+        // A failed optional motion download must leave the page usable.
+        if (request === generation) stop();
+      }
     };
 
-    const handleScroll = () => {
-      if (!scrollFrame) scrollFrame = requestAnimationFrame(updateScrollEffects);
-    };
-
-    updateScrollEffects();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll);
-
+    void start();
+    preference.addEventListener("change", start);
+    desktop.addEventListener("change", start);
     return () => {
-      observer?.disconnect();
-      sectionObserver.disconnect();
-      parallaxObserver.disconnect();
-      tiltCleanups.forEach((cleanup) => cleanup());
-      magneticCleanups.forEach((cleanup) => cleanup());
-      if (scrollFrame) cancelAnimationFrame(scrollFrame);
-      if (pointerFrame) cancelAnimationFrame(pointerFrame);
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
-      root.classList.remove("motion-ready");
-      scrollProgress?.style.removeProperty("transform");
-      pointerOrb?.style.removeProperty("transform");
-      heroCopy?.style.removeProperty("--hero-copy-shift");
-      heroImage?.style.removeProperty("--hero-image-shift");
-      heroImage?.style.removeProperty("--hero-image-scale");
-      root.classList.remove("pointer-active");
+      disposed = true;
+      preference.removeEventListener("change", start);
+      desktop.removeEventListener("change", start);
+      stop();
     };
   }, []);
-
-  return (
-    <>
-      <div className="scroll-progress" aria-hidden="true" />
-      <div className="pointer-orb" aria-hidden="true" />
-    </>
-  );
+  return null;
 }
