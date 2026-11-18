@@ -1,4 +1,4 @@
-export type ProjectKind = "aghimuan" | "yhans" | "applyph" | "rmv" | "academia" | "flowmoney" | "shelflife";
+export type ProjectKind = "aghimuan" | "yhans" | "applyph" | "rmv" | "academia" | "flowmoney" | "shelflife" | "reserve" | "viora";
 
 export type ProjectLink = {
   label: string;
@@ -19,8 +19,9 @@ export type Project = {
   links: ProjectLink[];
   unavailableDemo?: string;
   imageUrl: string;
+  imageCaption?: string;
   visual: ProjectKind;
-  gallery?: { src: string; alt: string; caption: string }[];
+  gallery?: { src: string; alt: string; caption: string; heading?: string }[];
   caseStudy: {
     problem: string;
     solution: string;
@@ -42,6 +43,122 @@ export type SkillGroup = {
 };
 
 const projectInventory: Project[] = [
+  {
+    title: "Viora",
+    type: "Mobile-first fitness and nutrition PWA",
+    status: "Portfolio walkthrough",
+    context: "Independent full-stack project",
+    role: "Designer and full-stack developer",
+    summary: "A private fitness journal with guided setup, a food diary, workout tracking, and coaching in a phone-first layout.",
+    description: "Viora is an installable web app for logging nutrition, workouts, and progress. It pairs a private journal with optional meal and fitness coaching.",
+    tech: ["React", "TypeScript", "Cloudflare Workers", "Supabase", "DeepSeek"],
+    highlights: [
+      "Guided onboarding with a choice of estimated targets, manual targets, or tracking without targets.",
+      "Food diary, saved foods, family recipes, and a Meal Coach that accepts text and photos.",
+      "Weekly workouts, set-by-set logging, walking entries, and measurement history.",
+      "Private progress photos and an optional coach that can use selected logs.",
+    ],
+    links: [],
+    imageUrl: "/assets/viora/cover.webp",
+    imageCaption: "Viora on mobile · AI-styled cover",
+    visual: "viora",
+    gallery: [
+      { heading: "Account and guided setup", src: "/assets/viora/live-login.jpg", alt: "Viora’s mobile sign-in page", caption: "Private account sign-in" },
+      { src: "/assets/viora/onboarding.jpg", alt: "Illustrated Viora onboarding welcome screen", caption: "Welcome and guided setup" },
+      { src: "/assets/viora/onboarding-height.jpg", alt: "Height ruler and unit selection on a phone", caption: "Measurement ruler with metric and imperial units" },
+      { src: "/assets/viora/onboarding-goals.jpg", alt: "Viora onboarding goal selection", caption: "Choose a goal or track without targets" },
+      { src: "/assets/viora/plan.jpg", alt: "Viora starter plan with example energy and nutrient targets", caption: "Starting targets and a check-in milestone · demo profile" },
+      { src: "/assets/viora/plan-showcase.webp", alt: "Stylized phone mockup of Viora’s plan screen", caption: "Starter plan · AI-styled visual" },
+      { heading: "Daily nutrition and training", src: "/assets/viora/home-populated.jpg", alt: "Viora dashboard with example nutrition and measurements", caption: "Daily nutrition and progress at a glance" },
+      { src: "/assets/viora/meal-coach.jpg", alt: "Viora Meal Coach text and photo entry", caption: "Start a meal log from text or a photo" },
+      { src: "/assets/viora/diary.jpg", alt: "Viora food diary with a sample lunch", caption: "Review logged meals and daily nutrition" },
+      { src: "/assets/viora/saved-foods.jpg", alt: "Viora’s saved foods and recipe screen", caption: "Reuse saved foods and family recipes" },
+      { src: "/assets/viora/workout.jpg", alt: "Viora weekly strength routine on a phone", caption: "Open a workout from the weekly routine" },
+      { src: "/assets/viora/active-session.jpg", alt: "Viora active strength session with a logged set", caption: "Log sets as you train and save a partial session" },
+      { src: "/assets/viora/tracking-showcase.webp", alt: "Styled side-by-side phones for Viora’s diary and workouts", caption: "Nutrition and training · AI-styled visual" },
+      { heading: "Progress and coaching", src: "/assets/viora/progress.jpg", alt: "Viora progress dashboard for a fictional profile", caption: "Review measurement history and milestones" },
+      { src: "/assets/viora/coach.jpg", alt: "Viora Coach chat with a fictional account", caption: "Viora Coach · sample conversation" },
+    ],
+    caseStudy: {
+      problem: "I wanted one place to record meals, training, and measurements throughout the day. Logging needed to work comfortably on a phone, with a clear way to revisit entries and reuse the foods I eat often.",
+      solution: "I put the daily dashboard, meals, workouts, progress, and coach within reach of a persistent mobile navigation bar. Guided setup offers a starting plan, and the diary lets users review food entries before saving them.",
+      architecture: "React renders the installable web app. A Cloudflare Worker handles the API, while Supabase provides authentication, per-account data storage, and private progress photos. Optional DeepSeek requests support meal analysis and coaching.",
+      decisions: [
+        "Keep manual logging available when optional AI features are off.",
+        "Preserve nutrition sources and keep suggested meal entries editable before saving.",
+        "Separate a starter target from the daily record so users can revisit their plan without losing past entries.",
+      ],
+      challenges: [
+        "Keeping phone navigation and chat composers usable on smaller screens.",
+        "Handling interrupted responses while preserving the message or draft.",
+        "Separating private journal records and photos by account.",
+      ],
+      testing: "The local browser flow completed onboarding, food logging, a workout set, measurement tracking, and a private photo upload using a dedicated demo account.",
+      deployment: "The sign-in screen was captured from the hosted Cloudflare app. The authenticated walkthrough uses local fixtures, so visitors can explore it here without signing in.",
+      lessons: [
+        "Give frequent actions space and keep them easy to reach on a phone.",
+        "Keep estimates reviewable and preserve manual entry when a provider is unavailable.",
+      ],
+      limitation: "The screenshots use a fictional profile, measurements, meals, and workout entries. The coach example is a demo conversation.",
+    },
+  },
+  {
+    title: "The Reserve & Reserve Desk",
+    type: "Property website and real estate CRM",
+    status: "Portfolio walkthrough",
+    context: "Independent project for my real estate sales workflow at Primehomes",
+    role: "Designer and full-stack developer",
+    summary: "A public condominium showcase and a private sales workspace for leads, inventory, payment estimates, and reports.",
+    description: "The Reserve helps buyers explore condominiums and request a viewing. Reserve Desk brings the day-to-day sales workflow into one private workspace.",
+    tech: ["React", "TypeScript", "Supabase", "Cloudflare Workers", "Meta Lead Ads"],
+    highlights: [
+      "Public property listings, floor plans, amenities, and a viewing-request form.",
+      "Searchable unit inventory organized by tower, unit type, and availability.",
+      "Lead records with contact details, pipeline stages, activity, and follow-up scheduling.",
+      "Payment-term comparisons, saved estimates, and downloadable PDF documents.",
+      "Sales reporting and a Meta Lead Ads integration built to import inquiries automatically.",
+    ],
+    links: [],
+    imageUrl: "/assets/reserve-desk/public-showcase.webp",
+    imageCaption: "Buyer website · AI-styled cover",
+    visual: "reserve",
+    gallery: [
+      { heading: "Buyer website", src: "/assets/reserve-desk/public-home.jpg", alt: "The Reserve public landing page", caption: "Homepage for prospective buyers" },
+      { src: "/assets/reserve-desk/public-properties.jpg", alt: "The Reserve property catalog", caption: "Browse condominium types and property details" },
+      { src: "/assets/reserve-desk/public-floor-plans.jpg", alt: "The Reserve floor-plan browser", caption: "Explore floor plans" },
+      { src: "/assets/reserve-desk/public-amenities.jpg", alt: "The Reserve amenities page", caption: "Explore shared amenities" },
+      { src: "/assets/reserve-desk/public-viewing.jpg", alt: "The Reserve viewing request screen", caption: "Request a property viewing" },
+      { src: "/assets/reserve-desk/mobile-showcase.webp", alt: "Stylized phone frame showing The Reserve property catalog", caption: "Mobile catalog · AI-styled cover" },
+      { src: "/assets/reserve-desk/public-mobile.jpg", alt: "The Reserve property catalog on a phone", caption: "Property browsing on mobile" },
+      { heading: "Sales workspace", src: "/assets/reserve-desk/admin-showcase.webp", alt: "Stylized browser frame around the Reserve Desk demo CRM", caption: "Reserve Desk · AI-styled cover with fictional data" },
+      { src: "/assets/reserve-desk/admin-leads.png", alt: "Reserve Desk lead list and detail panel populated with fictional prospects", caption: "Lead pipeline and follow-up actions · fictional data" },
+      { src: "/assets/reserve-desk/admin-units.png", alt: "Reserve Desk inventory view with demonstration units", caption: "Filter inventory by tower, unit type, and availability · fictional data" },
+      { src: "/assets/reserve-desk/admin-calculator.jpg", alt: "Reserve Desk comparison of payment terms for a fictional unit", caption: "Compare cash and installment terms · fictional unit and amounts" },
+      { src: "/assets/reserve-desk/admin-calendar.png", alt: "Reserve Desk calendar month view", caption: "Calendar for follow-ups and appointments · demo workspace" },
+      { src: "/assets/reserve-desk/admin-reports.png", alt: "Reserve Desk reporting dashboard displaying sample metrics", caption: "Reporting for lead sources, activity, and pipeline stages · fictional data" },
+    ],
+    caseStudy: {
+      problem: "I needed a way to show buyers available condominium layouts and keep track of inquiries, payment estimates, and follow-ups during the same sale.",
+      solution: "I built a property website for buyers and a private CRM for my own sales work. Buyers can explore the property and request a viewing. In the CRM I can track the lead, check unit availability, prepare a payment estimate, and schedule the next follow-up.",
+      architecture: "The React and TypeScript interfaces separate the public property catalog from the authenticated CRM. The workspace uses a shared API and Supabase, and the Meta Lead Ads integration uses a webhook to map incoming form answers to lead records.",
+      decisions: [
+        "Put availability filters next to the unit inventory so I can check options during a buyer conversation.",
+        "Calculate estimates from the selected payment terms and preserve saved proposals for later reference.",
+        "Keep source information on imported leads so follow-ups can account for the original inquiry.",
+      ],
+      challenges: [
+        "Handling repeated webhook deliveries without creating a second record for the same Meta lead.",
+        "Keeping the public catalog separate from internal lead records, estimates, and activity.",
+      ],
+      testing: "The project includes automated checks for pricing calculations, offline behavior, and the sales workflow. The workspace screenshots were captured with fictional leads, units, and activity in an isolated demo.",
+      deployment: "The project uses Cloudflare for hosting. The screenshots on this page provide a walkthrough of both interfaces.",
+      lessons: [
+        "Unit availability and the next follow-up should be easy to find during a buyer conversation.",
+        "Payment estimates are easier to review when the terms and calculations are shown together.",
+      ],
+      limitation: "Workspace screenshots use fictional data. Sample figures are for demonstration and do not represent current prices, availability, or sales performance.",
+    },
+  },
   {
     title: "Aghimuan Creatives",
     type: "Immersive creative portfolio",
@@ -312,7 +429,7 @@ const projectInventory: Project[] = [
 ];
 
 // Preserve the requested work order; retain the newer ApplyPH project in the index.
-const projectOrder: ProjectKind[] = ["aghimuan", "yhans", "rmv", "academia", "flowmoney", "shelflife", "applyph"];
+const projectOrder: ProjectKind[] = ["aghimuan", "yhans", "rmv", "reserve", "viora", "academia", "flowmoney", "shelflife", "applyph"];
 export const projects = [...projectInventory].sort((a, b) => projectOrder.indexOf(a.visual) - projectOrder.indexOf(b.visual));
 
 export const skillGroups: SkillGroup[] = [

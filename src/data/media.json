@@ -166,5 +166,125 @@
   "/assets/optimized/yhans-live.webp": {
     "width": 1440,
     "height": 1000
+  },
+  "/assets/reserve-desk/admin-calendar.png": {
+    "width": 1440,
+    "height": 900
+  },
+  "/assets/reserve-desk/admin-leads.png": {
+    "width": 1440,
+    "height": 900
+  },
+  "/assets/reserve-desk/admin-reports.png": {
+    "width": 1440,
+    "height": 900
+  },
+  "/assets/reserve-desk/admin-showcase.webp": {
+    "width": 1672,
+    "height": 941
+  },
+  "/assets/reserve-desk/admin-units.png": {
+    "width": 1440,
+    "height": 900
+  },
+  "/assets/reserve-desk/mobile-showcase.webp": {
+    "width": 1536,
+    "height": 1024
+  },
+  "/assets/reserve-desk/public-amenities.jpg": {
+    "width": 1440,
+    "height": 960
+  },
+  "/assets/reserve-desk/public-floor-plans.jpg": {
+    "width": 1440,
+    "height": 960
+  },
+  "/assets/reserve-desk/public-home.jpg": {
+    "width": 1440,
+    "height": 960
+  },
+  "/assets/reserve-desk/public-mobile.jpg": {
+    "width": 390,
+    "height": 844
+  },
+  "/assets/reserve-desk/public-properties.jpg": {
+    "width": 1440,
+    "height": 960
+  },
+  "/assets/reserve-desk/public-showcase.webp": {
+    "width": 1672,
+    "height": 941
+  },
+  "/assets/reserve-desk/public-viewing.jpg": {
+    "width": 1440,
+    "height": 870
+  },
+  "/assets/reserve-desk/admin-calculator.jpg": {
+    "width": 1440,
+    "height": 1050
+  },
+  "/assets/viora/active-session.jpg": {
+    "width": 390,
+    "height": 844
+  },
+  "/assets/viora/coach.jpg": {
+    "width": 390,
+    "height": 844
+  },
+  "/assets/viora/cover.webp": {
+    "width": 1672,
+    "height": 941
+  },
+  "/assets/viora/diary.jpg": {
+    "width": 390,
+    "height": 844
+  },
+  "/assets/viora/home-populated.jpg": {
+    "width": 390,
+    "height": 844
+  },
+  "/assets/viora/live-login.jpg": {
+    "width": 390,
+    "height": 844
+  },
+  "/assets/viora/meal-coach.jpg": {
+    "width": 390,
+    "height": 844
+  },
+  "/assets/viora/onboarding-goals.jpg": {
+    "width": 390,
+    "height": 844
+  },
+  "/assets/viora/onboarding-height.jpg": {
+    "width": 390,
+    "height": 844
+  },
+  "/assets/viora/onboarding.jpg": {
+    "width": 390,
+    "height": 844
+  },
+  "/assets/viora/plan-showcase.webp": {
+    "width": 1536,
+    "height": 1024
+  },
+  "/assets/viora/plan.jpg": {
+    "width": 390,
+    "height": 844
+  },
+  "/assets/viora/progress.jpg": {
+    "width": 390,
+    "height": 844
+  },
+  "/assets/viora/saved-foods.jpg": {
+    "width": 390,
+    "height": 844
+  },
+  "/assets/viora/tracking-showcase.webp": {
+    "width": 1536,
+    "height": 1024
+  },
+  "/assets/viora/workout.jpg": {
+    "width": 390,
+    "height": 844
   }
 }

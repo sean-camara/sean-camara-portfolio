@@ -1,6 +1,9 @@
+import { Fragment } from "react";
 import type { Project } from "../data/projects";
 import { ProjectMedia } from "./ProjectMedia";
 import dimensions from "../data/media.json";
+
+const imageSizes: Record<string, { width: number; height: number }> = dimensions;
 
 export function ProjectCaseStudy({
   project,
@@ -25,12 +28,19 @@ export function ProjectCaseStudy({
           Case study / {String(index + 1).padStart(2, "0")} / {project.type}
         </p>
         <h1>{project.title}</h1>
-        <p className="case-deck">{project.description}</p>
+        <p className="case-deck">{project.summary}</p>
+        <p className="project-role">{project.role}</p>
+      </header>
+      <div className="case-cover dark-surface">
+        <div className="page-shell">
+          <ProjectMedia key={project.visual} project={project} priority wide />
+          <p className="image-caption">
+            {project.imageCaption ?? `${project.title} / Interface overview`}
+          </p>
+        </div>
+      </div>
+      <div className="case-details page-shell">
         <dl className="case-meta">
-          <div>
-            <dt>Role</dt>
-            <dd>{project.role}</dd>
-          </div>
           <div>
             <dt>Context</dt>
             <dd>{project.context}</dd>
@@ -54,28 +64,19 @@ export function ProjectCaseStudy({
           ))}
           {project.unavailableDemo && <p>{project.unavailableDemo}</p>}
         </div>
-      </header>
-      <div className="case-cover dark-surface">
-        <div className="page-shell">
-          <ProjectMedia key={project.visual} project={project} priority wide />
-          <p className="image-caption">{project.title} / Interface overview</p>
-        </div>
       </div>
       <div className="case-narrative page-shell">
         <aside className="case-contents">
           <p className="section-kicker">Inside the project</p>
           <nav aria-label="Case study contents">
-            <a href="#problem">01 / The problem</a>
-            <a href="#approach">02 / The approach</a>
-            <a href="#implementation">03 / Implementation</a>
-            <a href="#delivery">04 / Delivery & lessons</a>
+            <a href="#problem">Problem</a>
+            <a href="#approach">Approach</a>
+            {project.gallery?.some((shot) => shot.heading) && (
+              <a href="#walkthrough">Walkthrough</a>
+            )}
+            <a href="#implementation">Implementation</a>
+            <a href="#delivery">Delivery & lessons</a>
           </nav>
-          <p className="mono">Built with</p>
-          <ul className="tech-list">
-            {project.tech.map((tech) => (
-              <li key={tech}>{tech}</li>
-            ))}
-          </ul>
         </aside>
         <div className="case-story">
           <section id="problem">
@@ -94,50 +95,51 @@ export function ProjectCaseStudy({
               ))}
             </ul>
           </section>
-          {project.gallery?.map((shot) => (
-            <figure
-              className={`case-gallery ${project.visual === "shelflife" ? "case-gallery-phone" : ""}`}
-              key={shot.src}
-            >
-              <a
-                href={shot.src}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Open full-size ${shot.caption}`}
-              >
-                <img
-                  src={shot.src}
-                  alt={shot.alt}
-                  loading="lazy"
-                  decoding="async"
-                  width={
-                    (
-                      dimensions as Record<
-                        string,
-                        { width: number; height: number }
+          {project.gallery && (
+            <div id="walkthrough" className={project.visual === "viora" ? "phone-walkthrough" : undefined}>
+              {project.gallery.map((shot) => {
+                const size = imageSizes[shot.src];
+                const portrait = size && size.height > size.width;
+                const narrow = project.visual === "shelflife" || portrait;
+                return (
+                  <Fragment key={shot.src}>
+                    {shot.heading && <h3>{shot.heading}</h3>}
+                    <figure className={narrow ? "case-gallery case-gallery-phone" : "case-gallery"}>
+                      <a
+                        href={shot.src}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Open full-size ${shot.caption}`}
                       >
-                    )[shot.src]?.width
-                  }
-                  height={
-                    (
-                      dimensions as Record<
-                        string,
-                        { width: number; height: number }
-                      >
-                    )[shot.src]?.height
-                  }
-                />
-              </a>
-              <figcaption>
-                {shot.caption}
-                <span>Open full size ↗</span>
-              </figcaption>
-            </figure>
-          ))}
+                        <img
+                          src={shot.src}
+                          alt={shot.alt}
+                          loading="lazy"
+                          decoding="async"
+                          width={size?.width}
+                          height={size?.height}
+                        />
+                      </a>
+                      <figcaption>
+                        {shot.caption}
+                        <span>Open full size ↗</span>
+                      </figcaption>
+                    </figure>
+                  </Fragment>
+                );
+              })}
+            </div>
+          )}
           <section id="implementation">
             <p className="section-kicker">03 / Implementation</p>
             <h2>How it fits together.</h2>
             <p>{project.caseStudy.architecture}</p>
+            <h3>Technologies</h3>
+            <ul className="tech-list">
+              {project.tech.map((tech) => (
+                <li key={tech}>{tech}</li>
+              ))}
+            </ul>
             <h3>Decisions that shaped the build</h3>
             <ul>
               {project.caseStudy.decisions.map((item) => (

@@ -7,6 +7,8 @@ const slugs = [
   "aghimuan",
   "yhans",
   "rmv",
+  "reserve",
+  "viora",
   "academia",
   "flowmoney",
   "shelflife",
@@ -35,12 +37,11 @@ test("identity, work order, resume, and verified contact links", async ({
     "Yhan’s Catering Services",
     "RMV Stainless Steel Fabrication",
   ]);
-  await expect(page.locator(".index-title h4")).toHaveText([
-    "AcademiaZen",
-    "FlowMoney",
-    "ShelfLife",
-    "ApplyPH",
-  ]);
+  const indexLinks = page.locator(".index-row").getByRole("link");
+  const indexTitles = ["The Reserve & Reserve Desk", "Viora", "AcademiaZen", "FlowMoney", "ShelfLife", "ApplyPH"];
+  await expect(indexLinks).toHaveCount(indexTitles.length);
+  for (const [index, title] of indexTitles.entries())
+    await expect(indexLinks.nth(index)).toHaveAccessibleName(title);
   const portrait = page.locator(".hero-portrait-frame img");
   await expect(portrait).toHaveAttribute("src", "/assets/sean-profile.webp");
   await expect(portrait).toBeVisible();
@@ -51,6 +52,8 @@ test("identity, work order, resume, and verified contact links", async ({
     "/assets/aghimuan-creatives-showcase.webp",
     "/assets/optimized/yhans-catering-showcase.webp",
     "/assets/rmv-showcase.webp",
+    "/assets/reserve-desk/public-showcase.webp",
+    "/assets/viora/cover.webp",
     "/assets/academiazen-showcase.webp",
     "/assets/flowmoney-showcase.webp",
     "/assets/shelflife-showcase.webp",
@@ -83,35 +86,39 @@ test("identity, work order, resume, and verified contact links", async ({
     page.locator('a[href="mailto:camara.sean13@gmail.com"]').first(),
   ).toBeVisible();
 });
-test("mobile menu traps focus, closes on Escape, and handles anchor navigation", async ({
+test("mobile menu fits short screens, closes on Escape, and handles anchor navigation", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  const toggle = page.getByLabel("Open navigation menu", { exact: true });
+  const toggle = page.locator(".mobile-menu summary");
+  const panel = page.getByRole("navigation", { name: "Mobile navigation" });
   await toggle.click();
-  await expect(page.locator(".mobile-panel")).toBeVisible();
-  await expect(page.locator("#page-content")).toHaveAttribute("inert", "");
-  await page.keyboard.press("Shift+Tab");
-  await expect(page.locator(".mobile-resume")).toBeFocused();
+  await expect(panel).toBeVisible();
+  await expect(panel.getByRole("link")).toHaveText([
+    "Work",
+    "Capabilities",
+    "About",
+    "Contact",
+    "Download résumé ↓",
+  ]);
+  await expect(page.locator("#page-content")).not.toHaveAttribute("inert", "");
+  expect(
+    await page.evaluate(() => getComputedStyle(document.body).overflowY),
+  ).not.toBe("hidden");
   await page.keyboard.press("Tab");
-  await expect(
-    page.getByLabel("Close navigation menu", { exact: true }),
-  ).toBeFocused();
+  await expect(panel.getByRole("link", { name: "Work" })).toBeFocused();
   await page.keyboard.press("Escape");
   await expect(toggle).toBeFocused();
-  await expect(page.locator(".mobile-panel")).toBeHidden();
-  await expect(page.locator("#page-content")).not.toHaveAttribute("inert", "");
+  await expect(panel).toBeHidden();
+  await page.setViewportSize({ width: 844, height: 390 });
   await toggle.click();
-  await page
-    .getByRole("navigation", { name: "Mobile navigation" })
-    .getByRole("link", { name: "04 Contact" })
-    .click();
+  expect(
+    await panel.evaluate((element) => element.scrollHeight <= element.clientHeight),
+  ).toBe(true);
+  await panel.getByRole("link", { name: "Contact" }).click();
   await expect(page).toHaveURL(/#contact$/);
-  await expect(page.locator(".mobile-panel")).toBeHidden();
+  await expect(panel).toBeHidden();
   await expect(page.locator("#contact")).toBeFocused();
-  await page.getByLabel("Open navigation menu", { exact: true }).click();
-  await page.setViewportSize({ width: 1024, height: 768 });
-  await expect(page.locator("#page-content")).not.toHaveAttribute("inert", "");
 });
 test("case-study navigation, direct URLs, back, and page metadata", async ({
   page,
@@ -191,7 +198,7 @@ test("keyboard skip link and reduced motion keep content accessible", async ({
   await expect(page.locator(".intro-screen")).toHaveCount(0);
 });
 for (const viewport of [
-  { width: 320, height: 740 },
+  { width: 320, height: 568 },
   { width: 390, height: 844 },
   { width: 768, height: 1024 },
   { width: 1024, height: 768 },
@@ -202,6 +209,12 @@ for (const viewport of [
     "responsive reflow " + viewport.width + "×" + viewport.height,
     async ({ page }) => {
       await page.setViewportSize(viewport);
+      if (viewport.width <= 390 || viewport.height <= 390) {
+        await page.goto("/");
+        await expect(
+          page.getByRole("link", { name: "View selected work" }),
+        ).toBeInViewport({ ratio: 1 });
+      }
       for (const route of ["/", "/work/rmv/"]) {
         await page.goto(route);
         await expect

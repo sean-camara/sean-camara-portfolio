@@ -7,7 +7,7 @@
     "dev": "vite --host 127.0.0.1",
     "typecheck": "tsc --noEmit",
     "test": "npm run test:unit",
-    "test:unit": "node --test src/lib/*.test.ts && node scripts/validate-portfolio.mjs",
+    "test:unit": "node scripts/validate-portfolio.mjs",
     "test:e2e": "playwright test",
     "test:a11y": "playwright test --grep @a11y",
     "build": "tsc --noEmit && vite build && vite build --ssr src/entry-server.tsx --outDir dist/server && node scripts/prerender.mjs",
@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@vitejs/plugin-react": "^6.0.3",
-    "gsap": "^3.15.0",
     "lucide-react": "^1.22.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",

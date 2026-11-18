@@ -1,3 +1,5 @@
+import { ArrowDown, ArrowDownToLine, ArrowUpRight } from "lucide-react";
+
 export function Hero() {
   return (
     <section className="hero page-shell" id="home">
@@ -19,25 +21,22 @@ export function Hero() {
             </span>
           </h1>
           <p className="hero-statement">
-            I build thoughtful websites, full-stack applications, and native
-            Android tools — from interface design to deployment.
+            I design and build full-stack web applications and native Android
+            apps.
           </p>
           <div className="hero-actions">
             <a className="button-primary" href="#projects">
-              View selected work <span aria-hidden="true">↘</span>
+              View selected work <ArrowDown size={16} aria-hidden="true" />
             </a>
-            <a className="text-link" href="#contact">
-              Get in touch <span aria-hidden="true">↗</span>
-            </a>
+            <div className="hero-secondary-actions">
+              <a href="#contact">
+                Get in touch <ArrowUpRight size={16} aria-hidden="true" />
+              </a>
+              <a href="/Sean_John_Camara_Resume.pdf" download>
+                Download résumé <ArrowDownToLine size={16} aria-hidden="true" />
+              </a>
+            </div>
           </div>
-          <a
-            className="resume-link"
-            href="/Sean_John_Camara_Resume.pdf"
-            download
-          >
-            Download résumé <span aria-hidden="true">↓</span>
-            <span className="mono">PDF</span>
-          </a>
         </div>
         <div className="hero-portrait-frame">
           <div className="hero-portrait-depth">
@@ -52,12 +51,6 @@ export function Hero() {
             />
           </div>
         </div>
-      </div>
-      <div className="hero-baseline">
-        <span className="hero-rule" aria-hidden="true" />
-        <a href="#projects">
-          Explore selected work <span aria-hidden="true">↓</span>
-        </a>
       </div>
     </section>
   );

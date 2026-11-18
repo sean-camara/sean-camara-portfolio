@@ -14,10 +14,66 @@ export function ProfessionalExperience() {
           </h2>
         </div>
         <p className="section-intro">
-          Formal customer-support experience built around careful listening,
-          structured troubleshooting, and clear guidance.
+          Experience in real estate sales, CRM development, and customer
+          support.
         </p>
       </div>
+
+      <article className="professional-record">
+        <aside
+          className="professional-record-rail"
+          aria-label="Employment details"
+        >
+          <span className="professional-record-number" aria-hidden="true">
+            01
+          </span>
+          <div className="professional-record-meta">
+            <span>Employment period</span>
+            <strong><time dateTime="2026-08">Aug 2026</time> — Present</strong>
+          </div>
+          <div className="professional-record-meta">
+            <span>Company</span>
+            <strong>Primehomes</strong>
+          </div>
+        </aside>
+
+        <div className="professional-record-main">
+          <header className="professional-record-header">
+            <div>
+              <p>Real estate sales</p>
+              <h3>Property Executive Specialist</h3>
+            </div>
+          </header>
+
+          <ol className="professional-record-notes">
+            <li>
+              <span>01</span>
+              <p>
+                Sell high-end condominiums priced from ₱9 million to ₱30 million,
+                communicate with prospective buyers, and manage my Meta ad campaigns.
+              </p>
+            </li>
+            <li>
+              <span>02</span>
+              <p>
+                Built a CRM to track unit availability and inventory, automatically
+                calculate costs based on payment terms, and save and export reports
+                as PDFs.
+              </p>
+            </li>
+            <li>
+              <span>03</span>
+              <p>
+                Integrated the Meta Ads API to import leads automatically. The CRM
+                also lets me add, view, update, and delete lead records.
+              </p>
+            </li>
+          </ol>
+          <a className="text-link" href="/work/reserve/">
+            View the Reserve Desk case study <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </article>
 
       <article className="professional-record" data-reveal="row">
         <aside
@@ -25,7 +81,7 @@ export function ProfessionalExperience() {
           aria-label="Employment details"
         >
           <span className="professional-record-number" aria-hidden="true">
-            01
+            02
           </span>
           <div className="professional-record-meta">
             <span>Employment period</span>

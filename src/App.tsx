@@ -6,7 +6,6 @@ import { Footer } from "./components/Footer";
 import { ExperienceEducation } from "./components/ExperienceEducation";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
-import { MotionEffects } from "./components/MotionEffects";
 import { ProjectShowcase } from "./components/ProjectShowcase";
 import { ProjectCaseStudy } from "./components/ProjectCaseStudy";
 import { ProfessionalExperience } from "./components/ProfessionalExperience";
@@ -81,7 +80,6 @@ export function App({ path = "/" }: { path?: string }) {
         </main>
         <Footer />
       </div>
-      <MotionEffects />
     </>
   );
 }
